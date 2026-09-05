@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-montserrat: 'Montserrat', sans-serif;
+}
+
+/* Custom Selection Color */
+::selection {
+  background-color: #EC2328;
+  color: #FFFFFF;
+}
+
+/* Global Body Styling */
+body {
+  background-color: #FFFFFF;
+  color: #0F172A;
+  font-family: var(--font-montserrat), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #EC2328;
+}
+
+/* Red Angular Polygonal Slices matching mockup */
+.red-hero-poly {
+  clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.red-accent-poly {
+  clip-path: polygon(0 0, 100% 0%, 82% 100%, 0% 100%);
+}
+
+.red-corner-slice-right {
+  clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.red-corner-slice-left {
+  clip-path: polygon(0 0, 70% 0, 100% 100%, 0 100%);
+}
+
+/* Wave line background pattern */
+.bg-wave-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='1000' height='200' viewBox='0 0 1000 200' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 C 200 40, 400 160, 600 100 C 800 40, 1000 160, 1200 100' stroke='%23EC2328' stroke-opacity='0.08' stroke-width='1.5' stroke-dasharray='4 4'/%3E%3Cpath d='M0 130 C 250 60, 450 180, 700 120 C 950 60, 1150 180, 1350 120' stroke='%23CBD5E1' stroke-opacity='0.35' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+/* Red TV Screen Watermark Grid on Red Polygonal Shapes */
+.red-tv-watermark {
+  background-color: #EC2328;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Smooth Card Transitions */
+.studio-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 4px 10px -2px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.studio-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(236, 35, 40, 0.3);
+  box-shadow: 0 20px 35px -10px rgba(236, 35, 40, 0.1), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+}
