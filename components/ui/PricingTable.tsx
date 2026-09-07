@@ -174,7 +174,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                           : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
                       }`}
                     >
-                      <span>{pkg.priceNum > 0 ? 'Select Package' : 'Get Custom Quote'}</span>
+                      <span>{pkg.priceNum > 0 ? 'Contact to Book' : 'Get Custom Quote'}</span>
                       <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
                     </Link>
                   </div>
@@ -275,7 +275,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                           : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
                       }`}
                     >
-                      <span>Select Subscription</span>
+                      <span>Inquire Subscription</span>
                       <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
                     </Link>
                   </div>

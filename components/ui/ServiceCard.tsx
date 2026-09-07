@@ -86,7 +86,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
           href={`/contact?service=${service.slug}`}
           className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white group-hover:text-brand-red transition-colors"
         >
-          <span>Book This Service</span>
+          <span>Contact to Book</span>
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </Link>
         <span className="text-[11px] text-slate-300 font-medium flex items-center gap-1">

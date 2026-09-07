@@ -146,7 +146,7 @@ export default function HomePage() {
                 href="/contact"
                 className="group relative inline-flex items-center justify-center gap-2.5 px-8 sm:px-12 py-3.5 sm:py-5 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white text-sm sm:text-base font-black tracking-wide transition-all duration-300 border border-red-400/30 shadow-[0_14px_34px_-6px_rgba(236,35,40,0.55),inset_0_1.5px_2px_rgba(255,255,255,0.4)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.7)] active:scale-[0.98] w-full sm:w-auto text-center"
               >
-                <span>Book The Studio</span>
+                <span>Contact to Book</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -462,7 +462,7 @@ export default function HomePage() {
                         : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
                     }`}
                   >
-                    <span>{pkg.priceNum > 0 ? 'Select Package' : 'Get Custom Quote'}</span>
+                    <span>{pkg.priceNum > 0 ? 'Contact to Book' : 'Get Custom Quote'}</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
                   </Link>
                 </div>
@@ -500,7 +500,7 @@ export default function HomePage() {
               href="/contact"
               className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
             >
-              Book Your Studio
+              Contact Our Studio
             </Link>
           </div>
         </div>

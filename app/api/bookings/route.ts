@@ -34,14 +34,14 @@ export async function POST(req: NextRequest) {
           client_email: bookingData.client_email,
           client_phone: bookingData.client_phone,
           company_name: bookingData.company_name || null,
-          show_name: bookingData.show_name || null,
-          requested_date: bookingData.requested_date,
-          requested_time_slot: bookingData.requested_time_slot,
-          guest_count: bookingData.guest_count,
-          add_ons: bookingData.add_ons,
-          estimated_total_lkr: body.estimated_total_lkr || 0,
+          show_name: bookingData.show_name || bookingData.service_interest || null,
+          requested_date: bookingData.requested_date || null,
+          requested_time_slot: bookingData.requested_time_slot || null,
+          guest_count: bookingData.guest_count || 1,
+          add_ons: bookingData.add_ons || [],
+          estimated_total_lkr: 0,
           client_notes: bookingData.client_notes || null,
-          status: 'pending',
+          status: 'inquiry',
         },
       ]).select();
 
@@ -55,10 +55,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: 'Booking reservation received successfully',
+      message: 'Studio inquiry received successfully',
       bookingReference,
       clientName: bookingData.client_name,
-      requestedDate: bookingData.requested_date,
+      requestedDate: bookingData.requested_date || 'Flexible',
     });
   } catch (err: any) {
     console.error('Booking API Error:', err);

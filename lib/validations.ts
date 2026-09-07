@@ -11,26 +11,21 @@ export const bookingFormSchema = z.object({
   client_phone: z
     .string()
     .min(9, { message: 'Please enter a valid phone or WhatsApp number' })
-    .max(20, { message: 'Phone number is too long' }),
+    .max(25, { message: 'Phone number is too long' }),
   company_name: z.string().max(100).optional(),
   show_name: z.string().max(100).optional(),
-  booking_type: z.enum(['package', 'subscription', 'custom'], {
-    errorMap: () => ({ message: 'Please select a booking option' }),
-  }),
+  booking_type: z.string().default('inquiry'),
   package_id: z.string().optional(),
   subscription_id: z.string().optional(),
-  requested_date: z
-    .string()
-    .min(1, { message: 'Please select a preferred studio date' }),
-  requested_time_slot: z
-    .string()
-    .min(1, { message: 'Please select a preferred time slot' }),
-  guest_count: z
-    .number()
-    .min(1, { message: 'At least 1 person is required' })
-    .max(8, { message: 'Maximum 8 people allowed in studio session' }),
+  service_interest: z.string().optional(),
+  requested_date: z.string().optional(),
+  requested_time_slot: z.string().optional(),
+  guest_count: z.number().optional(),
   add_ons: z.array(z.string()).default([]),
-  client_notes: z.string().max(1000).optional(),
+  client_notes: z
+    .string()
+    .min(5, { message: 'Please provide a brief message or project description' })
+    .max(2000),
 });
 
 export type BookingFormValues = z.infer<typeof bookingFormSchema>;

@@ -95,7 +95,7 @@ export default function StudioPackagesPage() {
                         href={`/contact?package=${pkg.slug}`}
                         className="px-4 py-2 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider inline-block shadow-sm transition-all"
                       >
-                        Select Plan
+                        Contact to Book
                       </Link>
                     </td>
                   </tr>
@@ -162,7 +162,7 @@ export default function StudioPackagesPage() {
                         href={`/contact?subscription=${sub.slug}`}
                         className="px-4 py-2 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider inline-block shadow-sm transition-all"
                       >
-                        Select Plan
+                        Inquire Tier
                       </Link>
                     </td>
                   </tr>

@@ -481,7 +481,7 @@ export default function ServicesPage() {
               href="/contact"
               className="px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
             >
-              Book Your Studio
+              Contact Our Studio
             </Link>
             <Link
               href="/contact?type=inquiry"

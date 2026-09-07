@@ -46,14 +46,14 @@ export default function ContactPage() {
               Studio Booking & Inquiries
             </h2>
             <p className="text-xs text-slate-500 font-medium mb-8">
-              Fill out the details below to reserve your recording time in Colombo 07.
+              Send us your details below to schedule your studio session or request a custom quotation. Our studio coordinator will contact you directly to confirm availability.
             </p>
 
             <Suspense
               fallback={
                 <div className="p-12 text-center text-slate-400">
                   <div className="w-8 h-8 rounded-full border-2 border-brand-red border-t-transparent animate-spin mx-auto mb-4" />
-                  <span>Loading Booking Form...</span>
+                  <span>Loading Form...</span>
                 </div>
               }
             >

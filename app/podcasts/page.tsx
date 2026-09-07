@@ -172,7 +172,7 @@ export default function PodcastsPage() {
                   href={`/contact?package=${pkg.slug}`}
                   className="w-full py-2.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider text-center transition-all shadow-sm hover:shadow-red-glow"
                 >
-                  Book This Package
+                  Contact to Book
                 </Link>
               </div>
             ))}
@@ -225,7 +225,7 @@ export default function PodcastsPage() {
             href="/contact"
             className="px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
           >
-            Book The Studio
+            Contact Our Studio
           </Link>
         </div>
       </section>
