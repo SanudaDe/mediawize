@@ -14,7 +14,10 @@ export const ThreeDMarquee = ({
   innerScaleClass?: string;
 }) => {
   // Ensure we have enough images to fill columns
-  const baseImages = images.length > 0 ? images : ["/images/studio-images/DSC00046.jpg"];
+  const baseImages =
+    images.length > 0
+      ? images
+      : ['/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19.jpeg'];
 
   // Split into 5 columns across the full screen width
   const numColumns = 5;
@@ -43,7 +46,7 @@ export const ThreeDMarquee = ({
             transformStyle: "preserve-3d",
           }}
           className={cn(
-            "w-[220vw] max-w-[3400px] min-w-[1400px] shrink-0 grid grid-cols-5 gap-6 sm:gap-8 lg:gap-10",
+            "w-[180vw] sm:w-[220vw] max-w-[3400px] min-w-[700px] sm:min-w-[1100px] lg:min-w-[1400px] shrink-0 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-8 lg:gap-10",
             innerScaleClass
           )}
         >
@@ -54,7 +57,10 @@ export const ThreeDMarquee = ({
             return (
               <div
                 key={`col-${colIndex}`}
-                className="relative overflow-hidden h-[1600px] flex flex-col justify-center"
+                className={cn(
+                  "relative overflow-hidden h-[900px] sm:h-[1300px] lg:h-[1600px] flex-col justify-center",
+                  colIndex === 3 ? "hidden sm:flex" : colIndex >= 4 ? "hidden lg:flex" : "flex"
+                )}
               >
                 <GridLineVertical className="-left-3 sm:-left-4" offset="120px" />
                 
@@ -67,7 +73,7 @@ export const ThreeDMarquee = ({
                     repeatType: "loop",
                     ease: "linear",
                   }}
-                  className="flex flex-col items-center gap-6 sm:gap-8 w-full"
+                  className="flex flex-col items-center gap-4 sm:gap-8 w-full"
                 >
                   {colImages.map((image, imageIndex) => (
                     <div
@@ -86,7 +92,7 @@ export const ThreeDMarquee = ({
                           duration: 0.3,
                           ease: "easeOut",
                         }}
-                        className="relative w-full aspect-[16/11] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/80 bg-slate-900 ring-1 ring-slate-900/20"
+                        className="relative w-full aspect-[3/4] sm:aspect-[4/5] lg:aspect-[16/11] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-2 border-white/80 bg-slate-900 ring-1 ring-slate-900/20"
                       >
                         {/* Image */}
                         <img

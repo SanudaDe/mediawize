@@ -42,9 +42,9 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 1. IMMERSIVE FULL-WIDTH 3D SHOWCASE HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative min-h-[720px] sm:min-h-[780px] lg:min-h-[840px] flex items-center justify-center overflow-hidden border-b border-slate-100 bg-white">
+      <section className="relative min-h-[680px] sm:min-h-[780px] lg:min-h-[840px] flex items-center justify-center overflow-hidden border-b border-slate-100 bg-white">
         {/* --- Background 3D Showcase & Background Edge Shaders (Strictly z-0) --- */}
-        <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none">
+        <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none opacity-40 sm:opacity-70 lg:opacity-100">
           {/* 3D Marquee Layer with Radial Mask */}
           <div
             style={{
@@ -69,7 +69,7 @@ export default function HomePage() {
         </div>
 
         {/* --- Left Corner Hero Content --- */}
-        <div className="relative z-40 isolate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-24 w-full flex justify-start items-start">
+        <div className="relative z-10 isolate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 lg:pt-20 pb-14 sm:pb-24 w-full flex justify-start items-start">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export default function HomePage() {
             className="relative max-w-2xl lg:max-w-3xl xl:max-w-4xl w-full text-left"
           >
             {/* Headline (Bigger & High-Impact) */}
-            <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-[5.5rem] font-black tracking-tight text-slate-950 leading-[0.98] mb-6">
+            <h1 className="text-4xl sm:text-6xl lg:text-8xl xl:text-[5.5rem] font-black tracking-tight text-slate-950 leading-[1.02] sm:leading-[0.98] mb-5 sm:mb-6">
               Your Story, <br />
               <span className="text-brand-red">Our Studio.</span>
             </h1>
@@ -93,7 +93,7 @@ export default function HomePage() {
                       key={name}
                       type="button"
                       onClick={() => setActiveWordIndex(idx)}
-                      className={`group relative px-4 py-2 rounded-xl text-xs sm:text-sm font-black tracking-wide transition-all duration-300 flex items-center gap-2 border shadow-sm ${
+                      className={`group relative px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-black tracking-wide transition-all duration-300 flex items-center gap-2 border shadow-sm ${
                         isActive
                           ? 'bg-slate-950 text-white border-slate-950 shadow-md scale-105'
                           : 'bg-white/85 hover:bg-white text-slate-800 border-slate-200/90 hover:border-slate-400 backdrop-blur-sm'
@@ -123,10 +123,10 @@ export default function HomePage() {
             </div>
 
             {/* CTA Buttons (Bigger, Modern & High-Impact) */}
-            <div className="flex items-center gap-4 sm:gap-5 flex-wrap">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 w-full sm:w-auto">
               <Link
                 href="/contact?type=inquiry"
-                className="group relative inline-flex items-center justify-center gap-2.5 px-10 sm:px-12 py-4.5 sm:py-5 rounded-2xl bg-slate-950 hover:bg-black text-white text-sm sm:text-base font-black tracking-wide transition-all duration-300 border border-slate-800 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.4),inset_0_1px_1.5px_rgba(255,255,255,0.2)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.55)] hover:scale-[1.03] active:scale-[0.98]"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-8 sm:px-12 py-3.5 sm:py-5 rounded-2xl bg-slate-950 hover:bg-black text-white text-sm sm:text-base font-black tracking-wide transition-all duration-300 border border-slate-800 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.4),inset_0_1px_1.5px_rgba(255,255,255,0.2)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.55)] active:scale-[0.98] w-full sm:w-auto text-center"
               >
                 <span>Let&apos;s Talk</span>
                 <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
@@ -134,7 +134,7 @@ export default function HomePage() {
 
               <Link
                 href="/contact"
-                className="group relative inline-flex items-center justify-center gap-2.5 px-10 sm:px-12 py-4.5 sm:py-5 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white text-sm sm:text-base font-black tracking-wide transition-all duration-300 border border-red-400/30 shadow-[0_14px_34px_-6px_rgba(236,35,40,0.55),inset_0_1.5px_2px_rgba(255,255,255,0.4)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.7)] hover:scale-[1.03] active:scale-[0.98]"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-8 sm:px-12 py-3.5 sm:py-5 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white text-sm sm:text-base font-black tracking-wide transition-all duration-300 border border-red-400/30 shadow-[0_14px_34px_-6px_rgba(236,35,40,0.55),inset_0_1.5px_2px_rgba(255,255,255,0.4)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.7)] active:scale-[0.98] w-full sm:w-auto text-center"
               >
                 <span>Book The Studio</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:translate-x-1 transition-transform" />
@@ -230,7 +230,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 3. PODCAST SECTION — Create Conversations That Matter */}
       {/* ========================================================================= */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white relative">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Column */}
@@ -286,7 +286,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 4. STUDIO SECTION — Your Content Deserves A Better Stage */}
       {/* ========================================================================= */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 text-slate-900 relative overflow-hidden border-y border-slate-200/80">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 text-slate-900 relative overflow-hidden border-y border-slate-200/80">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Content Column */}
@@ -320,11 +320,11 @@ export default function HomePage() {
               </div>
 
               {/* Download Catalogue (PDF) Actions */}
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
                 <a
                   href="/api/download-catalogue"
                   download="WizeTV_studio_catalogue.pdf"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-brand-red hover:bg-red-600 text-white font-bold text-sm shadow-[0_4px_20px_rgba(236,35,40,0.35)] hover:shadow-[0_6px_25px_rgba(236,35,40,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                  className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-brand-red hover:bg-red-600 text-white font-bold text-sm shadow-[0_4px_20px_rgba(236,35,40,0.35)] hover:shadow-[0_6px_25px_rgba(236,35,40,0.5)] transition-all duration-300 active:scale-95 text-center"
                 >
                   <Download className="w-4 h-4" />
                   <span>Download Catalogue (PDF)</span>
@@ -333,7 +333,7 @@ export default function HomePage() {
                   href="/downloads/WizeTV_studio_catalogue.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white hover:bg-slate-100 text-slate-800 font-semibold text-sm border border-slate-200 shadow-sm hover:shadow transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-white hover:bg-slate-100 text-slate-800 font-semibold text-sm border border-slate-200 shadow-sm hover:shadow transition-all text-center"
                 >
                   <FileText className="w-4 h-4 text-slate-600" />
                   <span>Preview PDF</span>
@@ -352,7 +352,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 5. PRODUCTION PACKAGES PREVIEW */}
       {/* ========================================================================= */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 relative border-t border-slate-200">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 relative border-t border-slate-200 overflow-hidden">
         <div className="absolute top-0 right-0 w-28 h-28 bg-brand-red red-corner-slice-right opacity-90 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-28 h-28 bg-brand-red red-corner-slice-left opacity-90 pointer-events-none" />
 
@@ -425,7 +425,7 @@ export default function HomePage() {
       {/* 6. BOTTOM CTA BANNER */}
       {/* ========================================================================= */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white text-center">
-        <div className="max-w-4xl mx-auto p-10 rounded-3xl bg-slate-900 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="max-w-4xl mx-auto p-6 sm:p-10 rounded-2xl sm:rounded-3xl bg-slate-900 text-white shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-left">
             <h3 className="text-xl sm:text-2xl font-black mb-1">
               Ready To Create Your Next Project?
@@ -434,10 +434,10 @@ export default function HomePage() {
               Every great brand has a story worth sharing. Let&apos;s turn it into content people trust.
             </p>
           </div>
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
             <Link
               href="/contact"
-              className="px-6 py-3 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
+              className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
             >
               Book Your Studio
             </Link>

@@ -48,7 +48,8 @@ export function PodcastCarousel({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
   const [isPaused, setIsPaused] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
 
   const total = images.length;
 
@@ -79,17 +80,23 @@ export function PodcastCarousel({
     return () => clearInterval(timer);
   }, [nextSlide, isPaused, autoPlayInterval, total, currentIndex]);
 
-  // Mobile Touch Swipe
+  // Mobile Touch Swipe (Distinguishes between horizontal swipe and vertical page scroll)
   const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.touches[0].clientX);
+    setTouchStartX(e.touches[0].clientX);
+    setTouchStartY(e.touches[0].clientY);
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStart === null) return;
-    const diff = touchStart - e.changedTouches[0].clientX;
-    if (diff > 50) nextSlide();
-    else if (diff < -50) prevSlide();
-    setTouchStart(null);
+    if (touchStartX === null || touchStartY === null) return;
+    const diffX = touchStartX - e.changedTouches[0].clientX;
+    const diffY = touchStartY - e.changedTouches[0].clientY;
+
+    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0) nextSlide();
+      else prevSlide();
+    }
+    setTouchStartX(null);
+    setTouchStartY(null);
   };
 
   if (!images || images.length === 0) return null;
@@ -104,12 +111,12 @@ export function PodcastCarousel({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Decorative Brand Red Watermark Accents */}
-      <div className="absolute -top-5 -left-5 w-24 h-24 bg-brand-red red-tv-watermark rounded-2xl z-0 transition-transform duration-500 group-hover:scale-105" />
-      <div className="absolute -bottom-6 -right-6 w-36 h-36 bg-brand-red red-tv-watermark rounded-3xl red-corner-slice-right z-0 transition-transform duration-500 group-hover:scale-105" />
+      {/* Decorative Brand Red Watermark Accents (Safe bounded offsets for mobile) */}
+      <div className="absolute -top-2.5 sm:-top-5 -left-2.5 sm:-left-5 w-16 sm:w-24 h-16 sm:h-24 bg-brand-red red-tv-watermark rounded-2xl z-0 transition-transform duration-500 group-hover:scale-105 pointer-events-none" />
+      <div className="absolute -bottom-3 sm:-bottom-6 -right-2.5 sm:-right-6 w-24 sm:w-36 h-24 sm:h-36 bg-brand-red red-tv-watermark rounded-3xl red-corner-slice-right z-0 transition-transform duration-500 group-hover:scale-105 pointer-events-none" />
 
-      {/* Main Glass Card Frame */}
-      <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] bg-slate-900">
+      {/* Main Glass Card Frame (Portrait 4:5 on mobile to perfectly frame vertical photography, 4:3 on desktop) */}
+      <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[4/5] sm:aspect-[4/3] bg-slate-900">
         {/* Subtle Top Progress Line */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-white/10 z-30 overflow-hidden">
           <motion.div
@@ -125,25 +132,25 @@ export function PodcastCarousel({
         </div>
 
         {/* Top Badges Bar */}
-        <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
+        <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 z-20 flex items-center justify-between pointer-events-none">
           {/* Live Studio Rig Badge */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white shadow-lg pointer-events-auto">
-            <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
-            <span className="text-[11px] font-bold tracking-wider uppercase text-slate-200">
+          <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white shadow-lg pointer-events-auto">
+            <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-brand-red animate-pulse" />
+            <span className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-slate-200">
               Live Studio Rig
             </span>
           </div>
 
           {/* Photo Counter */}
-          <div className="flex items-center gap-2 pointer-events-auto">
+          <div className="flex items-center gap-1.5 sm:gap-2 pointer-events-auto">
             <button
               onClick={() => setIsPaused(!isPaused)}
-              className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white/80 hover:text-white flex items-center justify-center transition-colors shadow-lg"
+              className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white/80 hover:text-white flex items-center justify-center transition-colors shadow-lg"
               title={isPaused ? 'Resume auto-play' : 'Pause auto-play'}
             >
-              {isPaused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
+              {isPaused ? <Play className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> : <Pause className="w-2.5 h-2.5 sm:w-3 sm:h-3" />}
             </button>
-            <div className="px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white font-mono text-xs font-bold tracking-widest shadow-lg">
+            <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white font-mono text-[10px] sm:text-xs font-bold tracking-widest shadow-lg">
               <span className="text-white">{String(currentIndex + 1).padStart(2, '0')}</span>
               <span className="text-white/40 mx-1">/</span>
               <span className="text-white/60">{String(total).padStart(2, '0')}</span>
@@ -184,9 +191,9 @@ export function PodcastCarousel({
             prevSlide();
           }}
           aria-label="Previous Studio Photo"
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md text-white border border-white/20 hover:bg-brand-red hover:border-brand-red hover:scale-110 active:scale-95 transition-all duration-200 flex items-center justify-center shadow-xl group-hover:opacity-100 opacity-80"
+          className="absolute left-2 sm:left-3.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/50 backdrop-blur-md text-white border border-white/20 hover:bg-brand-red hover:border-brand-red hover:scale-110 active:scale-95 transition-all duration-200 flex items-center justify-center shadow-xl group-hover:opacity-100 opacity-80"
         >
-          <ChevronLeft className="w-5 h-5 -ml-0.5" />
+          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 -ml-0.5" />
         </button>
 
         <button
@@ -195,9 +202,9 @@ export function PodcastCarousel({
             nextSlide();
           }}
           aria-label="Next Studio Photo"
-          className="absolute right-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md text-white border border-white/20 hover:bg-brand-red hover:border-brand-red hover:scale-110 active:scale-95 transition-all duration-200 flex items-center justify-center shadow-xl group-hover:opacity-100 opacity-80"
+          className="absolute right-2 sm:right-3.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/50 backdrop-blur-md text-white border border-white/20 hover:bg-brand-red hover:border-brand-red hover:scale-110 active:scale-95 transition-all duration-200 flex items-center justify-center shadow-xl group-hover:opacity-100 opacity-80"
         >
-          <ChevronRight className="w-5 h-5 -mr-0.5" />
+          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 -mr-0.5" />
         </button>
 
         {/* Bottom Pagination Dots (Compact Dot Strip) */}

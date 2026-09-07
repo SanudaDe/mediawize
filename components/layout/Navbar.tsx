@@ -34,12 +34,24 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sm py-3 border-b border-slate-100'
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+          scrolled || mobileMenuOpen
+            ? 'bg-white/98 backdrop-blur-md shadow-sm py-3 border-b border-slate-100'
             : 'bg-white py-4'
         }`}
       >
@@ -116,47 +128,64 @@ export const Navbar: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Drawer & Dimmed Backdrop (Always Upper Layer on Mobile) */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-x-0 top-[65px] z-40 p-6 bg-white border-b border-slate-200 shadow-xl lg:hidden"
-          >
-            <div className="flex flex-col gap-2">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`p-3 rounded-xl text-sm font-bold flex items-center justify-between ${
-                    pathname === link.href
-                      ? 'bg-brand-red/10 text-brand-red'
-                      : 'text-slate-700 hover:bg-slate-50'
-                  }`}
-                >
-                  <span>{link.name}</span>
-                  <ArrowRight className="w-4 h-4 opacity-70" />
-                </Link>
-              ))}
+          <>
+            {/* Fullscreen Dimmed Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] lg:hidden"
+            />
 
-              <div className="pt-4 border-t border-slate-100 flex flex-col gap-2 mt-2">
-                <Link
-                  href="/contact?type=inquiry"
-                  className="w-full py-3 rounded-lg bg-slate-900 text-white text-center text-xs font-bold"
-                >
-                  Let&apos;s Talk
-                </Link>
-                <Link
-                  href="/contact"
-                  className="w-full py-3 rounded-lg bg-brand-red text-white text-center text-xs font-bold"
-                >
-                  Book The Studio
-                </Link>
+            {/* Mobile Menu Drawer (Highest Layer) */}
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="fixed inset-x-0 top-[58px] sm:top-[65px] z-[100] p-6 bg-white border-b border-slate-200 shadow-2xl lg:hidden max-h-[calc(100vh-70px)] overflow-y-auto"
+            >
+              <div className="flex flex-col gap-2">
+                {NAV_LINKS.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`p-3 rounded-xl text-sm font-bold flex items-center justify-between ${
+                      pathname === link.href
+                        ? 'bg-brand-red/10 text-brand-red'
+                        : 'text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    <ArrowRight className="w-4 h-4 opacity-70" />
+                  </Link>
+                ))}
+
+                <div className="pt-4 border-t border-slate-100 flex flex-col gap-2 mt-2">
+                  <Link
+                    href="/contact?type=inquiry"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full py-3 rounded-lg bg-slate-900 text-white text-center text-xs font-bold shadow-sm"
+                  >
+                    Let&apos;s Talk
+                  </Link>
+                  <Link
+                    href="/contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full py-3 rounded-lg bg-brand-red text-white text-center text-xs font-bold shadow-md shadow-brand-red/20"
+                  >
+                    Book The Studio
+                  </Link>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

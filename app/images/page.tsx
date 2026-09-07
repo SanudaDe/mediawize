@@ -85,7 +85,11 @@ export default function StudioImagesPage() {
           </div>
 
           {/* Aceternity 3D Marquee Component */}
-          <ThreeDMarquee images={STUDIO_SHOWCASE_IMAGES} />
+          <ThreeDMarquee
+            images={STUDIO_SHOWCASE_IMAGES}
+            className="h-[460px] sm:h-[600px] lg:h-[720px] w-full"
+            innerScaleClass="scale-[0.85] sm:scale-[1.0] lg:scale-[1.1]"
+          />
 
           {/* Bottom subtle bar */}
           <div className="mt-2 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 px-4">
