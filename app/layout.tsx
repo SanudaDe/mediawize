@@ -48,6 +48,16 @@ export const metadata: Metadata = {
     description:
       'State-of-the-art podcast and video production studio in Colombo 07.',
   },
+  icons: {
+    icon: [
+      { url: '/icon.png' },
+      { url: '/favicon.ico' },
+    ],
+    shortcut: ['/icon.png'],
+    apple: [
+      { url: '/icon.png' },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -57,6 +67,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`dark ${montserrat.variable}`}>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/icon.png" />
+      </head>
       <body className="bg-brand-dark text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-red selection:text-white">
         <Navbar />
         <main className="flex-grow pt-[72px]">{children}</main>

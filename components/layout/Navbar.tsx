@@ -9,6 +9,7 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 const NAV_LINKS = [
   { name: 'Home', href: '/' },
   { name: 'Services', href: '/services' },
+  { name: 'Studio Tour', href: '/images' },
   { name: 'Podcasts', href: '/podcasts' },
   { name: 'Studio & Packages', href: '/pricing' },
   { name: 'About', href: '/about' },

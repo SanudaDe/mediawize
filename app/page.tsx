@@ -16,89 +16,82 @@ import {
   Sliders,
 } from 'lucide-react';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
+import { ThreeDMarquee } from '@/components/ui/3d-marquee';
+import { BackgroundGradient } from '@/components/ui/background-gradient';
+import { STUDIO_SHOWCASE_IMAGES } from '@/lib/studioImages';
 import { STUDIO_PACKAGES_DATA } from '@/lib/data';
 
 export default function HomePage() {
   return (
     <div className="bg-white text-slate-900 overflow-hidden">
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION */}
+      {/* 1. IMMERSIVE FULL-WIDTH 3D SHOWCASE HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative pt-8 pb-16 lg:pt-14 lg:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Text Column */}
-          <motion.div
-            initial={{ opacity: 0, x: -25 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-6 flex flex-col items-start"
+      <section className="relative min-h-[720px] sm:min-h-[780px] lg:min-h-[840px] flex items-center justify-center overflow-hidden border-b border-slate-100 bg-white">
+        {/* --- Background 3D Showcase & Background Edge Shaders (Strictly z-0) --- */}
+        <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none">
+          {/* 3D Marquee Layer with Radial Mask */}
+          <div
+            style={{
+              maskImage:
+                'radial-gradient(ellipse 90% 85% at 50% 50%, rgba(0,0,0,0.65) 30%, rgba(0,0,0,0.52) 65%, rgba(0,0,0,0.45) 100%)',
+              WebkitMaskImage:
+                'radial-gradient(ellipse 90% 85% at 50% 50%, rgba(0,0,0,0.65) 30%, rgba(0,0,0,0.52) 65%, rgba(0,0,0,0.45) 100%)',
+            }}
+            className="w-full h-full flex items-center justify-center"
           >
-            <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-2 block">
-              WIZETV
-            </span>
+            <ThreeDMarquee
+              images={STUDIO_SHOWCASE_IMAGES}
+              className="h-full w-full max-sm:h-full opacity-100"
+              innerScaleClass="scale-[0.85] sm:scale-[1.0] lg:scale-[1.18] xl:scale-[1.25]"
+            />
+          </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black tracking-tight text-slate-900 leading-[1.12] mb-5">
+          {/* Background-only Soft Edge Fades */}
+          <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent" />
+          <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent" />
+          <div className="absolute inset-y-0 right-0 w-28 sm:w-48 bg-gradient-to-l from-white via-white/45 to-transparent" />
+        </div>
+
+        {/* --- Left Corner Hero Content --- */}
+        <div className="relative z-40 isolate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-24 w-full flex justify-start items-start">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative max-w-2xl lg:max-w-3xl xl:max-w-4xl w-full text-left"
+          >
+            {/* Headline (Bigger & High-Impact) */}
+            <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-[5.5rem] font-black tracking-tight text-slate-950 leading-[0.98] mb-6">
               Your Story, <br />
-              <span className="text-slate-900">Our Studio.</span>
+              <span className="text-brand-red">Our Studio.</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-700 font-semibold leading-snug mb-3 max-w-lg">
-              Podcasting. Production. Storytelling. Editing. The Best Studio Experience in Sri Lanka.
-            </p>
+            {/* Subtitles (Bigger & Clearer Presence) */}
+            <div className="space-y-3 mb-8 max-w-2xl">
+              <p className="text-lg sm:text-2xl lg:text-3xl font-black text-slate-950 leading-tight">
+                Podcasting. Production. Storytelling. Editing. The Best Studio Experience in Sri Lanka.
+              </p>
+              <p className="text-sm sm:text-base lg:text-lg text-slate-700 font-semibold leading-relaxed">
+                Designed for founders, businesses, and creators who want every episode to reflect the highest caliber of their brand.
+              </p>
+            </div>
 
-            <p className="text-sm text-slate-500 font-medium leading-relaxed mb-8 max-w-lg">
-              Designed for founders, businesses and creators who want every episode to reflect the quality of their brand.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex items-center gap-4 flex-wrap">
+            {/* CTA Buttons (Enlarged, Studio Tour Removed) */}
+            <div className="flex items-center gap-4 sm:gap-5 flex-wrap">
               <Link
                 href="/contact?type=inquiry"
-                className="px-7 py-3 rounded-lg bg-[#111827] hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
+                className="px-9 sm:px-11 py-4 sm:py-4.5 rounded-2xl bg-[#111827] hover:bg-black text-white text-xs sm:text-sm font-black uppercase tracking-wider transition-all shadow-xl hover:scale-105"
               >
                 Let&apos;s Talk
               </Link>
 
               <Link
                 href="/contact"
-                className="px-7 py-3 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:shadow-red-glow"
+                className="px-9 sm:px-11 py-4 sm:py-4.5 rounded-2xl bg-brand-red hover:bg-brand-red-hover text-white text-xs sm:text-sm font-black uppercase tracking-wider transition-all shadow-xl hover:shadow-red-glow hover:scale-105"
               >
                 Book The Studio
               </Link>
-            </div>
-          </motion.div>
-
-          {/* Right Hero Visual with Angled Red Geometric Backdrop */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="lg:col-span-6 relative flex justify-end"
-          >
-            <div className="relative w-full max-w-[560px]">
-              {/* Red Angled Polygon Background */}
-              <div className="absolute -top-6 -right-6 -bottom-6 left-12 bg-brand-red red-tv-watermark rounded-3xl red-hero-poly z-0 shadow-lg" />
-
-              {/* Studio Setup Main Card */}
-              <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 aspect-[16/10]">
-                <Image
-                  src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1200&auto=format&fit=crop"
-                  alt="WizeTV Broadcast Studio Setup in Colombo"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
-                  <div className="text-white">
-                    <span className="text-[10px] font-extrabold uppercase tracking-widest bg-brand-red px-2.5 py-1 rounded text-white inline-block mb-1">
-                      WizeTV Studio Colombo
-                    </span>
-                    <p className="text-xs font-semibold text-slate-200">
-                      4K Multi-Cam & Whisper Suite
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>
@@ -148,15 +141,22 @@ export default function HomePage() {
                 <Link
                   key={idx}
                   href={item.href}
-                  className="studio-card p-8 rounded-2xl flex flex-col items-center justify-start text-center group cursor-pointer"
+                  className="block h-full cursor-pointer group"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-800 group-hover:text-brand-red group-hover:border-brand-red/40 transition-colors mb-5 shrink-0">
-                    <IconComp className="w-8 h-8" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-sm font-black text-slate-900 mb-2 group-hover:text-brand-red transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                  <BackgroundGradient
+                    containerClassName="h-full w-full"
+                    className="rounded-[22px] p-6 sm:p-8 bg-white h-full flex flex-col items-center justify-start text-center"
+                  >
+                    <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm flex items-center justify-center text-slate-800 group-hover:text-brand-red group-hover:border-brand-red/40 transition-colors mb-5 shrink-0">
+                      <IconComp className="w-8 h-8" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-base font-black text-slate-900 mb-2.5 group-hover:text-brand-red transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
+                      {item.desc}
+                    </p>
+                  </BackgroundGradient>
                 </Link>
               );
             })}
