@@ -50,12 +50,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon.png' },
-      { url: '/favicon.ico' },
+      { url: '/icon.png?v=2' },
+      { url: '/favicon.ico?v=2' },
     ],
-    shortcut: ['/icon.png'],
+    shortcut: ['/icon.png?v=2'],
     apple: [
-      { url: '/icon.png' },
+      { url: '/icon.png?v=2' },
     ],
   },
 };
@@ -68,9 +68,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${montserrat.variable}`}>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/icon.png" />
+        <link rel="icon" href="/icon.png?v=2" type="image/png" />
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="apple-touch-icon" href="/icon.png?v=2" />
+        <link rel="shortcut icon" href="/icon.png?v=2" />
       </head>
       <body className="bg-brand-dark text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-red selection:text-white">
         <Navbar />

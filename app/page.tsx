@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Mic,
   Camera,
@@ -11,17 +11,32 @@ import {
   Smartphone,
   CheckCircle2,
   ArrowRight,
+  ArrowUpRight,
   Sparkles,
   Radio,
   Sliders,
+  Download,
+  FileText,
 } from 'lucide-react';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 import { ThreeDMarquee } from '@/components/ui/3d-marquee';
-import { BackgroundGradient } from '@/components/ui/background-gradient';
+import { PodcastCarousel } from '@/components/ui/PodcastCarousel';
+import { StudioCatalogueViewer } from '@/components/ui/StudioCatalogueViewer';
 import { STUDIO_SHOWCASE_IMAGES } from '@/lib/studioImages';
 import { STUDIO_PACKAGES_DATA } from '@/lib/data';
 
+const DISCIPLINES = ['Podcasting', 'Production', 'Storytelling', 'Editing'];
+
 export default function HomePage() {
+  const [activeWordIndex, setActiveWordIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveWordIndex((prev) => (prev + 1) % DISCIPLINES.length);
+    }, 2400);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="bg-white text-slate-900 overflow-hidden">
       {/* ========================================================================= */}
@@ -67,30 +82,62 @@ export default function HomePage() {
               <span className="text-brand-red">Our Studio.</span>
             </h1>
 
-            {/* Subtitles (Bigger & Clearer Presence) */}
-            <div className="space-y-3 mb-8 max-w-2xl">
-              <p className="text-lg sm:text-2xl lg:text-3xl font-black text-slate-950 leading-tight">
-                Podcasting. Production. Storytelling. Editing. The Best Studio Experience in Sri Lanka.
+            {/* Disciplines & Tagline (Beautiful One-by-One Presentation) */}
+            <div className="space-y-4 mb-8 max-w-2xl">
+              {/* Disciplines Pill Chips (One by One) */}
+              <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+                {DISCIPLINES.map((name, idx) => {
+                  const isActive = activeWordIndex === idx;
+                  return (
+                    <button
+                      key={name}
+                      type="button"
+                      onClick={() => setActiveWordIndex(idx)}
+                      className={`group relative px-4 py-2 rounded-xl text-xs sm:text-sm font-black tracking-wide transition-all duration-300 flex items-center gap-2 border shadow-sm ${
+                        isActive
+                          ? 'bg-slate-950 text-white border-slate-950 shadow-md scale-105'
+                          : 'bg-white/85 hover:bg-white text-slate-800 border-slate-200/90 hover:border-slate-400 backdrop-blur-sm'
+                      }`}
+                    >
+                      <span>{name}</span>
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                          isActive ? 'bg-brand-red animate-pulse' : 'bg-slate-300'
+                        }`}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Tagline Anchor */}
+              <p className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-slate-950 leading-tight">
+                The Best Studio Experience in{' '}
+                <span className="text-brand-red">Sri Lanka.</span>
               </p>
-              <p className="text-sm sm:text-base lg:text-lg text-slate-700 font-semibold leading-relaxed">
+
+              {/* Context Description */}
+              <p className="text-sm sm:text-base lg:text-lg text-slate-700 font-semibold leading-relaxed max-w-xl">
                 Designed for founders, businesses, and creators who want every episode to reflect the highest caliber of their brand.
               </p>
             </div>
 
-            {/* CTA Buttons (Enlarged, Studio Tour Removed) */}
+            {/* CTA Buttons (Bigger, Modern & High-Impact) */}
             <div className="flex items-center gap-4 sm:gap-5 flex-wrap">
               <Link
                 href="/contact?type=inquiry"
-                className="px-9 sm:px-11 py-4 sm:py-4.5 rounded-2xl bg-[#111827] hover:bg-black text-white text-xs sm:text-sm font-black uppercase tracking-wider transition-all shadow-xl hover:scale-105"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-10 sm:px-12 py-4.5 sm:py-5 rounded-2xl bg-slate-950 hover:bg-black text-white text-sm sm:text-base font-black tracking-wide transition-all duration-300 border border-slate-800 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.4),inset_0_1px_1.5px_rgba(255,255,255,0.2)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.55)] hover:scale-[1.03] active:scale-[0.98]"
               >
-                Let&apos;s Talk
+                <span>Let&apos;s Talk</span>
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
               </Link>
 
               <Link
                 href="/contact"
-                className="px-9 sm:px-11 py-4 sm:py-4.5 rounded-2xl bg-brand-red hover:bg-brand-red-hover text-white text-xs sm:text-sm font-black uppercase tracking-wider transition-all shadow-xl hover:shadow-red-glow hover:scale-105"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-10 sm:px-12 py-4.5 sm:py-5 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white text-sm sm:text-base font-black tracking-wide transition-all duration-300 border border-red-400/30 shadow-[0_14px_34px_-6px_rgba(236,35,40,0.55),inset_0_1.5px_2px_rgba(255,255,255,0.4)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.7)] hover:scale-[1.03] active:scale-[0.98]"
               >
-                Book The Studio
+                <span>Book The Studio</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </motion.div>
@@ -100,36 +147,43 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 2. WHAT WE DO — Full-Service Creative Production (4 Cards) */}
       {/* ========================================================================= */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-wave-pattern relative border-t border-slate-100">
-        <div className="max-w-7xl mx-auto text-center">
-          <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-1 block">
-            WHAT WE DO
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-12">
-            Full-Service Creative Production.
-          </h2>
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 relative border-t border-slate-200/80">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-2 block">
+              WHAT WE DO
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 leading-tight">
+              Full-Service Creative Production.
+            </h2>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {[
               {
+                number: '01',
                 title: 'Podcast Production',
                 desc: 'Professional podcast recording, multi-camera setups, sound engineering, editing, and publishing support.',
                 icon: Mic,
                 href: '/services#podcast-production',
               },
               {
+                number: '02',
                 title: 'Creative Studio Rental',
                 desc: 'A professional environment built for podcasts, interviews, livestreams, content shoots, and brand storytelling.',
                 icon: Camera,
                 href: '/services#studio-rental',
               },
               {
+                number: '03',
                 title: 'Video Editing & Post Production',
                 desc: 'Clean edits. Cinematic storytelling. Short-form content. Platform-ready delivery.',
                 icon: Film,
                 href: '/services#editing-post',
               },
               {
+                number: '04',
                 title: 'Content Creation Services',
                 desc: 'YouTube production, reels, branded content, social media assets, and digital storytelling.',
                 icon: Smartphone,
@@ -141,22 +195,31 @@ export default function HomePage() {
                 <Link
                   key={idx}
                   href={item.href}
-                  className="block h-full cursor-pointer group"
+                  className="group relative bg-white rounded-2xl p-7 border border-slate-200/90 hover:border-brand-red/40 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(236,35,40,0.12)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
                 >
-                  <BackgroundGradient
-                    containerClassName="h-full w-full"
-                    className="rounded-[22px] p-6 sm:p-8 bg-white h-full flex flex-col items-center justify-start text-center"
-                  >
-                    <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm flex items-center justify-center text-slate-800 group-hover:text-brand-red group-hover:border-brand-red/40 transition-colors mb-5 shrink-0">
-                      <IconComp className="w-8 h-8" strokeWidth={1.5} />
+                  {/* Subtle top indicator highlight */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-brand-red/0 to-transparent group-hover:via-brand-red transition-all duration-500" />
+
+                  <div>
+                    {/* Top Row: Icon + Number & Arrow */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-slate-800 group-hover:bg-brand-red group-hover:text-white group-hover:border-brand-red transition-all duration-300 shadow-sm">
+                        <IconComp className="w-6 h-6" strokeWidth={1.75} />
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-400 group-hover:text-brand-red transition-colors">
+                        <span className="font-mono text-xs font-bold">{item.number}</span>
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </div>
                     </div>
-                    <h3 className="text-base font-black text-slate-900 mb-2.5 group-hover:text-brand-red transition-colors">
+
+                    {/* Card Content */}
+                    <h3 className="text-lg font-black text-slate-900 tracking-tight leading-snug mb-3 group-hover:text-brand-red transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
                       {item.desc}
                     </p>
-                  </BackgroundGradient>
+                  </div>
                 </Link>
               );
             })}
@@ -212,21 +275,9 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Visual Column */}
+            {/* Right Visual Column — Interactive Studio Showcase Carousel */}
             <div className="lg:col-span-6 relative flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-[500px]">
-                <div className="absolute -top-5 -left-5 w-24 h-24 bg-brand-red red-tv-watermark rounded-2xl z-0" />
-                <div className="absolute -bottom-6 -right-6 w-36 h-36 bg-brand-red red-tv-watermark rounded-3xl red-corner-slice-right z-0" />
-
-                <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1000&auto=format&fit=crop"
-                    alt="Lively podcast discussion at WizeTV studio"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+              <PodcastCarousel />
             </div>
           </div>
         </div>
@@ -235,42 +286,64 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 4. STUDIO SECTION — Your Content Deserves A Better Stage */}
       {/* ========================================================================= */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white relative overflow-hidden">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 text-slate-900 relative overflow-hidden border-y border-slate-200/80">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-6 flex flex-col items-start">
               <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-2 block">
                 STUDIO OVERVIEW
               </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mb-4">
                 Your Content Deserves A Better Stage.
               </h2>
-              <p className="text-sm text-slate-300 leading-relaxed mb-6 font-medium">
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-8 font-medium">
                 Built for podcasts, interviews, livestreams, webinars, and digital media productions.
               </p>
 
-              <div className="grid grid-cols-2 gap-4">
+              {/* 4 Features Only (No extra descriptions) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full mb-8">
                 {[
-                  { title: 'Professional Lighting', desc: 'Aputure & Amaran softbox lighting' },
-                  { title: 'Premium Audio', desc: 'Shure SM7B broadcast mic chain' },
-                  { title: 'Multi-Camera Production', desc: 'Sony FX Cinema 4K ISO cameras' },
-                  { title: 'Creator-Ready Setup', desc: 'Colombo 07 acoustic whisper suite' },
-                ].map((spec, i) => (
-                  <div key={i} className="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
-                    <div className="text-xs font-bold text-white mb-1">{spec.title}</div>
-                    <div className="text-[11px] text-slate-400">{spec.desc}</div>
+                  'Professional lighting.',
+                  'Premium audio.',
+                  'Multi-camera production.',
+                  'Creator-ready setup.',
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="p-4 rounded-xl bg-white border border-slate-200 flex items-center gap-3 shadow-sm hover:shadow-md hover:border-brand-red/40 transition-all"
+                  >
+                    <span className="w-2.5 h-2.5 rounded-full bg-brand-red shadow-[0_0_8px_rgba(236,35,40,0.6)] shrink-0" />
+                    <span className="text-sm font-bold text-slate-900 tracking-wide">{item}</span>
                   </div>
                 ))}
               </div>
+
+              {/* Download Catalogue (PDF) Actions */}
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="/api/download-catalogue"
+                  download="WizeTV_studio_catalogue.pdf"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-brand-red hover:bg-red-600 text-white font-bold text-sm shadow-[0_4px_20px_rgba(236,35,40,0.35)] hover:shadow-[0_6px_25px_rgba(236,35,40,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Download Catalogue (PDF)</span>
+                </a>
+                <a
+                  href="/downloads/WizeTV_studio_catalogue.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white hover:bg-slate-100 text-slate-800 font-semibold text-sm border border-slate-200 shadow-sm hover:shadow transition-all"
+                >
+                  <FileText className="w-4 h-4 text-slate-600" />
+                  <span>Preview PDF</span>
+                </a>
+              </div>
             </div>
 
-            <div className="lg:col-span-6 rounded-2xl overflow-hidden border border-slate-700 aspect-[16/10] relative">
-              <Image
-                src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1000&auto=format&fit=crop"
-                alt="WizeTV studio interior"
-                fill
-                className="object-cover"
-              />
+            {/* Right Visual Column: 2000x2000 px 3D Catalogue Book Viewer */}
+            <div className="lg:col-span-6 relative flex justify-center lg:justify-end">
+              <StudioCatalogueViewer />
             </div>
           </div>
         </div>

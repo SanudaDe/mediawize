@@ -49,7 +49,7 @@ export const ThreeDMarquee = ({
         >
           {columns.map((colImages, colIndex) => {
             const isEven = colIndex % 2 === 0;
-            const duration = isEven ? 80 + colIndex * 4 : 88 + colIndex * 4;
+            const duration = isEven ? 28 + colIndex * 3 : 32 + colIndex * 3;
 
             return (
               <div

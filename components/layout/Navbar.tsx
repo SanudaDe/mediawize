@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -44,29 +45,15 @@ export const Navbar: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 flex items-center justify-center relative">
-                <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
-                  <path
-                    d="M4 6L11 26H15L11 11L16 20L21 11L17 26H21L28 6H22L16 16L10 6H4Z"
-                    fill="#EC2328"
-                  />
-                  <path
-                    d="M14 6L16 10L18 6H22L16 16L10 6H14Z"
-                    fill="#111827"
-                  />
-                </svg>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[13px] font-black tracking-tight text-slate-900 leading-none">
-                  WIZE TV
-                </span>
-                <span className="text-[10px] font-bold tracking-widest text-slate-700 leading-tight">
-                  STUDIOS
-                </span>
-              </div>
-            </div>
+          <Link href="/" className="flex items-center group">
+            <Image
+              src="/logo.png"
+              alt="WizeTV Logo"
+              width={140}
+              height={49}
+              className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.03]"
+              priority
+            />
           </Link>
 
           {/* Center Navigation Links */}

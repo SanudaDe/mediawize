@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
 
             <div className="flex items-center gap-3">
               <a
-                href="https://youtube.com"
+                href="https://www.youtube.com/c/wizetv"
                 target="_blank"
                 rel="noreferrer"
                 className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-brand-red text-slate-300 hover:text-white flex items-center justify-center transition-all"
