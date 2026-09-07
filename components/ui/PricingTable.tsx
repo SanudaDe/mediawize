@@ -3,8 +3,34 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Flame, ArrowRight, ShieldCheck, Clock, Video } from 'lucide-react';
+import {
+  Check,
+  ArrowRight,
+  Clock,
+  Video,
+  Mic,
+  Camera,
+  Sparkles,
+  Zap,
+  ShieldCheck,
+  Award,
+  Crown,
+} from 'lucide-react';
 import { STUDIO_PACKAGES_DATA, SUBSCRIPTION_PACKAGES_DATA } from '@/lib/data';
+
+const STUDIO_ICONS: Record<string, React.ElementType> = {
+  'audio-only-podcast': Mic,
+  'solo-video-podcast': Camera,
+  'dual-host-video-podcast': Video,
+  'custom-premium-experience': Sparkles,
+};
+
+const SUBSCRIPTION_ICONS: Record<string, React.ElementType> = {
+  'basic-subscription': Zap,
+  'bronze-subscription': Award,
+  'silver-subscription': Crown,
+  'gold-subscription': Sparkles,
+};
 
 interface PricingTableProps {
   defaultMode?: 'packages' | 'subscriptions';
@@ -51,50 +77,109 @@ export const PricingTable: React.FC<PricingTableProps> = ({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch"
             >
-              {STUDIO_PACKAGES_DATA.map((pkg) => (
-                <div
-                  key={pkg.id}
-                  className="studio-card bg-white p-7 rounded-2xl flex flex-col justify-between text-left"
-                >
-                  <div>
-                    <h3 className="text-base font-black text-slate-900 text-center mb-1">
-                      {pkg.name}
-                    </h3>
-                    <div className="text-center font-black text-lg text-slate-900 mb-1">
-                      {pkg.priceLKR}
-                    </div>
-                    <div className="text-center text-[11px] text-slate-500 font-semibold mb-6 pb-4 border-b border-slate-100">
-                      Duration: {pkg.duration}
-                    </div>
+              {STUDIO_PACKAGES_DATA.map((pkg) => {
+                const IconComponent = STUDIO_ICONS[pkg.slug] || Sparkles;
+                const isPopular = !!pkg.popular;
 
-                    <div className="space-y-2 mb-8">
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
-                        Includes:
-                      </span>
-                      <ul className="space-y-2">
-                        {pkg.includes.map((inc, incIdx) => (
-                          <li
-                            key={incIdx}
-                            className="text-xs text-slate-600 font-medium flex items-start gap-2"
-                          >
-                            <span className="text-brand-red font-bold">&bull;</span>
-                            <span>{inc}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <Link
-                    href={`/contact?package=${pkg.slug}`}
-                    className="w-full py-2.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider text-center transition-all shadow-sm hover:shadow-red-glow"
+                return (
+                  <div
+                    key={pkg.id}
+                    className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left transition-all duration-300 ${
+                      isPopular
+                        ? 'border-2 border-brand-red shadow-xl shadow-red-500/10 ring-4 ring-brand-red/5 hover:-translate-y-1'
+                        : 'border border-slate-200 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1'
+                    }`}
                   >
-                    Select Plan
-                  </Link>
-                </div>
-              ))}
+                    {/* Floating Popular Badge */}
+                    {isPopular && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-brand-red text-white text-[10px] font-black uppercase tracking-wider shadow-md shadow-brand-red/30 flex items-center gap-1.5 whitespace-nowrap">
+                        <Sparkles className="w-3 h-3 fill-current" />
+                        <span>Most Popular</span>
+                      </div>
+                    )}
+
+                    <div>
+                      {/* Top Meta: Iconic Symbol + Duration Badge */}
+                      <div className="flex items-center justify-between gap-3 mb-6">
+                        <div
+                          className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-300 ${
+                            isPopular
+                              ? 'bg-brand-red text-white shadow-md shadow-brand-red/25'
+                              : 'bg-slate-100 text-slate-800 group-hover:bg-brand-red group-hover:text-white'
+                          }`}
+                        >
+                          <IconComponent className="w-5 h-5 stroke-[2.2]" />
+                        </div>
+
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 tracking-tight">
+                          <Clock className="w-3 h-3 text-slate-400" />
+                          <span>{pkg.duration}</span>
+                        </span>
+                      </div>
+
+                      {/* Title & Subtitle */}
+                      <h3 className="text-lg font-black text-slate-900 tracking-tight mb-1">
+                        {pkg.name}
+                      </h3>
+                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 min-h-[32px] mb-5">
+                        {pkg.bestFor}
+                      </p>
+
+                      {/* Price Block */}
+                      <div className="pt-4 pb-5 border-t border-b border-slate-100 mb-6">
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                            {pkg.priceLKR}
+                          </span>
+                          {pkg.priceNum > 0 && (
+                            <span className="text-xs font-semibold text-slate-400">/ session</span>
+                          )}
+                        </div>
+                        <span className="text-[11px] font-medium text-slate-400 block mt-0.5">
+                          {pkg.priceNum > 0
+                            ? 'Includes studio setup & technician'
+                            : 'Tailored to your creative scope'}
+                        </span>
+                      </div>
+
+                      {/* Inclusions List with iconic red checkmarks */}
+                      <div className="space-y-3 mb-8">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
+                          Included in Session
+                        </span>
+                        <ul className="space-y-2.5">
+                          {pkg.includes.map((inc, incIdx) => (
+                            <li
+                              key={incIdx}
+                              className="text-xs text-slate-600 font-medium flex items-start gap-2.5"
+                            >
+                              <div className="w-4 h-4 rounded-full bg-red-50 text-brand-red flex items-center justify-center shrink-0 mt-0.5 border border-red-100">
+                                <Check className="w-2.5 h-2.5 stroke-[3]" />
+                              </div>
+                              <span className="leading-snug">{inc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Interactive Modern Action Button */}
+                    <Link
+                      href={`/contact?package=${pkg.slug}`}
+                      className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 ${
+                        isPopular
+                          ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
+                          : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
+                      }`}
+                    >
+                      <span>{pkg.priceNum > 0 ? 'Select Package' : 'Get Custom Quote'}</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
+                    </Link>
+                  </div>
+                );
+              })}
             </motion.div>
           ) : (
             <motion.div
@@ -102,49 +187,100 @@ export const PricingTable: React.FC<PricingTableProps> = ({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch"
             >
-              {SUBSCRIPTION_PACKAGES_DATA.map((sub) => (
-                <div
-                  key={sub.id}
-                  className="studio-card bg-white p-7 rounded-2xl flex flex-col justify-between text-left"
-                >
-                  <div>
-                    <h3 className="text-base font-black text-slate-900 text-center mb-1">
-                      {sub.name}
-                    </h3>
-                    <div className="text-center font-black text-lg text-slate-900 mb-1">
-                      {sub.monthlyFeeLKR}
-                    </div>
-                    <div className="text-center text-[11px] text-slate-500 font-semibold mb-6 pb-4 border-b border-slate-100">
-                      Monthly Recurring Tier
-                    </div>
+              {SUBSCRIPTION_PACKAGES_DATA.map((sub) => {
+                const IconComponent = SUBSCRIPTION_ICONS[sub.slug] || Crown;
+                const isPopular = !!sub.popular;
 
-                    <div className="space-y-2 mb-8">
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                        Recommended For:
-                      </span>
-                      <p className="text-xs text-slate-700 font-medium mb-4">
+                return (
+                  <div
+                    key={sub.id}
+                    className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left transition-all duration-300 ${
+                      isPopular
+                        ? 'border-2 border-brand-red shadow-xl shadow-red-500/10 ring-4 ring-brand-red/5 hover:-translate-y-1'
+                        : 'border border-slate-200 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1'
+                    }`}
+                  >
+                    {/* Floating Popular Badge */}
+                    {isPopular && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-brand-red text-white text-[10px] font-black uppercase tracking-wider shadow-md shadow-brand-red/30 flex items-center gap-1.5 whitespace-nowrap">
+                        <Sparkles className="w-3 h-3 fill-current" />
+                        <span>Recommended</span>
+                      </div>
+                    )}
+
+                    <div>
+                      {/* Top Meta: Iconic Symbol + Priority Badge */}
+                      <div className="flex items-center justify-between gap-3 mb-6">
+                        <div
+                          className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-300 ${
+                            isPopular
+                              ? 'bg-brand-red text-white shadow-md shadow-brand-red/25'
+                              : 'bg-slate-100 text-slate-800 group-hover:bg-brand-red group-hover:text-white'
+                          }`}
+                        >
+                          <IconComponent className="w-5 h-5 stroke-[2.2]" />
+                        </div>
+
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 tracking-tight">
+                          <ShieldCheck className="w-3 h-3 text-slate-400" />
+                          <span>{sub.priority} Priority</span>
+                        </span>
+                      </div>
+
+                      {/* Title & Subtitle */}
+                      <h3 className="text-lg font-black text-slate-900 tracking-tight mb-1">
+                        {sub.name}
+                      </h3>
+                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 min-h-[32px] mb-5">
                         {sub.recommendedFor}
                       </p>
 
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                        Recording Allocation:
-                      </span>
-                      <p className="text-xs text-slate-700 font-semibold">
-                        {sub.recordingAllocation}
-                      </p>
-                    </div>
-                  </div>
+                      {/* Price Block */}
+                      <div className="pt-4 pb-5 border-t border-b border-slate-100 mb-6">
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                            {sub.monthlyFeeLKR}
+                          </span>
+                          <span className="text-xs font-semibold text-slate-400">/ month</span>
+                        </div>
+                        <span className="text-[11px] font-medium text-slate-400 block mt-0.5">
+                          Monthly recurring membership
+                        </span>
+                      </div>
 
-                  <Link
-                    href={`/contact?subscription=${sub.slug}`}
-                    className="w-full py-2.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider text-center transition-all shadow-sm hover:shadow-red-glow"
-                  >
-                    Select Plan
-                  </Link>
-                </div>
-              ))}
+                      {/* Allocation details */}
+                      <div className="space-y-3 mb-8">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
+                          Allocation & Details
+                        </span>
+                        <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                          <div className="flex items-start gap-2.5 text-xs text-slate-700 font-semibold">
+                            <div className="w-4 h-4 rounded-full bg-red-50 text-brand-red flex items-center justify-center shrink-0 mt-0.5 border border-red-100">
+                              <Check className="w-2.5 h-2.5 stroke-[3]" />
+                            </div>
+                            <span>{sub.recordingAllocation}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Interactive Modern Action Button */}
+                    <Link
+                      href={`/contact?subscription=${sub.slug}`}
+                      className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 ${
+                        isPopular
+                          ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
+                          : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
+                      }`}
+                    >
+                      <span>Select Subscription</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
+                    </Link>
+                  </div>
+                );
+              })}
             </motion.div>
           )}
         </AnimatePresence>

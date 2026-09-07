@@ -16,6 +16,11 @@ import {
   Sparkles,
   Users,
   ShieldCheck,
+  MessageSquare,
+  SlidersHorizontal,
+  CalendarCheck,
+  Clapperboard,
+  CheckCheck,
 } from 'lucide-react';
 
 export default function ServicesPage() {
@@ -311,33 +316,123 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Production Process (5 Steps) */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white mt-16">
-        <div className="max-w-7xl mx-auto text-center">
-          <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-2 block">
+      {/* ========================================================================= */}
+      {/* Production Process (5 Steps) — Clean Light Theme (No Blue Background) */}
+      {/* ========================================================================= */}
+      <section className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 border-y border-slate-200 text-slate-900 mt-16 overflow-hidden">
+        {/* Ambient Subtle Red Glow Accent (No Blue) */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(236,35,40,0.06),transparent_70%)] pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto text-center z-10">
+          {/* Section Subtitle Badge */}
+          <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-red/10 border border-brand-red/20 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
             HOW IT WORKS
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black mb-14">
+
+          {/* Section Main Heading */}
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-4">
             Our Production Process
           </h2>
+          <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto mb-14 sm:mb-16">
+            From initial concept to final broadcast delivery, our 5-step workflow guarantees frictionless production and world-class quality.
+          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            {[
-              { step: 'Step 1', desc: 'Tell us about your project.' },
-              { step: 'Step 2', desc: "We'll recommend the right package." },
-              { step: 'Step 3', desc: 'Book your recording session.' },
-              { step: 'Step 4', desc: 'Our team records and produces your content.' },
-              { step: 'Step 5', desc: 'We edit, review and deliver your final content.' },
-            ].map((p, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-slate-800/80 border border-slate-700 text-left flex flex-col justify-between">
-                <div>
-                  <span className="text-xs font-black uppercase tracking-wider text-brand-red block mb-3">
-                    {p.step}
-                  </span>
-                  <p className="text-sm font-semibold text-slate-200">{p.desc}</p>
-                </div>
-              </div>
-            ))}
+          {/* Connected Steps Pipeline */}
+          <div className="relative">
+            {/* Desktop Horizontal Connecting Track */}
+            <div className="hidden lg:block absolute top-[68px] left-[8%] right-[8%] h-[2px] bg-gradient-to-r from-transparent via-slate-300 to-transparent z-0 pointer-events-none" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-6 relative z-10">
+              {[
+                {
+                  number: '01',
+                  title: 'Project Discovery',
+                  desc: 'Tell us about your project.',
+                  detail: 'Share your show concept, format, and creative vision.',
+                  icon: MessageSquare,
+                },
+                {
+                  number: '02',
+                  title: 'Package Curation',
+                  desc: "We'll recommend the right package.",
+                  detail: 'Get a tailored plan covering multi-cam angles and audio rigs.',
+                  icon: SlidersHorizontal,
+                },
+                {
+                  number: '03',
+                  title: 'Studio Booking',
+                  desc: 'Book your recording session.',
+                  detail: 'Select your preferred studio slot and schedule session dates.',
+                  icon: CalendarCheck,
+                },
+                {
+                  number: '04',
+                  title: 'Live Production',
+                  desc: 'Our team records and produces your content.',
+                  detail: 'Our crew handles lighting, Sony 4K cinema optics & sound.',
+                  icon: Clapperboard,
+                },
+                {
+                  number: '05',
+                  title: 'Edit & Delivery',
+                  desc: 'We edit, review and deliver your final content.',
+                  detail: 'Receive polished color-graded master video and viral cuts.',
+                  icon: CheckCheck,
+                },
+              ].map((p, i) => {
+                const IconComp = p.icon;
+                return (
+                  <div
+                    key={i}
+                    className="group relative p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-white border border-slate-200 hover:border-brand-red/50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-12px_rgba(236,35,40,0.15)] transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between text-left overflow-hidden"
+                  >
+                    {/* Top Subtle Edge Glow on Hover */}
+                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-red/0 to-transparent group-hover:via-brand-red transition-all duration-500" />
+
+                    {/* Iconic Modern Display Number (Translucent 65% gradient depth) */}
+                    <span className="absolute top-2 sm:top-3 right-4 sm:right-5 font-black text-6xl sm:text-7xl tracking-tighter select-none pointer-events-none text-transparent bg-clip-text bg-gradient-to-b from-slate-900/65 via-slate-800/40 to-slate-400/10 group-hover:from-brand-red group-hover:via-red-500 group-hover:to-brand-red/30 transition-all duration-500">
+                      {p.number}
+                    </span>
+
+                    <div>
+                      {/* Top Row: Icon */}
+                      <div className="mb-5">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 group-hover:bg-brand-red group-hover:border-brand-red group-hover:text-white text-slate-700 flex items-center justify-center transition-all duration-300 shadow-sm group-hover:scale-110">
+                          <IconComp className="w-5 h-5" />
+                        </div>
+                      </div>
+
+                      {/* Step Title */}
+                      <h3 className="text-base font-black text-slate-900 tracking-tight mb-2 group-hover:text-brand-red transition-colors">
+                        {p.title}
+                      </h3>
+
+                      {/* Original Prominent Description */}
+                      <p className="text-xs sm:text-sm font-bold text-slate-800 leading-snug mb-2">
+                        {p.desc}
+                      </p>
+
+                      {/* Explanatory Helper Detail */}
+                      <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                        {p.detail}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Action CTA below the steps */}
+          <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-brand-red hover:bg-brand-red-hover text-white text-xs sm:text-sm font-black uppercase tracking-wider transition-all shadow-red-glow active:scale-95"
+            >
+              <span>Start Your Project Now</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

@@ -28,8 +28,8 @@ export const ThreeDMarquee = ({
     const slice = baseImages.slice(start, start + chunkSize);
     // If slice has fewer items, wrap around
     const colItems = slice.length > 0 ? slice : baseImages.slice(0, 4);
-    // Duplicate 3 times for seamless infinite video-like marquee loop
-    return [...colItems, ...colItems, ...colItems];
+    // Duplicate 4 times for mathematically seamless infinite loop (50% translation = exactly 2 full sets)
+    return [...colItems, ...colItems, ...colItems, ...colItems];
   });
 
   return (

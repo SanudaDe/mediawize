@@ -1,18 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import {
-  Sparkles,
-  Target,
-  Compass,
-  CheckCircle2,
-  ArrowRight,
-  ShieldCheck,
-  Award,
-  Users,
-} from 'lucide-react';
+import { Target, Compass } from 'lucide-react';
 
 export default function AboutPage() {
   return (
@@ -87,43 +76,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Studio & Production Capability */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-2 block">
-            FACILITIES & TECH
-          </span>
-          <h2 className="text-3xl font-black text-slate-900">
-            Studio & Production Capability
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              title: 'Acoustic Whisper Suite',
-              desc: 'Floating drywall and sound diffusers for pristine audio fidelity.',
-            },
-            {
-              title: 'Sony FX Cinema 4K',
-              desc: 'Multi-camera angles with cinema prime lenses.',
-            },
-            {
-              title: 'Live ATEM Switching',
-              desc: 'Multi-angle live ISO program feeds and instant sync.',
-            },
-            {
-              title: 'Full Post-Production',
-              desc: 'DaVinci color grading, audio restoration, and viral clipping.',
-            },
-          ].map((item, i) => (
-            <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
-              <h3 className="text-base font-bold text-slate-900 mb-2">{item.title}</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Meet The Team */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
@@ -168,21 +120,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-black mb-4">Start Your Story Today</h2>
-          <p className="text-sm text-slate-600 mb-8 font-medium">
-            Join the creators and brands shaping public conversations across Sri Lanka.
-          </p>
-          <Link
-            href="/contact"
-            className="px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
-          >
-            Book The Studio
-          </Link>
-        </div>
-      </section>
+
     </div>
   );
 }
