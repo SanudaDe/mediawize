@@ -19,6 +19,8 @@ export interface SubscriptionPackageItem {
   monthlyFeeNum: number;
   recordingAllocation: string;
   priority: string;
+  hoursBadge: string;
+  sessionCount: string;
   idealUseCase?: string;
   popular?: boolean;
 }
@@ -103,6 +105,8 @@ export const SUBSCRIPTION_PACKAGES_DATA: SubscriptionPackageItem[] = [
     monthlyFeeLKR: 'LKR 65,000',
     monthlyFeeNum: 65000,
     recordingAllocation: '1 Recording Session (6 Hours)',
+    hoursBadge: '6',
+    sessionCount: '1 Recording Session',
     priority: 'Standard',
     idealUseCase: 'Content creation and personal projects',
   },
@@ -114,6 +118,8 @@ export const SUBSCRIPTION_PACKAGES_DATA: SubscriptionPackageItem[] = [
     monthlyFeeLKR: 'LKR 95,000',
     monthlyFeeNum: 95000,
     recordingAllocation: '2 Recording Sessions (10 Hours)',
+    hoursBadge: '10',
+    sessionCount: '2 Recording Sessions',
     priority: 'High',
     idealUseCase: 'Personal branding',
   },
@@ -124,7 +130,9 @@ export const SUBSCRIPTION_PACKAGES_DATA: SubscriptionPackageItem[] = [
     recommendedFor: 'SMEs, Marketing Teams, Educational Institutes',
     monthlyFeeLKR: 'LKR 175,000',
     monthlyFeeNum: 175000,
-    recordingAllocation: '4 Recording Sessions (14 Hours)',
+    recordingAllocation: '4 Recording Sessions (14 Hours Each)',
+    hoursBadge: '14',
+    sessionCount: '4 Recording Sessions',
     priority: 'Priority',
     idealUseCase: 'Company podcast and marketing content',
     popular: true,
@@ -137,6 +145,8 @@ export const SUBSCRIPTION_PACKAGES_DATA: SubscriptionPackageItem[] = [
     monthlyFeeLKR: 'LKR 350,000+',
     monthlyFeeNum: 350000,
     recordingAllocation: 'Dedicated Monthly Production Days (20 Hours)',
+    hoursBadge: '20',
+    sessionCount: 'Dedicated Production Days',
     priority: 'Guaranteed',
     idealUseCase: 'Corporate communications and executive content',
   },
