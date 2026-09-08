@@ -251,37 +251,34 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                         </span>
                       </div>
 
-                      {/* 3D Visual Studio Time & Allocation (NO CLOCK) */}
+                      {/* Studio Time & Allocation on clean light card style */}
                       <div className="space-y-3 mb-8">
                         <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
                           Studio Time & Allocation
                         </span>
 
-                        <div className="p-4 rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white border border-slate-800 shadow-[0_8px_20px_-6px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.15)] relative overflow-hidden">
-                          {/* 3D ambient glow */}
-                          <div className="absolute -top-8 -right-8 w-20 h-20 bg-brand-red/20 rounded-full blur-xl pointer-events-none" />
-
-                          <div className="relative z-10 flex items-center justify-between gap-3 mb-2.5">
+                        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                          <div className="flex items-center justify-between gap-3 mb-2.5">
                             <div>
                               <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-0.5">
                                 Monthly Allocation
                               </span>
-                              <span className="text-xs font-bold text-white block leading-tight">
+                              <span className="text-xs sm:text-sm font-bold text-slate-900 block leading-tight">
                                 {sub.sessionCount}
                               </span>
                             </div>
 
                             {/* 3D Embossed Hours Tag */}
-                            <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-gradient-to-br from-brand-red via-[#f02d33] to-[#b91c1c] text-white shadow-[0_4px_14px_rgba(236,35,40,0.55),inset_0_1px_2px_rgba(255,255,255,0.4)] border border-red-400/30 flex items-baseline gap-1 text-center font-black">
+                            <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-gradient-to-br from-brand-red via-[#f02d33] to-[#b91c1c] text-white shadow-md shadow-brand-red/30 border border-red-400/30 flex items-baseline gap-1 text-center font-black">
                               <span className="text-lg leading-none tracking-tight">{sub.hoursBadge}</span>
                               <span className="text-[9px] uppercase tracking-wider opacity-90 font-black">HRS</span>
                             </div>
                           </div>
 
                           {sub.idealUseCase && (
-                            <div className="relative z-10 pt-2.5 border-t border-slate-800 flex items-center gap-2 text-[11px] text-slate-300 font-medium">
-                              <div className="w-3.5 h-3.5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
-                                <Check className="w-2 h-2 stroke-[3]" />
+                            <div className="pt-2.5 border-t border-slate-200/70 flex items-center gap-2 text-[11px] sm:text-xs text-slate-600 font-medium">
+                              <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
+                                <Check className="w-2.5 h-2.5 stroke-[3]" />
                               </div>
                               <span className="truncate">{sub.idealUseCase}</span>
                             </div>
