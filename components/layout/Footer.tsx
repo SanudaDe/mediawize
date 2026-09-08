@@ -12,7 +12,6 @@ import {
   Youtube,
   Instagram,
   Linkedin,
-  Headphones,
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -54,15 +53,6 @@ export const Footer: React.FC = () => {
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="https://open.spotify.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-brand-red text-slate-300 hover:text-white flex items-center justify-center transition-all"
-                aria-label="Spotify"
-              >
-                <Headphones className="w-4 h-4" />
               </a>
               <a
                 href="https://linkedin.com"
