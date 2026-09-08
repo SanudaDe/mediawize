@@ -78,11 +78,8 @@ export default function ContactPage() {
               {/* Big Direct Call Button */}
               <a
                 href={STUDIO_TEL_HREF}
-                className="group w-full py-5 sm:py-6 px-6 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white font-black text-lg sm:text-2xl tracking-wide flex items-center justify-center gap-3.5 shadow-[0_14px_34px_-6px_rgba(236,35,40,0.55)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.7)] active:scale-[0.98] transition-all mb-10 text-center"
+                className="group w-full py-5 sm:py-6 px-6 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white font-black text-lg sm:text-2xl tracking-wide flex items-center justify-center shadow-[0_14px_34px_-6px_rgba(236,35,40,0.55)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.7)] active:scale-[0.98] transition-all mb-10 text-center"
               >
-                <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner">
-                  <Phone className="w-5 h-5 sm:w-6 sm:h-6 fill-white" />
-                </div>
                 <span>Book The Studio</span>
               </a>
 

@@ -12,7 +12,6 @@ import {
   HelpCircle,
   ArrowRight,
   Sparkles,
-  Phone,
 } from 'lucide-react';
 import { STUDIO_PACKAGES_DATA } from '@/lib/data';
 
@@ -173,9 +172,8 @@ export default function PodcastsPage() {
 
                 <a
                   href={STUDIO_TEL_HREF}
-                  className="w-full py-2.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider text-center transition-all shadow-sm hover:shadow-red-glow flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider text-center transition-all shadow-sm hover:shadow-red-glow flex items-center justify-center"
                 >
-                  <Phone className="w-3.5 h-3.5 fill-current" />
                   <span>Book The Studio</span>
                 </a>
               </div>
@@ -227,9 +225,8 @@ export default function PodcastsPage() {
           </p>
           <a
             href={STUDIO_TEL_HREF}
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow text-center"
           >
-            <Phone className="w-3.5 h-3.5 fill-white" />
             <span>Book The Studio</span>
           </a>
         </div>

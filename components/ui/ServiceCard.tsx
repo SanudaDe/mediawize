@@ -12,7 +12,6 @@ import {
   ArrowUpRight,
   CheckCircle2,
   Sparkles,
-  Phone,
 } from 'lucide-react';
 import { ServiceDetail } from '@/lib/types';
 
@@ -85,9 +84,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
       <div className="relative z-10 pt-6 border-t border-white/10 flex items-center justify-between">
         <a
           href="tel:+94777352700"
-          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white group-hover:text-brand-red transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white group-hover:text-brand-red transition-colors"
         >
-          <Phone className="w-3.5 h-3.5 fill-current" />
           <span>Book The Studio</span>
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </a>

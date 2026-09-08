@@ -21,7 +21,6 @@ import {
   CalendarCheck,
   Clapperboard,
   CheckCheck,
-  Phone,
 } from 'lucide-react';
 
 const STUDIO_TEL_HREF = 'tel:+94777352700';
@@ -483,9 +482,8 @@ export default function ServicesPage() {
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <a
               href={STUDIO_TEL_HREF}
-              className="px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow flex items-center gap-2"
+              className="px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow flex items-center justify-center text-center"
             >
-              <Phone className="w-3.5 h-3.5 fill-white" />
               <span>Book The Studio</span>
             </a>
             <Link

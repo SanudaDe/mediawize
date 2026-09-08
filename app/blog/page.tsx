@@ -153,11 +153,8 @@ export default function BlogPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href={STUDIO_TEL_HREF}
-                className="group inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white text-sm sm:text-base font-black tracking-wide transition-all shadow-[0_14px_34px_-6px_rgba(236,35,40,0.6)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.75)] active:scale-[0.98] w-full sm:w-auto"
+                className="group inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white text-sm sm:text-base font-black tracking-wide transition-all shadow-[0_14px_34px_-6px_rgba(236,35,40,0.6)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.75)] active:scale-[0.98] w-full sm:w-auto text-center"
               >
-                <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Phone className="w-4 h-4 fill-white" />
-                </div>
                 <span>Book The Studio</span>
               </a>
 

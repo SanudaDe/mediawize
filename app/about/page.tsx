@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Target, Compass, ArrowRight, ArrowUpRight, Sparkles, Phone } from 'lucide-react';
+import { Target, Compass, ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 
 const STUDIO_TEL_HREF = 'tel:+94777352700';
@@ -132,9 +132,8 @@ export default function AboutPage() {
               </Link>
               <a
                 href={STUDIO_TEL_HREF}
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-brand-red hover:bg-brand-red-hover text-white text-sm font-black tracking-wide transition-all shadow-red-glow active:scale-[0.98] w-full sm:w-auto"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-brand-red hover:bg-brand-red-hover text-white text-sm font-black tracking-wide transition-all shadow-red-glow active:scale-[0.98] w-full sm:w-auto text-center"
               >
-                <Phone className="w-4 h-4 fill-white" />
                 <span>Book The Studio</span>
               </a>
             </div>
