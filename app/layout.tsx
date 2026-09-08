@@ -21,14 +21,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'WizeTV | Sri Lanka’s Leading Podcast & Media Production Studio',
   description:
-    'Experience broadcast-grade podcasting in Colombo. 4K Sony FX cinema multi-cam, Shure SM7B broadcast audio, live switching, viral shorts editing, and sound mastering for founders, creators, and enterprise brands.',
+    'WizeTV is a premier podcast and media production studio in Colombo, Sri Lanka,and professional audio mastering services.',
   keywords: [
     'Podcast Studio Sri Lanka',
     'Colombo Podcast Studio',
     'WizeTV',
     'Video Podcast Production',
-    'Shure SM7B Studio Colombo',
-    '4K Multi-Cam Podcast Studio',
+    'Studio Colombo',
+    'Multi-Cam Podcast Studio',
     'Short Form Video Agency Sri Lanka',
     'Audio Mastering Colombo',
   ],
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'WizeTV | Premier Podcast & Media Studio Colombo',
     description:
-      'Record your flagship podcast with 4K multi-cam cinema cameras, Shure broadcast mics, and viral clip editing in Colombo 07.',
+      'WizeTV is a premier podcast and media production studio in Colombo, Sri Lanka,and professional audio mastering services.',
     url: 'https://wizetv.lk',
     siteName: 'WizeTV Studio',
     locale: 'en_LK',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'WizeTV | Podcast & Media Production Studio Sri Lanka',
     description:
-      'State-of-the-art podcast and video production studio in Colombo 07.',
+      'WizeTV is a premier podcast and media production studio in Colombo, Sri Lanka,and professional audio mastering services.',
   },
   icons: {
     icon: [
