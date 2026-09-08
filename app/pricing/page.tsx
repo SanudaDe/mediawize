@@ -228,7 +228,7 @@ export default function StudioPackagesPage() {
 
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 tracking-tight">
                         <ShieldCheck className="w-3 h-3 text-slate-400" />
-                        <span>{sub.priority} Priority</span>
+                        <span>{sub.priority === 'Priority' ? 'Priority Access' : `${sub.priority} Priority`}</span>
                       </span>
                     </div>
 
@@ -253,23 +253,23 @@ export default function StudioPackagesPage() {
                       </span>
                     </div>
 
-                    {/* Allocation details */}
+                    {/* Allocation & Studio Times */}
                     <div className="space-y-3 mb-8">
                       <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
-                        Allocation & Details
+                        Studio Time & Allocation
                       </span>
-                      <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
-                        <div className="flex items-start gap-2.5 text-xs text-slate-700 font-semibold">
-                          <div className="w-4 h-4 rounded-full bg-red-50 text-brand-red flex items-center justify-center shrink-0 mt-0.5 border border-red-100">
-                            <Check className="w-2.5 h-2.5 stroke-[3]" />
+                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2.5">
+                        <div className="flex items-center gap-2.5 text-xs text-slate-900 font-bold">
+                          <div className="w-5 h-5 rounded-lg bg-brand-red/10 text-brand-red flex items-center justify-center shrink-0">
+                            <Clock className="w-3 h-3 stroke-[2.5]" />
                           </div>
                           <span>{sub.recordingAllocation}</span>
                         </div>
                         {sub.idealUseCase && (
-                          <div className="flex items-start gap-2.5 text-xs text-slate-600 font-medium pt-1.5 border-t border-slate-200/60">
-                            <span className="text-[10px] font-black uppercase tracking-wider text-brand-red shrink-0 mt-0.5">
-                              Use Case:
-                            </span>
+                          <div className="flex items-center gap-2.5 text-xs text-slate-600 font-medium pl-0.5 pt-1.5 border-t border-slate-200/60">
+                            <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
+                              <Check className="w-2.5 h-2.5 stroke-[3]" />
+                            </div>
                             <span>{sub.idealUseCase}</span>
                           </div>
                         )}
