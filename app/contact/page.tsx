@@ -220,7 +220,7 @@ export default function ContactPage() {
               </span>
               <div className="flex items-center gap-3">
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/mediawizetv"
                   target="_blank"
                   rel="noreferrer"
                   className="w-9 h-9 rounded-xl bg-white border border-slate-200 hover:bg-brand-red hover:text-white text-slate-700 flex items-center justify-center transition-all shadow-sm"
@@ -231,7 +231,7 @@ export default function ContactPage() {
                   </svg>
                 </a>
                 <a
-                  href="https://youtube.com"
+                  href="https://www.youtube.com/c/wizetv"
                   target="_blank"
                   rel="noreferrer"
                   className="w-9 h-9 rounded-xl bg-white border border-slate-200 hover:bg-brand-red hover:text-white text-slate-700 flex items-center justify-center transition-all shadow-sm"
@@ -240,7 +240,7 @@ export default function ContactPage() {
                   <Youtube className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/mediawizetv/"
                   target="_blank"
                   rel="noreferrer"
                   className="w-9 h-9 rounded-xl bg-white border border-slate-200 hover:bg-brand-red hover:text-white text-slate-700 flex items-center justify-center transition-all shadow-sm"
@@ -249,7 +249,7 @@ export default function ContactPage() {
                   <Instagram className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/company/wizetv/"
                   target="_blank"
                   rel="noreferrer"
                   className="w-9 h-9 rounded-xl bg-white border border-slate-200 hover:bg-brand-red hover:text-white text-slate-700 flex items-center justify-center transition-all shadow-sm"
