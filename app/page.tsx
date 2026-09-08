@@ -20,6 +20,7 @@ import {
   Sliders,
   Download,
   FileText,
+  Phone,
 } from 'lucide-react';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 import { ThreeDMarquee } from '@/components/ui/3d-marquee';
@@ -27,6 +28,9 @@ import { PodcastCarousel } from '@/components/ui/PodcastCarousel';
 import { StudioCatalogueViewer } from '@/components/ui/StudioCatalogueViewer';
 import { STUDIO_SHOWCASE_IMAGES } from '@/lib/studioImages';
 import { STUDIO_PACKAGES_DATA } from '@/lib/data';
+
+const STUDIO_PHONE = '077 735 2700';
+const STUDIO_TEL_HREF = 'tel:+94777352700';
 
 const DISCIPLINES = ['Podcasting', 'Production', 'Storytelling', 'Editing'];
 
@@ -142,13 +146,15 @@ export default function HomePage() {
                 <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
               </Link>
 
-              <Link
-                href="/contact"
+              <a
+                href={STUDIO_TEL_HREF}
                 className="group relative inline-flex items-center justify-center gap-2.5 px-8 sm:px-12 py-3.5 sm:py-5 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white text-sm sm:text-base font-black tracking-wide transition-all duration-300 border border-red-400/30 shadow-[0_14px_34px_-6px_rgba(236,35,40,0.55),inset_0_1.5px_2px_rgba(255,255,255,0.4)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.7)] active:scale-[0.98] w-full sm:w-auto text-center"
               >
-                <span>Contact to Book</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:translate-x-1 transition-transform" />
-              </Link>
+                <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Phone className="w-3 h-3 fill-white" />
+                </div>
+                <span>Book The Studio</span>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -453,18 +459,18 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Interactive Modern Action Button */}
-                  <Link
-                    href={`/contact?package=${pkg.slug}`}
+                  {/* Interactive Modern Action Button: Direct Phone Call */}
+                  <a
+                    href={STUDIO_TEL_HREF}
                     className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 ${
                       isPopular
                         ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
                         : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
                     }`}
                   >
-                    <span>{pkg.priceNum > 0 ? 'Contact to Book' : 'Get Custom Quote'}</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
-                  </Link>
+                    <Phone className="w-3.5 h-3.5 fill-current" />
+                    <span>Book The Studio</span>
+                  </a>
                 </div>
               );
             })}
@@ -496,12 +502,13 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
+            <a
+              href={STUDIO_TEL_HREF}
+              className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow flex items-center justify-center gap-2"
             >
-              Contact Our Studio
-            </Link>
+              <Phone className="w-3.5 h-3.5 fill-white" />
+              <span>Book The Studio</span>
+            </a>
           </div>
         </div>
       </section>

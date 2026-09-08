@@ -5,27 +5,29 @@
  * ==============================================================================
  */
 
+const SUPABASE_STORAGE_BASE = 'https://bdsdxtydmhydiqwaodie.supabase.co/storage/v1/object/public/photos';
+
 export const STUDIO_SHOWCASE_IMAGES: string[] = [
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(1).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(2).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(3).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(4).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(5).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(6).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(7).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(8).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(9).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(10).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(11).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(12).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(13).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(14).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(15).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(16).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(17).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(18).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(19).jpeg",
-  "/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19.jpeg",
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(1).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(2).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(3).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(4).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(5).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(6).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(7).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(8).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(9).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(10).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(11).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(12).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(13).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(14).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(15).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(16).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(17).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(18).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(19).jpeg`,
+  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19.jpeg`,
 ];
 
 export interface StudioImageDetail {

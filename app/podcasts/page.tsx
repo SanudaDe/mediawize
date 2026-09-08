@@ -12,8 +12,11 @@ import {
   HelpCircle,
   ArrowRight,
   Sparkles,
+  Phone,
 } from 'lucide-react';
 import { STUDIO_PACKAGES_DATA } from '@/lib/data';
+
+const STUDIO_TEL_HREF = 'tel:+94777352700';
 
 export default function PodcastsPage() {
   return (
@@ -168,12 +171,13 @@ export default function PodcastsPage() {
                   </div>
                 </div>
 
-                <Link
-                  href={`/contact?package=${pkg.slug}`}
-                  className="w-full py-2.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider text-center transition-all shadow-sm hover:shadow-red-glow"
+                <a
+                  href={STUDIO_TEL_HREF}
+                  className="w-full py-2.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider text-center transition-all shadow-sm hover:shadow-red-glow flex items-center justify-center gap-1.5"
                 >
-                  Contact to Book
-                </Link>
+                  <Phone className="w-3.5 h-3.5 fill-current" />
+                  <span>Book The Studio</span>
+                </a>
               </div>
             ))}
           </div>
@@ -221,12 +225,13 @@ export default function PodcastsPage() {
           <p className="text-sm text-slate-400 mb-8">
             Book your session in our Colombo studio today or talk with our executive producer.
           </p>
-          <Link
-            href="/contact"
-            className="px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
+          <a
+            href={STUDIO_TEL_HREF}
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
           >
-            Contact Our Studio
-          </Link>
+            <Phone className="w-3.5 h-3.5 fill-white" />
+            <span>Book The Studio</span>
+          </a>
         </div>
       </section>
     </div>

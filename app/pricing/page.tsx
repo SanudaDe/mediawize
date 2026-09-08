@@ -15,12 +15,15 @@ import {
   Zap,
   Award,
   Crown,
+  Phone,
 } from 'lucide-react';
 import {
   STUDIO_PACKAGES_DATA,
   SUBSCRIPTION_PACKAGES_DATA,
   MEMBERSHIP_BENEFITS_DATA,
 } from '@/lib/data';
+
+const STUDIO_TEL_HREF = 'tel:+94777352700';
 
 const STUDIO_ICONS: Record<string, React.ElementType> = {
   'audio-only-podcast': Mic,
@@ -156,18 +159,18 @@ export default function StudioPackagesPage() {
                     </div>
                   </div>
 
-                  {/* Interactive Modern Action Button */}
-                  <Link
-                    href={`/contact?package=${pkg.slug}`}
+                  {/* Interactive Modern Action Button: Direct Phone Call */}
+                  <a
+                    href={STUDIO_TEL_HREF}
                     className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 ${
                       isPopular
                         ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
                         : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
                     }`}
                   >
-                    <span>{pkg.priceNum > 0 ? 'Contact to Book' : 'Get Custom Quote'}</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
-                  </Link>
+                    <Phone className="w-3.5 h-3.5 fill-current" />
+                    <span>Book The Studio</span>
+                  </a>
                 </div>
               );
             })}
@@ -268,18 +271,18 @@ export default function StudioPackagesPage() {
                     </div>
                   </div>
 
-                  {/* Interactive Modern Action Button */}
-                  <Link
-                    href={`/contact?subscription=${sub.slug}`}
+                  {/* Interactive Modern Action Button: Direct Phone Call */}
+                  <a
+                    href={STUDIO_TEL_HREF}
                     className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 ${
                       isPopular
                         ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
                         : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
                     }`}
                   >
-                    <span>Inquire Tier</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
-                  </Link>
+                    <Phone className="w-3.5 h-3.5 fill-current" />
+                    <span>Book The Studio</span>
+                  </a>
                 </div>
               );
             })}

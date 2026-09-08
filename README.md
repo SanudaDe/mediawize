@@ -109,7 +109,7 @@ npm run start
 ---
 
 ## 📍 Studio Location
-- **Address**: Ward Place, Colombo 07, Sri Lanka
-- **Hotline / WhatsApp**: +94 77 123 4567
-- **Email**: `studio@wizetv.lk`
+- **Address**: 17, Kirimandala Mawatha, Nawala / Colombo, Sri Lanka
+- **Hotline**: +94 77 735 2700
+- **Email**: `info@wize.tv`
 - **Hours**: Monday – Sunday: 8:00 AM – 10:00 PM (By Appointment)

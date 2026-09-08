@@ -103,7 +103,7 @@ export const Navbar: React.FC = () => {
               href="/contact"
               className="px-5 py-2 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold transition-all shadow-sm hover:shadow-red-glow"
             >
-              Contact Studio
+              Book The Studio
             </Link>
           </div>
 
@@ -113,7 +113,7 @@ export const Navbar: React.FC = () => {
               href="/contact"
               className="px-3 py-1.5 rounded-lg bg-brand-red text-white text-xs font-bold shadow-sm sm:hidden"
             >
-              Contact
+              Book Studio
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -178,7 +178,7 @@ export const Navbar: React.FC = () => {
                     onClick={() => setMobileMenuOpen(false)}
                     className="w-full py-3 rounded-lg bg-brand-red text-white text-center text-xs font-bold shadow-md shadow-brand-red/20"
                   >
-                    Contact Studio
+                    Book The Studio
                   </Link>
                 </div>
               </div>

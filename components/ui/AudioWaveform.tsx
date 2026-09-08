@@ -12,7 +12,7 @@ export const AudioWaveform: React.FC<{ className?: string }> = ({ className = ''
   ];
 
   return (
-    <div className={`flex items-center gap-[3px] sm:gap-[4px] h-16 max-w-full overflow-hidden ${className}`}>
+    <div className={`flex items-center justify-center gap-[3px] sm:gap-[4px] h-16 max-w-full overflow-hidden ${className}`}>
       {barHeights.map((height, i) => (
         <motion.div
           key={i}

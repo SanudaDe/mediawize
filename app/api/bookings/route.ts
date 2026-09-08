@@ -35,19 +35,20 @@ export async function POST(req: NextRequest) {
           client_phone: bookingData.client_phone,
           company_name: bookingData.company_name || null,
           show_name: bookingData.show_name || bookingData.service_interest || null,
-          requested_date: bookingData.requested_date || null,
-          requested_time_slot: bookingData.requested_time_slot || null,
+          requested_date: bookingData.requested_date || new Date().toISOString().split('T')[0],
+          requested_time_slot: bookingData.requested_time_slot || 'Flexible',
           guest_count: bookingData.guest_count || 1,
           add_ons: bookingData.add_ons || [],
           estimated_total_lkr: 0,
           client_notes: bookingData.client_notes || null,
-          status: 'inquiry',
+          status: 'pending',
         },
       ]).select();
 
       if (error) {
-        // If Supabase is running with mock keys, log and proceed with successful mock confirmation
-        console.warn('Supabase insert note (using mock fallback if unconfigured):', error.message);
+        console.error('Supabase insert error:', error.message);
+      } else {
+        console.log('Booking successfully stored in Supabase:', data);
       }
     } catch (dbErr) {
       console.warn('Database connection note:', dbErr);

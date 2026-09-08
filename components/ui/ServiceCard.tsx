@@ -12,6 +12,7 @@ import {
   ArrowUpRight,
   CheckCircle2,
   Sparkles,
+  Phone,
 } from 'lucide-react';
 import { ServiceDetail } from '@/lib/types';
 
@@ -82,13 +83,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
 
       {/* Card Footer CTA */}
       <div className="relative z-10 pt-6 border-t border-white/10 flex items-center justify-between">
-        <Link
-          href={`/contact?service=${service.slug}`}
+        <a
+          href="tel:+94777352700"
           className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white group-hover:text-brand-red transition-colors"
         >
-          <span>Contact to Book</span>
+          <Phone className="w-3.5 h-3.5 fill-current" />
+          <span>Book The Studio</span>
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-        </Link>
+        </a>
         <span className="text-[11px] text-slate-300 font-medium flex items-center gap-1">
           <Sparkles className="w-3 h-3 text-brand-red" />
           Pro Gear Included

@@ -122,9 +122,9 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-brand-red transition-colors">
-                  Contact to Book
-                </Link>
+                <a href="tel:+94777352700" className="hover:text-brand-red transition-colors text-white font-semibold flex items-center gap-1">
+                  <span>Book The Studio</span>
+                </a>
               </li>
               <li>
                 <Link href="/contact?type=inquiry" className="hover:text-brand-red transition-colors">
@@ -144,14 +144,14 @@ export const Footer: React.FC = () => {
                 <MapPin className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
                 <span>17, Kirimandala Mawatha,  Nawala ,Sri Lanka</span>
               </div>
-              <div className="flex items-center gap-2">
+              <a href="tel:+94777352700" className="flex items-center gap-2 hover:text-brand-red transition-colors">
                 <Phone className="w-4 h-4 text-brand-red shrink-0" />
-                <span>+94 77 123 4567</span>
-              </div>
-              <div className="flex items-center gap-2">
+                <span>+94 77 735 2700</span>
+              </a>
+              <a href="mailto:info@wize.tv" className="flex items-center gap-2 hover:text-brand-red transition-colors">
                 <Mail className="w-4 h-4 text-brand-red shrink-0" />
-                <span>hello@wizetv.lk</span>
-              </div>
+                <span>info@wize.tv</span>
+              </a>
             </div>
           </div>
         </div>

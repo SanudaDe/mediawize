@@ -6,8 +6,10 @@
  * ==============================================================================
  */
 
+const SUPABASE_STORAGE_BASE = 'https://bdsdxtydmhydiqwaodie.supabase.co/storage/v1/object/public/photos';
+
 export const STUDIO_CATALOGUE_PAGES: string[] = Array.from({ length: 30 }, (_, i) =>
-  `/images/catalogue-pages/page_${String(i + 1).padStart(2, '0')}.jpg?v=3`
+  `${SUPABASE_STORAGE_BASE}/images/catalogue-pages/page_${String(i + 1).padStart(2, '0')}.jpg?v=3`
 );
 
 export const PODCAST_CAROUSEL_IMAGES: string[] = STUDIO_CATALOGUE_PAGES;
