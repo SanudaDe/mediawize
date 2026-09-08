@@ -263,6 +263,14 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                             </div>
                             <span>{sub.recordingAllocation}</span>
                           </div>
+                          {sub.idealUseCase && (
+                            <div className="flex items-start gap-2.5 text-xs text-slate-600 font-medium pt-1.5 border-t border-slate-200/60">
+                              <span className="text-[10px] font-black uppercase tracking-wider text-brand-red shrink-0 mt-0.5">
+                                Use Case:
+                              </span>
+                              <span>{sub.idealUseCase}</span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>

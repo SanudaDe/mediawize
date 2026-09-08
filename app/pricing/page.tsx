@@ -265,6 +265,14 @@ export default function StudioPackagesPage() {
                           </div>
                           <span>{sub.recordingAllocation}</span>
                         </div>
+                        {sub.idealUseCase && (
+                          <div className="flex items-start gap-2.5 text-xs text-slate-600 font-medium pt-1.5 border-t border-slate-200/60">
+                            <span className="text-[10px] font-black uppercase tracking-wider text-brand-red shrink-0 mt-0.5">
+                              Use Case:
+                            </span>
+                            <span>{sub.idealUseCase}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -311,49 +319,40 @@ export default function StudioPackagesPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {MEMBERSHIP_BENEFITS_DATA.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                    <td className="p-4 sm:p-5 font-bold text-slate-900">
-                      {row.benefit}
-                    </td>
-                    <td className="p-4 sm:p-5 text-center font-bold text-slate-700">
-                      {row.basic === '✓' ? (
-                        <span className="text-emerald-600 font-black">✓</span>
-                      ) : row.basic === '✗' ? (
-                        <span className="text-slate-300">✗</span>
-                      ) : (
-                        row.basic
-                      )}
-                    </td>
-                    <td className="p-4 sm:p-5 text-center font-bold text-slate-700">
-                      {row.bronze.includes('✓') ? (
-                        <span className="text-emerald-600 font-black">{row.bronze}</span>
-                      ) : row.bronze === '✗' ? (
-                        <span className="text-slate-300">✗</span>
-                      ) : (
-                        row.bronze
-                      )}
-                    </td>
-                    <td className="p-4 sm:p-5 text-center font-bold text-slate-700">
-                      {row.silver.includes('✓') ? (
-                        <span className="text-emerald-600 font-black">{row.silver}</span>
-                      ) : row.silver === '✗' ? (
-                        <span className="text-slate-300">✗</span>
-                      ) : (
-                        row.silver
-                      )}
-                    </td>
-                    <td className="p-4 sm:p-5 text-center font-bold text-slate-700">
-                      {row.gold.includes('✓') ? (
-                        <span className="text-emerald-600 font-black">{row.gold}</span>
-                      ) : row.gold === '✗' ? (
-                        <span className="text-slate-300">✗</span>
-                      ) : (
-                        row.gold
-                      )}
-                    </td>
-                  </tr>
-                ))}
+                {MEMBERSHIP_BENEFITS_DATA.map((row, idx) => {
+                  const renderCell = (val: string) => {
+                    if (val.includes('✓')) {
+                      return <span className="text-emerald-600 font-black">{val}</span>;
+                    }
+                    if (val === '✗') {
+                      return <span className="text-slate-300">✗</span>;
+                    }
+                    if (val === 'Priority' || val === 'Unlimited') {
+                      return <span className="text-brand-red font-black tracking-tight">{val}</span>;
+                    }
+                    return <span className="text-slate-700 font-bold">{val}</span>;
+                  };
+
+                  return (
+                    <tr key={idx} className="hover:bg-slate-50 transition-colors">
+                      <td className="p-4 sm:p-5 font-bold text-slate-900">
+                        {row.benefit}
+                      </td>
+                      <td className="p-4 sm:p-5 text-center font-bold">
+                        {renderCell(row.basic)}
+                      </td>
+                      <td className="p-4 sm:p-5 text-center font-bold">
+                        {renderCell(row.bronze)}
+                      </td>
+                      <td className="p-4 sm:p-5 text-center font-bold">
+                        {renderCell(row.silver)}
+                      </td>
+                      <td className="p-4 sm:p-5 text-center font-bold">
+                        {renderCell(row.gold)}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

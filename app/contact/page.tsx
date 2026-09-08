@@ -100,7 +100,7 @@ export default function ContactPage() {
                     {
                       number: '02',
                       title: 'Pick Your Package',
-                      desc: 'Choose Audio Only (18.5k), Solo 4K (40k), Dual Multi-Cam (50k), or Custom.',
+                      desc: 'Choose Audio Only (18.5k), Solo Video (35k), Dual Multi-Cam (45k), or Custom.',
                       icon: SlidersHorizontal,
                     },
                     {

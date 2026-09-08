@@ -19,6 +19,7 @@ export interface SubscriptionPackageItem {
   monthlyFeeNum: number;
   recordingAllocation: string;
   priority: string;
+  idealUseCase?: string;
   popular?: boolean;
 }
 
@@ -59,8 +60,8 @@ export const STUDIO_PACKAGES_DATA: StudioPackageItem[] = [
       'Lighting Setup',
       'Technician Support',
     ],
-    priceLKR: 'LKR 40,000',
-    priceNum: 40000,
+    priceLKR: 'LKR 35,000',
+    priceNum: 35000,
   },
   {
     id: 'pkg-dual',
@@ -75,8 +76,8 @@ export const STUDIO_PACKAGES_DATA: StudioPackageItem[] = [
       '2 Podcast Microphones',
       'Technician Support',
     ],
-    priceLKR: 'LKR 50,000',
-    priceNum: 50000,
+    priceLKR: 'LKR 45,000',
+    priceNum: 45000,
     popular: true,
   },
   {
@@ -99,10 +100,11 @@ export const SUBSCRIPTION_PACKAGES_DATA: SubscriptionPackageItem[] = [
     slug: 'basic-subscription',
     name: 'Basic',
     recommendedFor: 'YouTubers, Content Creators, Influencers',
-    monthlyFeeLKR: 'LKR 80,000',
-    monthlyFeeNum: 80000,
-    recordingAllocation: '1 Recording Session (5 Hours)',
+    monthlyFeeLKR: 'LKR 65,000',
+    monthlyFeeNum: 65000,
+    recordingAllocation: '1 Recording Session (6 Hours)',
     priority: 'Standard',
+    idealUseCase: 'Content creation and personal projects',
   },
   {
     id: 'sub-bronze',
@@ -111,8 +113,9 @@ export const SUBSCRIPTION_PACKAGES_DATA: SubscriptionPackageItem[] = [
     recommendedFor: 'Founders, CEOs, Consultants, Coaches',
     monthlyFeeLKR: 'LKR 95,000',
     monthlyFeeNum: 95000,
-    recordingAllocation: '1 Recording Session (5 Hours)',
+    recordingAllocation: '2 Recording Sessions (10h)',
     priority: 'High',
+    idealUseCase: 'Personal branding',
   },
   {
     id: 'sub-silver',
@@ -121,8 +124,9 @@ export const SUBSCRIPTION_PACKAGES_DATA: SubscriptionPackageItem[] = [
     recommendedFor: 'SMEs, Marketing Teams, Educational Institutes',
     monthlyFeeLKR: 'LKR 175,000',
     monthlyFeeNum: 175000,
-    recordingAllocation: '2 Recording Sessions (10 Hours Each)',
+    recordingAllocation: '4 Recording Sessions (14 Hours Each)',
     priority: 'Priority',
+    idealUseCase: 'Company podcast and marketing content',
     popular: true,
   },
   {
@@ -130,10 +134,11 @@ export const SUBSCRIPTION_PACKAGES_DATA: SubscriptionPackageItem[] = [
     slug: 'gold-subscription',
     name: 'Gold',
     recommendedFor: 'Corporates, Banks, Hotels, Large Organizations',
-    monthlyFeeLKR: 'LKR 350,000',
+    monthlyFeeLKR: 'LKR 350,000+',
     monthlyFeeNum: 350000,
-    recordingAllocation: '4 Recording Sessions (20 Hours)',
+    recordingAllocation: 'Dedicated Monthly Production Days (20H)',
     priority: 'Guaranteed',
+    idealUseCase: 'Corporate communications and executive content',
   },
 ];
 
@@ -155,19 +160,19 @@ export const MEMBERSHIP_BENEFITS_DATA: MembershipBenefit[] = [
   {
     benefit: 'Strategy Session',
     basic: '✗',
-    bronze: 'One Time',
+    bronze: 'Monthly',
     silver: 'Monthly',
-    gold: 'Monthly',
+    gold: 'Unlimited',
   },
   {
-    benefit: 'Live Editing and Raw Footages',
-    basic: '✓',
+    benefit: 'Faster Editing',
+    basic: '✗',
     bronze: '✓',
     silver: '✓',
-    gold: '✓',
+    gold: 'Priority',
   },
   {
-    benefit: 'Discounted Add-ons (For Annual)',
+    benefit: 'Discounted Add-ons',
     basic: '5%',
     bronze: '10%',
     silver: '15%',
