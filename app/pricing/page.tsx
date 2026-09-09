@@ -47,7 +47,7 @@ export default function StudioPackagesPage() {
           PRICING & PLANS
         </span>
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mb-6 leading-tight">
-          Studio & Packages
+          Packages
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
           Transparent rates in Sri Lankan Rupees (LKR). Choose between single session recording slots or subscribe to monthly creator allocations.
@@ -64,7 +64,7 @@ export default function StudioPackagesPage() {
               PER SESSION
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-              Studio Packages
+              Packages
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
               Complete equipment, acoustic treatment, and on-site engineer included in every session.

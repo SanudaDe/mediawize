@@ -114,7 +114,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs text-slate-400">
               <li>
                 <Link href="/pricing" className="hover:text-brand-red transition-colors">
-                  Studio & Packages
+                  Packages
                 </Link>
               </li>
               <li>
