@@ -159,8 +159,24 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 2. WHAT WE DO — Full-Service Creative Production (4 Cards) */}
       {/* ========================================================================= */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 relative border-t border-slate-200/80">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative border-t border-slate-200/80 overflow-hidden bg-slate-900">
+        {/* Background Video Animation */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover"
+          >
+            <source src="/images/videos/animate%20video.mp4" type="video/mp4" />
+          </video>
+          {/* Semi-transparent backdrop overlay to ensure contrast and readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/75 to-white/90 backdrop-blur-[1px]" />
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-14">
             <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-2 block">
@@ -203,7 +219,7 @@ export default function HomePage() {
                 <Link
                   key={idx}
                   href={item.href}
-                  className="group relative bg-white rounded-2xl p-7 border border-slate-200/90 hover:border-brand-red/40 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(236,35,40,0.12)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
+                  className="group relative bg-white/95 backdrop-blur-md rounded-2xl p-7 border border-slate-200/90 hover:border-brand-red/40 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_-15px_rgba(236,35,40,0.15)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
                 >
                   {/* Subtle top indicator highlight */}
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-brand-red/0 to-transparent group-hover:via-brand-red transition-all duration-500" />
