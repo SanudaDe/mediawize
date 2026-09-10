@@ -63,6 +63,21 @@ export const VIDEO_CONTENTS: VideoContentItem[] = [
     date: 'Tips & Tricks',
   },
   {
+    id: 'podcast-lighting-breakdown',
+    title: 'Good Lighting Transforms Your Podcast Look',
+    subtitle: 'Fill, Back, Background & Projector Lights',
+    category: 'Tips & Tricks',
+    contentType: 'Instagram & Facebook Reel',
+    duration: 'Reel',
+    facebookUrl: 'https://www.facebook.com/share/r/18VkJaEsvU/',
+    originalThumbnail: '/images/facebook-thumbnails/fb-reel-lighting.jpg',
+    description:
+      'Good lighting can change the whole look of your podcast. Here is a simple breakdown of the key lights that bring a basic setup to life: fill light, back light, background light, and projector light.',
+    views: '4.5K Views',
+    reactions: 'Lighting Tips',
+    date: 'Tips & Tricks',
+  },
+  {
     id: 'done-contents-equipment-tour',
     title: 'WIZEtv — Where Stories Come to Life (Equipment Tour)',
     subtitle: 'Behind The Scenes & Cinema Rig Tour',

@@ -28,8 +28,8 @@ export const VideoMockupCard: React.FC<VideoMockupCardProps> = ({ item }) => {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-brand-red/0 to-transparent group-hover:via-brand-red transition-all duration-500" />
 
       <div>
-        {/* Original Video Image Viewport (16:9 Screen) */}
-        <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-100 shadow-sm mb-6 select-none">
+        {/* Original Video Image Viewport (4:5 Screen) */}
+        <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-100 shadow-sm mb-6 select-none">
           {/* Original Facebook Video Poster */}
           <Image
             src={item.originalThumbnail}
