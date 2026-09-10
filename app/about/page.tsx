@@ -16,7 +16,7 @@ export default function AboutPage() {
       {/* ========================================================================= */}
       <section className="pt-16 pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center border-b border-slate-100">
         <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-3 block">
-          ABOUT WIZETV
+          ABOUT WIZEtv
         </span>
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-950 mb-6 leading-[1.05] tracking-tight">
           The World&apos;s Greatest Ideas <br />
@@ -26,7 +26,7 @@ export default function AboutPage() {
           The world&apos;s greatest ideas don&apos;t deserve to stay inside boardrooms, notebooks or busy minds. They deserve to be heard.
         </p>
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium mb-10">
-          That&apos;s why WizeTV exists. We help businesses, corporate leaders, entrepreneurs and creators transform their knowledge into conversations that educate, inspire and influence. Through world-class podcast production, corporate podcast solutions and strategic storytelling, we create content that doesn&apos;t just fill timelines, it shapes opinions, builds trust and leaves a legacy.
+          That&apos;s why WIZEtv exists. We help businesses, corporate leaders, entrepreneurs and creators transform their knowledge into conversations that educate, inspire and influence. Through world-class podcast production, corporate podcast solutions and strategic storytelling, we create content that doesn&apos;t just fill timelines, it shapes opinions, builds trust and leaves a legacy.
         </p>
 
         {/* Perfectly Centered Waveform */}
@@ -118,7 +118,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-medium mb-10">
               The kind that challenges ideas, builds trust, and creates opportunities. <br className="hidden sm:inline" />
-              <strong>That&apos;s why WizeTV exists.</strong>
+              <strong>That&apos;s why WIZEtv exists.</strong>
             </p>
 
             {/* Home Page CTAs */}

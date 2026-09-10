@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
             <Link href="/" className="inline-block mb-4 group">
               <Image
                 src="/logo-white.png"
-                alt="WizeTV Studios Logo"
+                alt="WIZEtv Studios Logo"
                 width={160}
                 height={56}
                 className="h-9 sm:h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
@@ -159,7 +159,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Legal */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>&copy; {new Date().getFullYear()} WizeTV Studios. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} WIZEtv Studios. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link href="/about" className="hover:text-slate-400 transition-colors">
               Privacy Policy

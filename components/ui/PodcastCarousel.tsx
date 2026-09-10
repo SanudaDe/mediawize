@@ -158,7 +158,7 @@ export function PodcastCarousel({
             >
               <Image
                 src={currentImage}
-                alt={`WizeTV Studio Set - Slide ${currentIndex + 1}`}
+                alt={`WIZEtv Studio Set - Slide ${currentIndex + 1}`}
                 fill
                 priority
                 className="object-cover object-center"

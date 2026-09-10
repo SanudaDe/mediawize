@@ -58,7 +58,7 @@ export const Navbar: React.FC = () => {
           <Link href="/" className="flex items-center group">
             <Image
               src="/logo.png"
-              alt="WizeTV Logo"
+              alt="WIZEtv Logo"
               width={140}
               height={49}
               className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.03]"

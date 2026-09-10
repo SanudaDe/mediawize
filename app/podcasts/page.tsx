@@ -219,7 +219,7 @@ export default function PodcastsPage() {
       {/* Bottom CTA */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white text-center">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-black mb-4">Launch Your Podcast With WizeTV</h2>
+          <h2 className="text-3xl font-black mb-4">Launch Your Podcast With WIZEtv</h2>
           <p className="text-sm text-slate-400 mb-8">
             Book your session in our Colombo studio today or talk with our executive producer.
           </p>

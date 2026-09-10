@@ -38,7 +38,7 @@ export default function ServicesPage() {
           Create Content That Builds Your Brand
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
-          If you&apos;re launching a podcast, producing a corporate video or creating content for your business, WizeTV provides everything you need under one roof. From planning and production to editing and distribution, our team helps you create professional content that informs, inspires and connects with your audience.
+          If you&apos;re launching a podcast, producing a corporate video or creating content for your business, WIZEtv provides everything you need under one roof. From planning and production to editing and distribution, our team helps you create professional content that informs, inspires and connects with your audience.
         </p>
       </section>
 
@@ -440,14 +440,14 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Why WizeTV? */}
+      {/* Why WIZEtv? */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-2 block">
             THE WIZE ADVANTAGE
           </span>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900">
-            Why WizeTV?
+            Why WIZEtv?
           </h2>
         </div>
 

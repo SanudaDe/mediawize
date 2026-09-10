@@ -155,7 +155,7 @@ export const BookingForm: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href={`https://wa.me/94771234567?text=Hi%20WizeTV%2C%20I%20just%20submitted%20a%20studio%20inquiry%20(Ref%3A%20${bookingRef})`}
+            href={`https://wa.me/94771234567?text=Hi%20WIZEtv%2C%20I%20just%20submitted%20a%20studio%20inquiry%20(Ref%3A%20${bookingRef})`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all"
@@ -375,7 +375,7 @@ export const BookingForm: React.FC = () => {
             </span>
           </div>
           <a
-            href="https://wa.me/94771234567?text=Hi%20WizeTV%2C%20I%20would%20like%20to%20inquire%20about%20booking%20the%20studio"
+            href="https://wa.me/94771234567?text=Hi%20WIZEtv%2C%20I%20would%20like%20to%20inquire%20about%20booking%20the%20studio"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors whitespace-nowrap shadow-sm"

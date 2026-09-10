@@ -241,7 +241,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'behind-the-scenes-colombo-whisper-room-acoustics',
-    title: 'Behind the Scenes: Inside WizeTV’s Acoustically Calibrated Whisper Suite',
+    title: 'Behind the Scenes: Inside WIZEtv’s Acoustically Calibrated Whisper Suite',
     category: 'Studio Behind The Scenes',
     date: 'Jul 2026',
     readTime: '4 min read',

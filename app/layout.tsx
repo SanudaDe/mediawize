@@ -19,34 +19,34 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'WizeTV | Sri Lanka’s Leading Podcast & Media Production Studio',
+  title: 'WIZEtv | Sri Lanka’s Leading Podcast & Media Production Studio',
   description:
-    'WizeTV is a premier podcast and media production studio in Colombo, Sri Lanka,and professional audio mastering services.',
+    'WIZEtv is a premier podcast and media production studio in Colombo, Sri Lanka,and professional audio mastering services.',
   keywords: [
     'Podcast Studio Sri Lanka',
     'Colombo Podcast Studio',
-    'WizeTV',
+    'WIZEtv',
     'Video Podcast Production',
     'Studio Colombo',
     'Multi-Cam Podcast Studio',
     'Short Form Video Agency Sri Lanka',
     'Audio Mastering Colombo',
   ],
-  authors: [{ name: 'WizeTV Media Production' }],
+  authors: [{ name: 'WIZEtv Media Production' }],
   openGraph: {
-    title: 'WizeTV | Premier Podcast & Media Studio Colombo',
+    title: 'WIZEtv | Premier Podcast & Media Studio Colombo',
     description:
-      'WizeTV is a premier podcast and media production studio in Colombo, Sri Lanka,and professional audio mastering services.',
+      'WIZEtv is a premier podcast and media production studio in Colombo, Sri Lanka,and professional audio mastering services.',
     url: 'https://wizetv.lk',
-    siteName: 'WizeTV Studio',
+    siteName: 'WIZEtv Studio',
     locale: 'en_LK',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WizeTV | Podcast & Media Production Studio Sri Lanka',
+    title: 'WIZEtv | Podcast & Media Production Studio Sri Lanka',
     description:
-      'WizeTV is a premier podcast and media production studio in Colombo, Sri Lanka,and professional audio mastering services.',
+      'WIZEtv is a premier podcast and media production studio in Colombo, Sri Lanka,and professional audio mastering services.',
   },
   icons: {
     icon: [

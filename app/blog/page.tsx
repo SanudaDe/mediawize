@@ -15,7 +15,7 @@ import { VideoMockupCard } from '@/components/ui/VideoMockupCard';
 
 const VIDEO_CATEGORIES = [
   'All Videos',
-  'WizeTV Podcast',
+  'WIZEtv Podcast',
   'Tips & Tricks',
   'Gear & BTS',
   'Studio Showcase',
@@ -86,7 +86,7 @@ export default function BlogPage() {
                 Featured Episodes & Content Grabs.
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
-                Featuring original video covers from WizeTV productions. Click any card to watch directly on Facebook.
+                Featuring original video covers from WIZEtv productions. Click any card to watch directly on Facebook.
               </p>
             </div>
 

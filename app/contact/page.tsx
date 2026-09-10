@@ -181,7 +181,7 @@ export default function ContactPage() {
                   Studio Address:
                 </span>
                 <span className="font-bold text-slate-900 block text-base">
-                  WizeTV Media Production House
+                  WIZEtv Media Production House
                 </span>
                 <p className="text-slate-600 mt-0.5">
                   17, Kirimandala Mawatha, Nawala / Colombo, Sri Lanka
@@ -216,7 +216,7 @@ export default function ContactPage() {
             {/* Social Links */}
             <div className="pt-6 mt-6 border-t border-slate-200">
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-3">
-                Follow WizeTV Studios:
+                Follow WIZEtv Studios:
               </span>
               <div className="flex items-center gap-3">
                 <a

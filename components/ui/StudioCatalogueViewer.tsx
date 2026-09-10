@@ -231,7 +231,7 @@ export function StudioCatalogueViewer({
             {/* Real 100% sRGB 2000x2000 Original Catalogue Page */}
             <Image
               src={safeSrc}
-              alt={`WizeTV Studio Catalogue - Page ${currentIndex + 1}`}
+              alt={`WIZEtv Studio Catalogue - Page ${currentIndex + 1}`}
               fill
               priority={currentIndex < 2}
               className="object-contain"

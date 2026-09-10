@@ -248,7 +248,7 @@ export default function HomePage() {
               </h2>
 
               <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed mb-6">
-                From first-time podcasters to established brands, WIZETV helps creators launch powerful conversations.
+                From first-time podcasters to established brands, WIZEtv helps creators launch powerful conversations.
               </p>
 
               {/* Animated Red Audio Waveform */}

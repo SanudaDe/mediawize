@@ -2,7 +2,7 @@ export interface VideoContentItem {
   id: string;
   title: string;
   subtitle: string;
-  category: 'WizeTV Podcast' | 'Tips & Tricks' | 'Gear & BTS' | 'Studio Showcase';
+  category: 'WIZEtv Podcast' | 'Tips & Tricks' | 'Gear & BTS' | 'Studio Showcase';
   contentType: 'Podcast Episode' | 'Instagram & Facebook Reel' | 'Studio Production Grab';
   duration: string; // e.g. "Full Episode" or "Reel"
   facebookUrl: string;
@@ -18,14 +18,14 @@ export const VIDEO_CONTENTS: VideoContentItem[] = [
   {
     id: 'wizetv-podcast-suneth',
     title: 'Reading the Comments — with Dr. Suneth Rajawasan',
-    subtitle: 'WizeTV Original Podcast Series',
-    category: 'WizeTV Podcast',
+    subtitle: 'WIZEtv Original Podcast Series',
+    category: 'WIZEtv Podcast',
     contentType: 'Podcast Episode',
     duration: 'Full Episode',
     facebookUrl: 'https://www.facebook.com/share/v/193uTK2JTF/',
     originalThumbnail: '/images/facebook-thumbnails/fb-podcast-suneth.jpg',
     description:
-      "WizeTV's 'Reading the Comments' series with Dr. Suneth Rajawasan. Real audience conversations, personal branding, and high-impact studio production in Colombo.",
+      "WIZEtv's 'Reading the Comments' series with Dr. Suneth Rajawasan. Real audience conversations, personal branding, and high-impact studio production in Colombo.",
     views: '78K Views',
     reactions: '815 Reactions',
     date: 'Recent',
@@ -34,8 +34,8 @@ export const VIDEO_CONTENTS: VideoContentItem[] = [
   {
     id: 'wizetv-podcast-comments',
     title: 'Read Between the Comments — Real Stories & Q&A',
-    subtitle: 'WizeTV Studio Production Episode',
-    category: 'WizeTV Podcast',
+    subtitle: 'WIZEtv Studio Production Episode',
+    category: 'WIZEtv Podcast',
     contentType: 'Podcast Episode',
     duration: 'Full Episode',
     facebookUrl: 'https://www.facebook.com/share/v/1EhDo4Ffx1/',
@@ -64,7 +64,7 @@ export const VIDEO_CONTENTS: VideoContentItem[] = [
   },
   {
     id: 'done-contents-equipment-tour',
-    title: 'WIZE TV — Where Stories Come to Life (Equipment Tour)',
+    title: 'WIZEtv — Where Stories Come to Life (Equipment Tour)',
     subtitle: 'Behind The Scenes & Cinema Rig Tour',
     category: 'Gear & BTS',
     contentType: 'Studio Production Grab',
