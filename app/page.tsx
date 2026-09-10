@@ -171,9 +171,9 @@ export default function HomePage() {
             </h2>
           </div>
 
-          {/* Centered Video in Original Aspect Ratio (128:15) */}
+          {/* Centered Video in 4:1 Widescreen Ratio */}
           <div className="max-w-6xl mx-auto mb-14">
-            <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_10px_35px_-8px_rgba(0,0,0,0.1)] border border-slate-200/90 bg-slate-950 aspect-[128/15]">
+            <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_10px_35px_-8px_rgba(0,0,0,0.1)] border border-slate-200/90 bg-slate-950 aspect-[4/1]">
               <video
                 autoPlay
                 loop
