@@ -21,6 +21,7 @@ import {
   SUBSCRIPTION_PACKAGES_DATA,
   MEMBERSHIP_BENEFITS_DATA,
 } from '@/lib/data';
+import { AdditionalServicesDropdown } from '@/components/ui/AdditionalServicesDropdown';
 
 const STUDIO_TEL_HREF = 'tel:+94777352700';
 
@@ -173,6 +174,9 @@ export default function StudioPackagesPage() {
               );
             })}
           </div>
+
+          {/* Simple Dropdown for Additional A La Carte Services & Equipment */}
+          <AdditionalServicesDropdown />
         </div>
 
         {/* ========================================================================= */}
@@ -277,8 +281,21 @@ export default function StudioPackagesPage() {
                           </div>
                         </div>
 
+                        {/* Camera Setup Category */}
+                        {sub.cameras && (
+                          <div className="pt-2.5 border-t border-slate-200/70 flex items-center justify-between text-[11px] sm:text-xs">
+                            <span className="flex items-center gap-1.5 text-slate-500 font-semibold">
+                              <Camera className="w-3.5 h-3.5 text-brand-red" />
+                              <span>Camera Setup</span>
+                            </span>
+                            <span className="font-bold text-slate-900 bg-white px-2 py-0.5 rounded-md border border-slate-200/80 shadow-xs">
+                              {sub.cameras}
+                            </span>
+                          </div>
+                        )}
+
                         {sub.idealUseCase && (
-                          <div className="pt-2.5 border-t border-slate-200/70 flex items-center gap-2 text-[11px] sm:text-xs text-slate-600 font-medium">
+                          <div className="pt-2 border-t border-slate-200/70 flex items-center gap-2 text-[11px] sm:text-xs text-slate-600 font-medium">
                             <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
                               <Check className="w-2.5 h-2.5 stroke-[3]" />
                             </div>

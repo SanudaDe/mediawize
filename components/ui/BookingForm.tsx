@@ -19,8 +19,8 @@ import {
 import { bookingFormSchema } from '@/lib/validations';
 
 const INTEREST_OPTIONS = [
-  { id: 'dual-host-video-podcast', label: 'Dual Host Video Podcast (LKR 45,000 / 2 Hrs)' },
-  { id: 'solo-video-podcast', label: 'Solo Video Podcast (LKR 35,000 / 2 Hrs)' },
+  { id: 'dual-host-video-podcast', label: 'Dual Host Video Podcast (LKR 55,000 / 2 Hrs)' },
+  { id: 'solo-video-podcast', label: 'Solo Video Podcast (LKR 40,000 / 2 Hrs)' },
   { id: 'audio-only-podcast', label: 'Audio Only Podcast (LKR 18,500 / 2 Hrs)' },
   { id: 'custom-premium-experience', label: 'Custom Premium Experience / Quotation' },
   { id: 'subscription', label: 'Monthly Creator Subscription' },

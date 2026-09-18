@@ -27,6 +27,7 @@ import { PodcastCarousel } from '@/components/ui/PodcastCarousel';
 import { StudioCatalogueViewer } from '@/components/ui/StudioCatalogueViewer';
 import { STUDIO_SHOWCASE_IMAGES } from '@/lib/studioImages';
 import { STUDIO_PACKAGES_DATA } from '@/lib/data';
+import { AdditionalServicesDropdown } from '@/components/ui/AdditionalServicesDropdown';
 
 const STUDIO_PHONE = '077 735 2700';
 const STUDIO_TEL_HREF = 'tel:+94777352700';
@@ -486,6 +487,8 @@ export default function HomePage() {
               );
             })}
           </div>
+          {/* Simple Dropdown for Additional A La Carte Services & Equipment */}
+          <AdditionalServicesDropdown />
 
           <div className="mt-12">
             <Link
