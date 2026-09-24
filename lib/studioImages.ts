@@ -26,7 +26,6 @@ export const STUDIO_SHOWCASE_IMAGES: string[] = [
   `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(16).jpeg`,
   `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(17).jpeg`,
   `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(18).jpeg`,
-  `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(19).jpeg`,
   `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19.jpeg`,
 ];
 
@@ -167,16 +166,9 @@ export const STUDIO_GALLERY_ITEMS: StudioImageDetail[] = [
   },
   {
     id: 'img-19',
-    title: 'Backstage Production Area',
-    category: 'Lounge',
-    description: 'Dedicated backstage prep area for production teams and talent.',
-    imageUrl: STUDIO_SHOWCASE_IMAGES[18],
-  },
-  {
-    id: 'img-20',
     title: 'Studio Stage Atmosphere',
     category: 'Studio Set',
     description: 'Ambient neon edge glow highlighting the production environment.',
-    imageUrl: STUDIO_SHOWCASE_IMAGES[19],
+    imageUrl: STUDIO_SHOWCASE_IMAGES[18],
   },
 ];
