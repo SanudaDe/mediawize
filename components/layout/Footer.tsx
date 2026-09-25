@@ -160,11 +160,14 @@ export const Footer: React.FC = () => {
         {/* Bottom Legal */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>&copy; {new Date().getFullYear()} WIZEtv Studios. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link href="/about" className="hover:text-slate-400 transition-colors">
+          <div className="flex flex-wrap items-center gap-6">
+            <Link href="/privacy" className="hover:text-slate-400 transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/about" className="hover:text-slate-400 transition-colors">
+            <Link href="/terms" className="hover:text-slate-400 transition-colors">
+              Terms &amp; Conditions
+            </Link>
+            <Link href="/terms#studio-rental" className="hover:text-slate-400 transition-colors">
               Terms of Studio Rental
             </Link>
           </div>
