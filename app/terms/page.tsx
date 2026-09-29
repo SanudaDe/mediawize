@@ -260,7 +260,7 @@ export default function TermsPage() {
                 <tr className="hover:bg-slate-50/80">
                   <td className="p-3.5 sm:p-4 font-black text-slate-900">Gold</td>
                   <td className="p-3.5 sm:p-4">Corporates, Banks, Hotels, Large Organizations</td>
-                  <td className="p-3.5 sm:p-4 font-bold text-brand-red whitespace-nowrap">LKR 350,000+</td>
+                  <td className="p-3.5 sm:p-4 font-bold text-brand-red whitespace-nowrap">LKR 380,000</td>
                   <td className="p-3.5 sm:p-4 font-medium">Dedicated monthly production days / 20 hours</td>
                   <td className="p-3.5 sm:p-4 text-center font-bold">3</td>
                   <td className="p-3.5 sm:p-4">Corporate communications and executive content</td>

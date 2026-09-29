@@ -411,7 +411,7 @@ VALUES
     'gold',
     'Enterprise & high-velocity media dominance',
     'Comprehensive end-to-end podcast and video production powerhouse for enterprise brands and top-tier creators.',
-    350000.00,
+    380000.00,
     8,
     16,
     24,

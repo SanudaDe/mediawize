@@ -47,7 +47,7 @@ export const AdditionalServicesDropdown: React.FC<AdditionalServicesDropdownProp
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={`w-full max-w-5xl mx-auto mt-10 sm:mt-12 ${className}`}>
+    <div className={`w-full max-w-5xl mx-auto mt-10 sm:mt-12 text-left ${className}`}>
       {/* Trigger Button Container */}
       <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
         <button
@@ -114,26 +114,26 @@ export const AdditionalServicesDropdown: React.FC<AdditionalServicesDropdownProp
             </div>
 
             {/* Responsive Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-left">
               {ADDITIONAL_SERVICES_DATA.map((item: AdditionalServiceItem, idx: number) => {
                 const IconComponent = SERVICE_ICONS[item.service] || PlusCircle;
 
                 return (
                   <div
                     key={idx}
-                    className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-slate-200/90 shadow-sm flex items-center justify-between gap-3 hover:border-brand-red/40 hover:shadow-md transition-all duration-200"
+                    className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-slate-200/90 shadow-sm flex items-center justify-between gap-3 hover:border-brand-red/40 hover:shadow-md transition-all duration-200 text-left"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 min-w-0 text-left">
                       <div className="w-9 h-9 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
                         <IconComponent className="w-4 h-4 stroke-[2.2]" />
                       </div>
-                      <span className="text-xs sm:text-sm font-bold text-slate-900">
+                      <span className="text-xs sm:text-sm font-bold text-slate-900 text-left leading-snug">
                         {item.service}
                       </span>
                     </div>
 
                     <div className="shrink-0 text-right">
-                      <span className="inline-block px-3 py-1 rounded-lg bg-slate-100 text-slate-900 text-xs sm:text-sm font-black tracking-tight border border-slate-200/60">
+                      <span className="inline-block px-3 py-1 rounded-lg bg-slate-100 text-slate-900 text-xs sm:text-sm font-black tracking-tight border border-slate-200/60 whitespace-nowrap">
                         {item.price}
                       </span>
                     </div>
