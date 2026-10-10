@@ -100,7 +100,7 @@ export const Navbar: React.FC = () => {
             </Link>
 
             <Link
-              href="/contact"
+              href="/book-studio"
               className="px-5 py-2 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold transition-all shadow-sm hover:shadow-red-glow"
             >
               Book The Studio
@@ -110,7 +110,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-2">
             <Link
-              href="/contact"
+              href="/book-studio"
               className="px-3 py-1.5 rounded-lg bg-brand-red text-white text-xs font-bold shadow-sm sm:hidden"
             >
               Book Studio
@@ -174,7 +174,7 @@ export const Navbar: React.FC = () => {
                     Let&apos;s Talk
                   </Link>
                   <Link
-                    href="/contact"
+                    href="/book-studio"
                     onClick={() => setMobileMenuOpen(false)}
                     className="w-full py-3 rounded-lg bg-brand-red text-white text-center text-xs font-bold shadow-md shadow-brand-red/20"
                   >
