@@ -8,7 +8,6 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
--- 2. Create Enums
 DO $$ BEGIN
     CREATE TYPE user_role AS ENUM ('client', 'producer', 'admin');
 EXCEPTION
