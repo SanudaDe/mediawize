@@ -64,9 +64,9 @@ export default function BookingWizard() {
       <div className="mb-10">
         <div className="flex items-center justify-between relative">
           {/* connector line */}
-          <div className="absolute top-5 left-0 right-0 h-px bg-brand-charcoal z-0" />
+          <div className="absolute top-5 left-0 right-0 h-0.5 bg-slate-200 z-0" />
           <div
-            className="absolute top-5 left-0 h-px bg-brand-red z-0 transition-all duration-500"
+            className="absolute top-5 left-0 h-0.5 bg-brand-red z-0 transition-all duration-500"
             style={{ width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%` }}
           />
           {STEPS.map((step) => {
@@ -80,17 +80,17 @@ export default function BookingWizard() {
                   disabled={step.id > currentStep}
                   className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                     isCompleted
-                      ? 'bg-brand-red border-brand-red text-white cursor-pointer'
+                      ? 'bg-brand-red border-brand-red text-white cursor-pointer shadow-md shadow-brand-red/20'
                       : isActive
-                      ? 'bg-brand-dark border-brand-red text-brand-red'
-                      : 'bg-brand-dark border-brand-charcoal text-slate-500'
+                      ? 'bg-white border-brand-red text-brand-red ring-4 ring-brand-red/10 shadow-sm'
+                      : 'bg-white border-slate-200 text-slate-400'
                   }`}
                 >
                   {isCompleted ? <CheckCircle size={18} /> : <Icon size={16} />}
                 </button>
                 <span
-                  className={`mt-2 text-xs font-semibold hidden sm:block ${
-                    isActive ? 'text-brand-red' : isCompleted ? 'text-slate-300' : 'text-slate-600'
+                  className={`mt-2 text-xs hidden sm:block ${
+                    isActive ? 'text-brand-red font-bold' : isCompleted ? 'text-slate-900 font-semibold' : 'text-slate-400 font-medium'
                   }`}
                 >
                   {`0${step.id}`} {step.label}

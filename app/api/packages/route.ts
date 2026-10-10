@@ -13,6 +13,7 @@ export async function GET() {
       .from('studio_packages')
       .select('*')
       .eq('is_active', true)
+      .neq('slug', 'custom-premium-experience')
       .order('display_order', { ascending: true });
 
     if (error) throw error;

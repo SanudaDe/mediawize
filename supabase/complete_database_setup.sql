@@ -403,24 +403,6 @@ VALUES
     ]'::jsonb,
     true,
     3
-),
-(
-    'custom-premium-experience',
-    'Custom Premium Experience',
-    'Fully tailored VIP studio production',
-    'Designed for corporate podcasts, premium productions, and large bespoke setups.',
-    'full_production',
-    4,
-    6,
-    65000.00,
-    '[
-        "Fully customized production based on client requirements",
-        "Multiple camera setups and teleprompter available",
-        "Full studio control room switching & monitor feed",
-        "Expedited delivery of final master cut"
-    ]'::jsonb,
-    false,
-    4
 )
 ON CONFLICT (slug) DO UPDATE SET
     name = EXCLUDED.name,

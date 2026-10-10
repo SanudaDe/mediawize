@@ -19,19 +19,19 @@ export default function BookingSuccess({ clientName }: Props) {
         </div>
       </div>
 
-      <h1 className="text-3xl font-bold text-white mb-3">Booking Request Received!</h1>
-      <p className="text-slate-400 text-lg mb-8 leading-relaxed">
+      <h1 className="text-3xl sm:text-4xl font-black text-slate-950 mb-3">Booking Request Received!</h1>
+      <p className="text-slate-600 text-base sm:text-lg mb-8 leading-relaxed font-medium">
         Thank you{clientName ? `, ${clientName.split(' ')[0]}` : ''}. Your booking request has been received by WIZEtv Studios.
-        Your booking is <strong className="text-amber-400">not confirmed</strong> until approved by our production team.
+        Your booking is <strong className="text-amber-600 font-bold">not confirmed</strong> until approved by our production team.
         You will receive an email once your booking has been confirmed.
       </p>
 
       {/* What happens next */}
-      <div className="bg-brand-charcoal rounded-2xl p-6 mb-8 text-left border border-brand-charcoal">
-        <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+      <div className="bg-slate-50 rounded-2xl p-6 mb-8 text-left border border-slate-200 shadow-sm">
+        <h3 className="text-slate-900 font-black mb-4 flex items-center gap-2">
           <Mail size={18} className="text-brand-red" /> What happens next?
         </h3>
-        <ol className="space-y-3">
+        <ol className="space-y-3.5">
           {[
             { step: '1', text: "You'll receive a request confirmation email at your provided email address." },
             { step: '2', text: "Our production team will review your booking request within 24 hours." },
@@ -39,10 +39,10 @@ export default function BookingSuccess({ clientName }: Props) {
             { step: '4', text: "Please arrive 10 minutes before your scheduled time." },
           ].map(item => (
             <li key={item.step} className="flex items-start gap-3">
-              <span className="w-6 h-6 rounded-full bg-brand-red/20 border border-brand-red/30 text-brand-red text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span className="w-6 h-6 rounded-full bg-brand-red/10 border border-brand-red/20 text-brand-red text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
                 {item.step}
               </span>
-              <span className="text-slate-400 text-sm">{item.text}</span>
+              <span className="text-slate-700 text-sm font-medium">{item.text}</span>
             </li>
           ))}
         </ol>
@@ -51,13 +51,13 @@ export default function BookingSuccess({ clientName }: Props) {
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
           href="/"
-          className="border border-brand-charcoal text-slate-300 hover:text-white hover:border-brand-red px-6 py-3 rounded-xl font-semibold transition-all text-sm"
+          className="border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 px-6 py-3 rounded-xl font-bold transition-all text-sm shadow-sm"
         >
           Back to Home
         </Link>
         <Link
           href="/contact"
-          className="bg-brand-red hover:bg-brand-red-hover text-white px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-colors text-sm"
+          className="bg-brand-red hover:bg-brand-red-hover text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors text-sm shadow-md shadow-brand-red/20"
         >
           Contact Us <ArrowRight size={16} />
         </Link>

@@ -60,17 +60,17 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-1">Select Time Slot</h2>
-      <p className="text-slate-400 mb-2 text-sm">
-        <span className="text-brand-red font-semibold">{dateDisplay}</span> · All times are Sri Lanka Time (UTC+05:30)
+      <h2 className="text-2xl font-black text-slate-900 mb-1">Select Time Slot</h2>
+      <p className="text-slate-500 mb-2 text-sm">
+        <span className="text-brand-red font-bold">{dateDisplay}</span> · All times are Sri Lanka Time (UTC+05:30)
       </p>
 
       {!availability?.isOpen ? (
-        <div className="mt-8 bg-brand-charcoal rounded-2xl p-8 text-center border border-brand-charcoal">
+        <div className="mt-8 bg-slate-50 rounded-2xl p-8 text-center border border-slate-200">
           <div className="text-4xl mb-4">🚫</div>
-          <h3 className="text-white font-bold text-lg mb-2">Studio Closed</h3>
-          <p className="text-slate-400 text-sm mb-6">The studio is closed on this day. Please select a different date.</p>
-          <button onClick={onBack} className="bg-brand-red text-white px-6 py-3 rounded-xl font-semibold hover:bg-brand-red-hover transition-colors">
+          <h3 className="text-slate-900 font-bold text-lg mb-2">Studio Closed</h3>
+          <p className="text-slate-500 text-sm mb-6">The studio is closed on this day. Please select a different date.</p>
+          <button onClick={onBack} className="bg-brand-red text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-red-hover transition-colors shadow-md shadow-brand-red/20">
             Choose Another Date
           </button>
         </div>
@@ -79,31 +79,31 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
           <p className="text-slate-500 text-xs mb-6">
             Studio hours: {formatLabel(availability.openTime)} – {formatLabel(availability.closeTime)}
             {' · '}
-            <span className="text-green-400">{availableSlots.length} slot{availableSlots.length !== 1 ? 's' : ''} available</span>
+            <span className="text-green-600 font-bold">{availableSlots.length} slot{availableSlots.length !== 1 ? 's' : ''} available</span>
           </p>
 
           {availableSlots.length === 0 ? (
-            <div className="bg-brand-charcoal rounded-2xl p-8 text-center border border-brand-charcoal max-w-xl mx-auto">
+            <div className="bg-slate-50 rounded-2xl p-8 text-center border border-slate-200 max-w-xl mx-auto shadow-sm">
               <div className="text-4xl mb-3">😔</div>
-              <h3 className="text-white font-bold text-xl mb-2">Fully Booked</h3>
-              <p className="text-slate-400 text-sm mb-3">
+              <h3 className="text-slate-900 font-black text-xl mb-2">Fully Booked</h3>
+              <p className="text-slate-600 text-sm mb-3 font-medium">
                 All regular time slots on this date are currently taken.
               </p>
-              <p className="text-slate-300 text-xs mb-6 max-w-md mx-auto">
+              <p className="text-slate-600 text-xs mb-6 max-w-md mx-auto">
                 Need an urgent session or a custom production schedule? Call our studio team directly for manual confirmation and priority arrangements:
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a
                   href="tel:+94777352700"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-hover text-white px-6 py-3.5 rounded-xl font-bold transition-all shadow-md hover:shadow-red-glow text-sm"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-hover text-white px-6 py-3.5 rounded-xl font-bold transition-all shadow-md hover:shadow-brand-red/30 text-sm"
                 >
                   <Phone size={16} />
                   <span>Call Us: +94 77 735 2700</span>
                 </a>
                 <button
                   onClick={onBack}
-                  className="w-full sm:w-auto border border-brand-charcoal hover:border-slate-500 text-slate-300 hover:text-white px-6 py-3.5 rounded-xl font-semibold transition-colors text-sm"
+                  className="w-full sm:w-auto border border-slate-300 hover:border-slate-400 bg-white text-slate-700 hover:text-slate-900 px-6 py-3.5 rounded-xl font-bold transition-colors text-sm"
                 >
                   Choose Another Date
                 </button>
@@ -118,15 +118,15 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
                     key={slot.time}
                     disabled={!slot.available}
                     onClick={() => slot.available && onSelect(slot.time)}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-xl border-2 font-semibold text-sm transition-all duration-200 ${
+                    className={`flex items-center gap-2 px-4 py-3 rounded-xl border font-bold text-sm transition-all duration-200 ${
                       isSelected
-                        ? 'border-brand-red bg-brand-red text-white shadow-red-glow'
+                        ? 'border-brand-red bg-brand-red text-white shadow-md shadow-brand-red/30'
                         : slot.available
-                        ? 'border-brand-charcoal bg-brand-charcoal text-slate-200 hover:border-brand-red/50 hover:text-white hover:shadow-card-hover'
-                        : 'border-brand-charcoal/30 bg-brand-charcoal/20 text-slate-600 cursor-not-allowed line-through'
+                        ? 'border-slate-200 bg-white text-slate-800 hover:border-brand-red hover:shadow-md shadow-sm'
+                        : 'border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed line-through'
                     }`}
                   >
-                    <Clock size={14} className={isSelected ? 'text-white' : slot.available ? 'text-brand-red' : 'text-slate-600'} />
+                    <Clock size={14} className={isSelected ? 'text-white' : slot.available ? 'text-brand-red' : 'text-slate-300'} />
                     <span>{slot.label}</span>
                   </button>
                 );
@@ -138,7 +138,7 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => onSelect(selectedTime)}
-                className="bg-brand-red hover:bg-brand-red-hover text-white font-bold px-8 py-3 rounded-xl transition-colors"
+                className="bg-brand-red hover:bg-brand-red-hover text-white font-bold px-8 py-3 rounded-xl transition-colors shadow-md shadow-brand-red/20"
               >
                 Continue with {formatLabel(selectedTime)} →
               </button>
@@ -147,20 +147,20 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
         </>
       )}
 
-      <div className="mt-8 flex items-center gap-4 text-xs text-slate-500">
+      <div className="mt-8 flex items-center gap-4 text-xs text-slate-500 font-medium">
         <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-sm bg-brand-red" /> Available
+          <span className="w-3 h-3 rounded-sm bg-white border border-slate-300 shadow-sm" /> Available
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-sm bg-brand-charcoal/30 border border-brand-charcoal/30" /> Unavailable
+          <span className="w-3 h-3 rounded-sm bg-slate-100 border border-slate-200" /> Unavailable
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-sm bg-brand-red border-2 border-white" /> Selected
+          <span className="w-3 h-3 rounded-sm bg-brand-red" /> Selected
         </span>
       </div>
 
       <div className="mt-6">
-        <button onClick={onBack} className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
+        <button onClick={onBack} className="text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-2 text-sm font-semibold">
           <ChevronLeft size={16} /> Back to date selection
         </button>
       </div>
