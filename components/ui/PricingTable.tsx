@@ -319,11 +319,11 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                           )}
 
                           {sub.idealUseCase && (
-                            <div className="pt-2 border-t border-slate-200/70 flex items-center gap-2 text-[11px] sm:text-xs text-slate-600 font-medium">
-                              <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
+                            <div className="pt-2 border-t border-slate-200/70 flex items-start gap-2 text-[11px] sm:text-xs text-slate-600 font-medium">
+                              <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100 mt-0.5">
                                 <Check className="w-2.5 h-2.5 stroke-[3]" />
                               </div>
-                              <span className="truncate">{sub.idealUseCase}</span>
+                              <span className="leading-snug">{sub.idealUseCase}</span>
                             </div>
                           )}
                         </div>
