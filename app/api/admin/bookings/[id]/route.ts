@@ -101,28 +101,41 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
         // Send confirmation email
         const pkg = booking.studio_packages;
-        sendBookingConfirmationEmail({
-          bookingReference: booking.booking_reference,
-          clientName: booking.client_name,
-          clientEmail: booking.client_email,
-          clientPhone: booking.client_phone ?? undefined,
-          companyName: booking.company_name ?? undefined,
-          durationHours: pkg?.duration_hours ?? booking.duration_hours ?? undefined,
-          packageName: pkg?.name ?? 'Studio Package',
-          requestedDate: booking.requested_date,
-          requestedTime: booking.requested_time_slot,
-          estimatedTotal: booking.estimated_total_lkr,
-          adminNotes: admin_notes,
-        }).then(async (result) => {
+        let emailSent = false;
+        let emailError: string | null = null;
+        try {
+          const emailResult = await sendBookingConfirmationEmail({
+            bookingReference: booking.booking_reference,
+            clientName: booking.client_name,
+            clientEmail: booking.client_email,
+            clientPhone: booking.client_phone ?? undefined,
+            companyName: booking.company_name ?? undefined,
+            durationHours: pkg?.duration_hours ?? booking.duration_hours ?? undefined,
+            packageName: pkg?.name ?? 'Studio Package',
+            requestedDate: booking.requested_date,
+            requestedTime: booking.requested_time_slot,
+            estimatedTotal: booking.estimated_total_lkr,
+            adminNotes: admin_notes,
+          });
+          emailSent = emailResult.success;
+          emailError = emailResult.error ?? null;
+        } catch (err: unknown) {
+          emailError = err instanceof Error ? err.message : 'Confirmation email error';
+          console.error('[Email] Failed to send confirmation email:', emailError);
+        }
+
+        try {
           await supabase.from('booking_notifications').insert([{
             booking_id: params.id,
             type: 'confirmed',
             recipient_email: booking.client_email,
-            status: result.success ? 'sent' : 'failed',
-            error_message: result.error ?? null,
-            sent_at: result.success ? now : null,
+            status: emailSent ? 'sent' : 'failed',
+            error_message: emailError,
+            sent_at: emailSent ? now : null,
           }]);
-        }).catch(console.error);
+        } catch (notifErr) {
+          console.error('[Notification] Log insert error:', notifErr);
+        }
         break;
       }
 
@@ -137,27 +150,40 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
         activityNote = rejection_reason ? `Rejected: ${rejection_reason}` : 'Booking rejected by admin';
 
         const pkg = booking.studio_packages;
-        sendBookingRejectionEmail({
-          bookingReference: booking.booking_reference,
-          clientName: booking.client_name,
-          clientEmail: booking.client_email,
-          clientPhone: booking.client_phone ?? undefined,
-          companyName: booking.company_name ?? undefined,
-          durationHours: pkg?.duration_hours ?? booking.duration_hours ?? undefined,
-          packageName: pkg?.name ?? 'Studio Package',
-          requestedDate: booking.requested_date,
-          requestedTime: booking.requested_time_slot,
-          rejectionReason: rejection_reason,
-        }).then(async (result) => {
+        let emailSent = false;
+        let emailError: string | null = null;
+        try {
+          const emailResult = await sendBookingRejectionEmail({
+            bookingReference: booking.booking_reference,
+            clientName: booking.client_name,
+            clientEmail: booking.client_email,
+            clientPhone: booking.client_phone ?? undefined,
+            companyName: booking.company_name ?? undefined,
+            durationHours: pkg?.duration_hours ?? booking.duration_hours ?? undefined,
+            packageName: pkg?.name ?? 'Studio Package',
+            requestedDate: booking.requested_date,
+            requestedTime: booking.requested_time_slot,
+            rejectionReason: rejection_reason,
+          });
+          emailSent = emailResult.success;
+          emailError = emailResult.error ?? null;
+        } catch (err: unknown) {
+          emailError = err instanceof Error ? err.message : 'Rejection email error';
+          console.error('[Email] Failed to send rejection email:', emailError);
+        }
+
+        try {
           await supabase.from('booking_notifications').insert([{
             booking_id: params.id,
             type: 'rejected',
             recipient_email: booking.client_email,
-            status: result.success ? 'sent' : 'failed',
-            error_message: result.error ?? null,
-            sent_at: result.success ? now : null,
+            status: emailSent ? 'sent' : 'failed',
+            error_message: emailError,
+            sent_at: emailSent ? now : null,
           }]);
-        }).catch(console.error);
+        } catch (notifErr) {
+          console.error('[Notification] Log insert error:', notifErr);
+        }
         break;
       }
 

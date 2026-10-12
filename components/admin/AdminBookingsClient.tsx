@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Booking } from '@/lib/booking-types';
 import { getStatusBadge, formatDateColombo, formatTimeSlot, formatLKR } from '@/lib/booking-utils';
-import { Loader2, Search, Filter, RefreshCw, AlertCircle, Trash2 } from 'lucide-react';
+import { Loader2, Search, Filter, RefreshCw, AlertCircle, Trash2, CheckCircle, X } from 'lucide-react';
 import Link from 'next/link';
 
 const STATUS_TABS = ['all', 'pending', 'confirmed', 'rejected', 'cancelled', 'completed'];
@@ -12,6 +12,8 @@ export default function AdminBookingsClient() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [approvingId, setApprovingId] = useState<string | null>(null);
+  const [feedbackMsg, setFeedbackMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [activeStatus, setActiveStatus] = useState('all');
   const [search, setSearch] = useState('');
   const [total, setTotal] = useState(0);
@@ -31,6 +33,36 @@ export default function AdminBookingsClient() {
       setLoading(false);
     }
   }, []);
+
+  const handleQuickApprove = async (id: string, ref: string) => {
+    const confirmed = window.confirm(
+      `Approve and confirm booking "${ref}"?\n\nThis will update the database status to CONFIRMED and send the official studio confirmation email to the client.`
+    );
+    if (!confirmed) return;
+
+    setApprovingId(id);
+    setFeedbackMsg(null);
+    try {
+      const res = await fetch(`/api/admin/bookings/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'approve' }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to approve booking');
+
+      setBookings(prev => prev.map(b => (b.id === id ? { ...b, status: 'confirmed' } : b)));
+      setFeedbackMsg({
+        type: 'success',
+        text: `Booking ${ref} confirmed successfully! The user has been notified via email.`,
+      });
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to approve booking';
+      setFeedbackMsg({ type: 'error', text: msg });
+    } finally {
+      setApprovingId(null);
+    }
+  };
 
   const handleDelete = async (id: string, ref: string) => {
     const confirmed = window.confirm(
@@ -94,6 +126,32 @@ export default function AdminBookingsClient() {
         ))}
       </div>
 
+      {/* Feedback Alert */}
+      {feedbackMsg && (
+        <div
+          className={`mb-5 p-4 rounded-xl flex items-center justify-between text-sm transition-all ${
+            feedbackMsg.type === 'success'
+              ? 'bg-green-500/10 border border-green-500/30 text-green-400'
+              : 'bg-red-500/10 border border-red-500/30 text-red-400'
+          }`}
+        >
+          <div className="flex items-center gap-2 font-medium">
+            {feedbackMsg.type === 'success' ? (
+              <CheckCircle size={18} className="text-green-400 flex-shrink-0" />
+            ) : (
+              <AlertCircle size={18} className="text-red-400 flex-shrink-0" />
+            )}
+            <span>{feedbackMsg.text}</span>
+          </div>
+          <button
+            onClick={() => setFeedbackMsg(null)}
+            className="text-slate-400 hover:text-white transition-colors ml-4"
+          >
+            <X size={16} />
+          </button>
+        </div>
+      )}
+
       {/* Search */}
       <div className="relative mb-5">
         <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
@@ -122,7 +180,7 @@ export default function AdminBookingsClient() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-brand-dark">
-                  {['Reference', 'Client', 'Package', 'Date & Time', 'Total', 'Status', ''].map(h => (
+                  {['Reference', 'Client', 'Package', 'Date & Time', 'Total', 'Status', 'Actions'].map(h => (
                     <th key={h} className="text-left px-5 py-3 text-slate-500 font-semibold text-xs uppercase tracking-wider">
                       {h}
                     </th>
@@ -164,10 +222,26 @@ export default function AdminBookingsClient() {
                         </span>
                       </td>
                       <td className="px-5 py-4">
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2.5">
+                          {b.status === 'pending' && (
+                            <button
+                              type="button"
+                              onClick={() => handleQuickApprove(b.id, b.booking_reference)}
+                              disabled={approvingId === b.id}
+                              title="Approve booking and send confirmation email to client"
+                              className="inline-flex items-center gap-1.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white border border-green-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition-all disabled:opacity-50"
+                            >
+                              {approvingId === b.id ? (
+                                <Loader2 size={13} className="animate-spin text-green-400" />
+                              ) : (
+                                <CheckCircle size={13} />
+                              )}
+                              <span>Approve</span>
+                            </button>
+                          )}
                           <Link
                             href={`/admin/bookings/${b.id}`}
-                            className="text-brand-red hover:underline text-xs font-semibold whitespace-nowrap"
+                            className="text-brand-red hover:underline text-xs font-semibold whitespace-nowrap px-2 py-1"
                           >
                             View →
                           </Link>

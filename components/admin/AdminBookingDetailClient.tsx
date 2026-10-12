@@ -50,7 +50,13 @@ export default function AdminBookingDetailClient({ id }: Props) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Action failed');
       setBooking(data.booking);
-      setSuccess(`Booking ${action}d successfully.`);
+      if (action === 'approve') {
+        setSuccess(`Booking confirmed! The official confirmation email has been sent successfully to ${data.booking?.client_email || 'the client'}.`);
+      } else if (action === 'reject') {
+        setSuccess(`Booking rejected. An update email has been sent to ${data.booking?.client_email || 'the client'}.`);
+      } else {
+        setSuccess(`Booking ${action}d successfully.`);
+      }
       setShowRejectModal(false);
       setShowRescheduleModal(false);
     } catch (err: unknown) {
