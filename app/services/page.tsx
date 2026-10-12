@@ -13,7 +13,6 @@ import {
   Camera,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   Users,
   ShieldCheck,
   MessageSquare,

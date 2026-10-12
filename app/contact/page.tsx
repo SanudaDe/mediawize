@@ -9,7 +9,6 @@ import {
   Mail,
   Clock,
   CheckCircle2,
-  Sparkles,
   ArrowUpRight,
   Youtube,
   Instagram,

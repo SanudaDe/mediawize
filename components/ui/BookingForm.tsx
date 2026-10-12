@@ -13,7 +13,6 @@ import {
   Clock,
   MessageSquare,
   ArrowRight,
-  Sparkles,
   ShieldCheck,
 } from 'lucide-react';
 import { bookingFormSchema } from '@/lib/validations';

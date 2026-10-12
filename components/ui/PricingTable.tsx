@@ -10,7 +10,9 @@ import {
   Video,
   Mic,
   Camera,
-  Sparkles,
+  Flame,
+  Star,
+  Sliders,
   Zap,
   ShieldCheck,
   Award,
@@ -31,14 +33,14 @@ const STUDIO_ICONS: Record<string, React.ElementType> = {
   'audio-only-podcast': Mic,
   'solo-video-podcast': Camera,
   'dual-host-video-podcast': Video,
-  'custom-premium-experience': Sparkles,
+  'custom-premium-experience': Sliders,
 };
 
 const SUBSCRIPTION_ICONS: Record<string, React.ElementType> = {
   'basic-subscription': Zap,
   'bronze-subscription': Award,
   'silver-subscription': Crown,
-  'gold-subscription': Sparkles,
+  'gold-subscription': Star,
 };
 
 interface PricingTableProps {
@@ -91,7 +93,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch"
             >
               {STUDIO_PACKAGES_DATA.map((pkg) => {
-                const IconComponent = STUDIO_ICONS[pkg.slug] || Sparkles;
+                const IconComponent = STUDIO_ICONS[pkg.slug] || Star;
                 const isPopular = !!pkg.popular;
 
                 return (
@@ -106,7 +108,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                     {/* Floating Popular Badge */}
                     {isPopular && (
                       <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-brand-red text-white text-[10px] font-black uppercase tracking-wider shadow-md shadow-brand-red/30 flex items-center gap-1.5 whitespace-nowrap">
-                        <Sparkles className="w-3 h-3 fill-current" />
+                        <Flame className="w-3 h-3 fill-current" />
                         <span>Most Popular</span>
                       </div>
                     )}
@@ -232,7 +234,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                     {/* Floating Popular Badge */}
                     {isPopular && (
                       <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-brand-red text-white text-[10px] font-black uppercase tracking-wider shadow-md shadow-brand-red/30 flex items-center gap-1.5 whitespace-nowrap">
-                        <Sparkles className="w-3 h-3 fill-current" />
+                        <Crown className="w-3 h-3 fill-current" />
                         <span>Creator Choice</span>
                       </div>
                     )}

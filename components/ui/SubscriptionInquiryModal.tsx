@@ -9,7 +9,7 @@ import {
   Mail,
   Phone,
   MessageSquare,
-  Sparkles,
+  Flame,
   Send,
   Loader2,
   CheckCircle2,
@@ -200,7 +200,7 @@ export const SubscriptionInquiryModal: React.FC<SubscriptionInquiryModalProps> =
                 </div>
 
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-brand-red/10 text-brand-red mb-3">
-                  <Sparkles className="w-3.5 h-3.5" />
+                  <ShieldCheck className="w-3.5 h-3.5" />
                   {isCustomQuotation ? 'Quotation Request Dispatched' : 'Inquiry Dispatched'}
                 </span>
 
@@ -254,7 +254,7 @@ export const SubscriptionInquiryModal: React.FC<SubscriptionInquiryModalProps> =
                     </span>
                     {selectedPackage?.popular && (
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-brand-red text-white flex items-center gap-1 shadow-xs">
-                        <Sparkles className="w-2.5 h-2.5 fill-current" />
+                        <Flame className="w-2.5 h-2.5 fill-current" />
                         Most Popular
                       </span>
                     )}

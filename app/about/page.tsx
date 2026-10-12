@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Target, Compass, ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Target, Compass, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 
 const STUDIO_TEL_HREF = 'tel:+94777352700';

@@ -11,7 +11,7 @@ import {
   Radio,
   ArrowUpRight,
   CheckCircle2,
-  Sparkles,
+  ShieldCheck,
 } from 'lucide-react';
 import { ServiceDetail } from '@/lib/types';
 
@@ -90,7 +90,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </Link>
         <span className="text-[11px] text-slate-300 font-medium flex items-center gap-1">
-          <Sparkles className="w-3 h-3 text-brand-red" />
+          <ShieldCheck className="w-3.5 h-3.5 text-brand-red" />
           Pro Gear Included
         </span>
       </div>

@@ -14,7 +14,6 @@ import {
   Phone,
   Mail,
   ChevronRight,
-  Sparkles,
   Layers,
   Camera,
   Users,

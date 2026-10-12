@@ -11,7 +11,6 @@ import {
   CheckCircle2,
   HelpCircle,
   ArrowRight,
-  Sparkles,
 } from 'lucide-react';
 import { STUDIO_PACKAGES_DATA } from '@/lib/data';
 
