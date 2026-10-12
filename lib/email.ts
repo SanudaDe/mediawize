@@ -45,10 +45,11 @@ const FROM_EMAIL = process.env.BOOKING_FROM_EMAIL ?? 'bookings@wize.tv';
 const ADMIN_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL ?? 'info@wize.tv';
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
-async function sendEmail(to: string, subject: string, html: string): Promise<EmailResult> {
+async function sendEmail(to: string, subject: string, html: string, replyTo?: string): Promise<EmailResult> {
   const googlePass = process.env.GOOGLE_APP_PASSWORD || process.env.SMTP_PASS;
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.BOOKING_FROM_EMAIL || 'bookings@wize.tv';
+  const effectiveReplyTo = replyTo || 'bookings@wize.tv';
 
   // 1. Try Google Mail / SMTP if configured
   if (googlePass) {
@@ -70,7 +71,7 @@ async function sendEmail(to: string, subject: string, html: string): Promise<Ema
       await transporter.sendMail({
         from: `"WIZEtv Studios" <${user}>`,
         to,
-        replyTo: 'bookings@wize.tv',
+        replyTo: effectiveReplyTo,
         subject,
         html,
       });
@@ -97,7 +98,7 @@ async function sendEmail(to: string, subject: string, html: string): Promise<Ema
       ? `WIZEtv Studios <${fromEmail}>`
       : `WIZEtv Studios <${fromEmail}>`;
 
-    const replyToEmail = 'bookings@wize.tv';
+    const replyToEmail = effectiveReplyTo;
 
     let { error } = await resend.emails.send({
       from: senderString,
@@ -358,4 +359,106 @@ export async function sendAdminNotificationEmail(data: AdminNotificationData): P
   `);
 
   return sendEmail(ADMIN_EMAIL, `🎙️ New Booking Request — ${data.bookingReference}`, html);
+}
+
+export interface SubscriptionInquiryEmailData {
+  userName: string;
+  companyName?: string;
+  phone: string;
+  email: string;
+  mailBody: string;
+  packageName: string;
+  packagePrice: string;
+  packageAllocation?: string;
+  idealUseCase?: string;
+}
+
+export async function sendSubscriptionInquiryEmail(data: SubscriptionInquiryEmailData): Promise<EmailResult> {
+  const recipient = 'bookings@wize.tv';
+
+  const html = emailWrapper(`
+    <p class="greeting">New Subscription Package Inquiry</p>
+    <p class="text">A new client has submitted an inquiry for the <strong>${data.packageName}</strong> subscription package.</p>
+    
+    <div class="card">
+      <div class="card-row">
+        <span class="card-label">Package Tier</span>
+        <span class="card-value"><span class="badge badge-red">${data.packageName}</span></span>
+      </div>
+      <div class="card-row">
+        <span class="card-label">Monthly Rate</span>
+        <span class="card-value"><strong>${data.packagePrice}</strong></span>
+      </div>
+      ${data.packageAllocation ? `
+      <div class="card-row">
+        <span class="card-label">Allocation</span>
+        <span class="card-value">${data.packageAllocation}</span>
+      </div>` : ''}
+      ${data.idealUseCase ? `
+      <div class="card-row">
+        <span class="card-label">Target Use</span>
+        <span class="card-value">${data.idealUseCase}</span>
+      </div>` : ''}
+      <div class="card-row">
+        <span class="card-label">Client Name</span>
+        <span class="card-value"><strong>${data.userName}</strong></span>
+      </div>
+      <div class="card-row">
+        <span class="card-label">Company Name</span>
+        <span class="card-value">${data.companyName || 'Not specified'}</span>
+      </div>
+      <div class="card-row">
+        <span class="card-label">Phone / WhatsApp</span>
+        <span class="card-value"><a href="tel:${data.phone}" style="color:#EC2328;text-decoration:none;">${data.phone}</a></span>
+      </div>
+      <div class="card-row">
+        <span class="card-label">Email Address</span>
+        <span class="card-value"><a href="mailto:${data.email}" style="color:#EC2328;text-decoration:none;">${data.email}</a></span>
+      </div>
+    </div>
+
+    <div class="highlight" style="color:#F1F5F9;background:#0F172A;border:1px solid #334155;border-left:4px solid #EC2328;padding:16px;border-radius:8px;">
+      <strong style="color:#EC2328;display:block;margin-bottom:8px;font-size:13px;text-transform:uppercase;letter-spacing:0.5px;">Client Message / Requirements:</strong>
+      <p style="white-space:pre-wrap;margin:0;line-height:1.6;color:#E2E8F0;font-size:14px;">${data.mailBody}</p>
+    </div>
+
+    <p class="text" style="font-size:13px;color:#94A3B8;margin-top:20px;">
+      Reply directly to this email to contact <strong>${data.userName}</strong> at <a href="mailto:${data.email}" style="color:#EC2328;">${data.email}</a> or call <a href="tel:${data.phone}" style="color:#EC2328;">${data.phone}</a>.
+    </p>
+  `);
+
+  return sendEmail(recipient, `💎 New Subscription Inquiry: ${data.packageName} — ${data.userName}${data.companyName ? ` (${data.companyName})` : ''}`, html, data.email);
+}
+
+export async function sendSubscriptionConfirmationToClient(data: SubscriptionInquiryEmailData): Promise<EmailResult> {
+  const html = emailWrapper(`
+    <p class="greeting">Hi ${data.userName},</p>
+    <p class="text">Thank you for your interest in the <strong>${data.packageName}</strong> monthly recurring subscription at WIZEtv Studios!</p>
+    <p class="text">Our executive studio producer has received your inquiry details and will contact you via email or WhatsApp within 24 hours to confirm your membership onboarding.</p>
+    
+    <div class="card">
+      <div class="card-row">
+        <span class="card-label">Requested Plan</span>
+        <span class="card-value"><span class="badge badge-red">${data.packageName}</span></span>
+      </div>
+      <div class="card-row">
+        <span class="card-label">Monthly Rate</span>
+        <span class="card-value">${data.packagePrice}</span>
+      </div>
+      ${data.packageAllocation ? `
+      <div class="card-row">
+        <span class="card-label">Studio Allocation</span>
+        <span class="card-value">${data.packageAllocation}</span>
+      </div>` : ''}
+      <div class="card-row">
+        <span class="card-label">Studio Hotline</span>
+        <span class="card-value">bookings@wize.tv / +94 77 735 2700</span>
+      </div>
+    </div>
+
+    <p class="text">If you have immediate questions, feel free to call our direct hotline at <a href="tel:+94777352700" style="color:#EC2328;">+94 77 735 2700</a>.</p>
+    <p class="text">Warm regards,<br/><strong>WIZEtv Studios Team</strong></p>
+  `);
+
+  return sendEmail(data.email, `Subscription Request Received: ${data.packageName} — WIZEtv Studios`, html);
 }

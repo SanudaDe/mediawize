@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import {
   Check,
@@ -19,9 +19,11 @@ import {
 import {
   STUDIO_PACKAGES_DATA,
   SUBSCRIPTION_PACKAGES_DATA,
+  SubscriptionPackageItem,
   MEMBERSHIP_BENEFITS_DATA,
 } from '@/lib/data';
 import { AdditionalServicesDropdown } from '@/components/ui/AdditionalServicesDropdown';
+import { SubscriptionInquiryModal } from '@/components/ui/SubscriptionInquiryModal';
 
 const STUDIO_TEL_HREF = 'tel:+94777352700';
 
@@ -40,6 +42,9 @@ const SUBSCRIPTION_ICONS: Record<string, React.ElementType> = {
 };
 
 export default function StudioPackagesPage() {
+  const [inquiryPackage, setInquiryPackage] = useState<SubscriptionPackageItem | null>(null);
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
+
   return (
     <div className="bg-white text-slate-900 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       {/* Header */}
@@ -308,17 +313,21 @@ export default function StudioPackagesPage() {
                     </div>
                   </div>
 
-                  {/* Interactive Modern Action Button: Book Studio Page */}
-                  <Link
-                    href="/book-studio"
-                    className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
+                  {/* Interactive Modern Action Button: Opens Subscription Email Inquiry Modal */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setInquiryPackage(sub);
+                      setIsInquiryModalOpen(true);
+                    }}
+                    className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 cursor-pointer ${
                       isPopular
                         ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
                         : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
                     }`}
                   >
                     <span>Book The Studio</span>
-                  </Link>
+                  </button>
                 </div>
               );
             })}
@@ -407,6 +416,13 @@ export default function StudioPackagesPage() {
           </Link>
         </div>
       </section>
+
+      {/* Subscription Inquiry Email Modal */}
+      <SubscriptionInquiryModal
+        isOpen={isInquiryModalOpen}
+        onClose={() => setIsInquiryModalOpen(false)}
+        selectedPackage={inquiryPackage}
+      />
     </div>
   );
 }
