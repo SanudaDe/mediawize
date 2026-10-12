@@ -110,7 +110,7 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
               {availability?.slots.map((slot: TimeSlot) => {
                 const isSelected = selectedTime === slot.time;
                 return (
@@ -118,16 +118,30 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
                     key={slot.time}
                     disabled={!slot.available}
                     onClick={() => slot.available && onSelect(slot.time)}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-xl border font-bold text-sm transition-all duration-200 ${
+                    className={`p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between ${
                       isSelected
-                        ? 'border-brand-red bg-brand-red text-white shadow-md shadow-brand-red/30'
+                        ? 'border-brand-red bg-brand-red text-white shadow-lg shadow-brand-red/30 ring-2 ring-brand-red/20'
                         : slot.available
-                        ? 'border-slate-200 bg-white text-slate-800 hover:border-brand-red hover:shadow-md shadow-sm'
-                        : 'border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed line-through'
+                        ? 'border-slate-200 bg-white text-slate-900 hover:border-brand-red hover:shadow-md shadow-xs'
+                        : 'border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed opacity-60'
                     }`}
                   >
-                    <Clock size={14} className={isSelected ? 'text-white' : slot.available ? 'text-brand-red' : 'text-slate-300'} />
-                    <span>{slot.label}</span>
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <span className="font-black text-sm tracking-tight flex items-center gap-2">
+                        <Clock size={15} className={isSelected ? 'text-white' : slot.available ? 'text-brand-red' : 'text-slate-300'} />
+                        {slot.label}
+                      </span>
+                      {slot.available && (
+                        <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
+                          isSelected ? 'bg-white/20 text-white' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                        }`}>
+                          2 Hours
+                        </span>
+                      )}
+                    </div>
+                    <span className={`text-xs ${isSelected ? 'text-white/80' : slot.available ? 'text-slate-500' : 'text-slate-400'}`}>
+                      {slot.available ? 'Studio recording session' : 'Booked'}
+                    </span>
                   </button>
                 );
               })}
@@ -135,12 +149,13 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
           )}
 
           {selectedTime && (
-            <div className="mt-6 flex justify-end">
+            <div className="mt-8 flex justify-end">
               <button
                 onClick={() => onSelect(selectedTime)}
-                className="bg-brand-red hover:bg-brand-red-hover text-white font-bold px-8 py-3 rounded-xl transition-colors shadow-md shadow-brand-red/20"
+                className="bg-brand-red hover:bg-brand-red-hover text-white font-bold px-8 py-3.5 rounded-xl transition-colors shadow-md shadow-brand-red/20 flex items-center gap-2 text-sm"
               >
-                Continue with {formatLabel(selectedTime)} →
+                <span>Continue with {selectedSlotLabel(availability?.slots, selectedTime)}</span>
+                <span>→</span>
               </button>
             </div>
           )}
@@ -169,8 +184,15 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
 }
 
 function formatLabel(time: string): string {
+  if (!time) return '';
   const [h, m] = time.split(':').map(Number);
   const period = h >= 12 ? 'PM' : 'AM';
   const hour12 = h % 12 || 12;
   return `${hour12}:${m.toString().padStart(2, '0')} ${period}`;
+}
+
+function selectedSlotLabel(slots?: TimeSlot[], time?: string): string {
+  if (!slots || !time) return '';
+  const match = slots.find(s => s.time === time);
+  return match?.label || formatLabel(time);
 }

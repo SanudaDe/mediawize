@@ -73,13 +73,25 @@ export function utcToColomboTime(date: Date | string): string {
 }
 
 /**
- * Format time slot "09:00" → "9:00 AM"
+ * Format time slot "09:00" → "9:00 AM – 11:00 AM"
  */
-export function formatTimeSlot(timeStr: string): string {
+export function formatTimeSlot(timeStr: string, durationHours: number = 2): string {
+  if (!timeStr) return '';
   const [h, m] = timeStr.split(':').map(Number);
   const period = h >= 12 ? 'PM' : 'AM';
   const hour12 = h % 12 || 12;
-  return `${hour12}:${m.toString().padStart(2, '0')} ${period}`;
+  const startLabel = `${hour12}:${m.toString().padStart(2, '0')} ${period}`;
+
+  if (!durationHours || durationHours <= 0) return startLabel;
+
+  const endTotal = h * 60 + m + durationHours * 60;
+  const endH = Math.floor(endTotal / 60) % 24;
+  const endM = endTotal % 60;
+  const endPeriod = endH >= 12 ? 'PM' : 'AM';
+  const endHour12 = endH % 12 || 12;
+  const endLabel = `${endHour12}:${endM.toString().padStart(2, '0')} ${endPeriod}`;
+
+  return `${startLabel} – ${endLabel}`;
 }
 
 /**

@@ -7,17 +7,17 @@ import { createServerClient } from '@/lib/supabaseClient';
 import { generateTimeSlots, colomboToUTC } from '@/lib/booking-utils';
 
 const COLOMBO_TZ = 'Asia/Colombo';
-const DEFAULT_SLOT_INTERVAL = 60;   // minutes
-const DEFAULT_BUFFER = 30;           // minutes
+const DEFAULT_SLOT_INTERVAL = 120;  // 2 hours for podcast/video packages
+const DEFAULT_BUFFER = 0;           // minutes
 
 const DEFAULT_BUSINESS_HOURS: Record<number, { is_open: boolean; open_time: string; close_time: string }> = {
-  0: { is_open: true,  open_time: '08:00', close_time: '21:00' }, // Sunday
-  1: { is_open: true,  open_time: '08:00', close_time: '21:00' }, // Monday
-  2: { is_open: true,  open_time: '08:00', close_time: '21:00' }, // Tuesday
-  3: { is_open: true,  open_time: '08:00', close_time: '21:00' }, // Wednesday
-  4: { is_open: true,  open_time: '08:00', close_time: '21:00' }, // Thursday
-  5: { is_open: true,  open_time: '08:00', close_time: '21:00' }, // Friday
-  6: { is_open: true,  open_time: '08:00', close_time: '21:00' }, // Saturday
+  0: { is_open: true, open_time: '09:00', close_time: '21:00' }, // Sunday
+  1: { is_open: true, open_time: '09:00', close_time: '21:00' }, // Monday
+  2: { is_open: true, open_time: '09:00', close_time: '21:00' }, // Tuesday
+  3: { is_open: true, open_time: '09:00', close_time: '21:00' }, // Wednesday
+  4: { is_open: true, open_time: '09:00', close_time: '21:00' }, // Thursday
+  5: { is_open: true, open_time: '09:00', close_time: '21:00' }, // Friday
+  6: { is_open: true, open_time: '09:00', close_time: '21:00' }, // Saturday
 };
 
 export const dynamic = 'force-dynamic';
@@ -152,11 +152,18 @@ export async function GET(req: NextRequest) {
 
     const slots = allSlots.map((slotTime) => {
       const slotStart = colomboToUTC(date, slotTime);
-      const slotEnd = new Date(slotStart.getTime() + durationHours * 60 * 60 * 1000 + bufferMins * 60 * 1000);
+      const slotEnd = new Date(slotStart.getTime() + durationHours * 3600000);
+      const { label, endTime } = formatTimeRange(slotTime, durationHours);
 
       // Check if in the past / too soon
       if (slotStart <= minBookingTime) {
-        return { time: slotTime, label: formatTimeLabel(slotTime), available: false };
+        return {
+          time: slotTime,
+          endTime,
+          durationHours,
+          label,
+          available: false,
+        };
       }
 
       // Check conflict with existing bookings
@@ -176,9 +183,9 @@ export async function GET(req: NextRequest) {
         } else {
           // Legacy bookings without start_time
           bStart = colomboToUTC(date, b.requested_time_slot!);
-          bEnd = new Date(bStart.getTime() + (b.duration_hours || 2) * 3600000 + bufferMins * 60000);
+          bEnd = new Date(bStart.getTime() + (b.duration_hours || 2) * 3600000);
         }
-        // Check overlap: new_start < existing_end AND new_end > existing_start
+        // Overlap check: new_start < existing_end AND new_end > existing_start
         return slotStart < bEnd && slotEnd > bStart;
       });
 
@@ -191,7 +198,9 @@ export async function GET(req: NextRequest) {
 
       return {
         time: slotTime,
-        label: formatTimeLabel(slotTime),
+        endTime,
+        durationHours,
+        label,
         available: !hasBookingConflict && !hasBlockConflict,
       };
     });
@@ -210,9 +219,22 @@ export async function GET(req: NextRequest) {
   }
 }
 
-function formatTimeLabel(timeStr: string): string {
-  const [h, m] = timeStr.split(':').map(Number);
-  const period = h >= 12 ? 'PM' : 'AM';
-  const hour12 = h % 12 || 12;
-  return `${hour12}:${m.toString().padStart(2, '0')} ${period}`;
+function formatTimeRange(startStr: string, durationHours: number): { label: string; endTime: string } {
+  const [h, m] = startStr.split(':').map(Number);
+  const startPeriod = h >= 12 ? 'PM' : 'AM';
+  const startHour12 = h % 12 || 12;
+  const startFormatted = `${startHour12}:${m.toString().padStart(2, '0')} ${startPeriod}`;
+
+  const endTotal = h * 60 + m + durationHours * 60;
+  const endH = Math.floor(endTotal / 60) % 24;
+  const endM = endTotal % 60;
+  const endPeriod = endH >= 12 ? 'PM' : 'AM';
+  const endHour12 = endH % 12 || 12;
+  const endFormatted = `${endHour12}:${endM.toString().padStart(2, '0')} ${endPeriod}`;
+  const endTime = `${endH.toString().padStart(2, '0')}:${endM.toString().padStart(2, '0')}`;
+
+  return {
+    label: `${startFormatted} – ${endFormatted}`,
+    endTime,
+  };
 }

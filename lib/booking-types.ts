@@ -20,8 +20,10 @@ export interface StudioPackage {
 }
 
 export interface TimeSlot {
-  time: string;       // "09:00"
-  label: string;      // "9:00 AM"
+  time: string;           // "09:00"
+  label: string;          // "9:00 AM – 11:00 AM"
+  endTime?: string;       // "11:00"
+  durationHours?: number; // 2
   available: boolean;
 }
 
