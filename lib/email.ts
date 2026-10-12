@@ -1503,8 +1503,9 @@ export async function sendSubscriptionInquiryEmail(data: SubscriptionInquiryEmai
   const typeLabel = isCustomQuote ? 'CUSTOM PRODUCTION QUOTATION' : 'SUBSCRIPTION INQUIRY';
   const headline = isCustomQuote ? 'New Custom Quotation Request' : 'New Subscription Package Inquiry';
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wize.tv';
-  const logoUrl = `${siteUrl}/logo-white.png`;
+  const logoUrl =
+    process.env.EMAIL_LOGO_URL ||
+    'https://sqpfwjwtefhxvqcfalyf.supabase.co/storage/v1/object/public/public-assets/wizetv-logo-white.png';
   const now = new Date();
   const dateStr = formatDateColombo(now, { day: '2-digit', month: 'short', year: 'numeric' });
   const timeStr = formatTimeColombo(now);
@@ -1545,8 +1546,9 @@ export async function sendSubscriptionConfirmationToClient(data: SubscriptionInq
   const typeLabel = isCustomQuote ? 'QUOTATION REQUEST RECEIVED' : 'SUBSCRIPTION INQUIRY RECEIVED';
   const headline = `Thank you, ${data.userName}!`;
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wize.tv';
-  const logoUrl = `${siteUrl}/logo-white.png`;
+  const logoUrl =
+    process.env.EMAIL_LOGO_URL ||
+    'https://sqpfwjwtefhxvqcfalyf.supabase.co/storage/v1/object/public/public-assets/wizetv-logo-white.png';
   const now = new Date();
   const dateStr = formatDateColombo(now, { day: '2-digit', month: 'short', year: 'numeric' });
   const timeStr = formatTimeColombo(now);
