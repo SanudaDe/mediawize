@@ -35,22 +35,17 @@ export default function BookingWizard() {
   const goPrev = () => setCurrentStep(s => Math.max(s - 1, 1));
 
   const handleSubmit = async () => {
-    try {
-      const res = await fetch('/api/bookings/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setBookingRef(data.bookingReference);
-        setIsSubmitted(true);
-      } else {
-        throw new Error(data.error || 'Submission failed');
-      }
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Something went wrong';
-      alert(msg);
+    const res = await fetch('/api/bookings/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+    if (data.success) {
+      setBookingRef(data.bookingReference);
+      setIsSubmitted(true);
+    } else {
+      throw new Error(data.error || 'Submission failed');
     }
   };
 

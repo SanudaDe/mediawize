@@ -20,13 +20,17 @@ import {
   Sliders,
   Download,
   FileText,
+  Zap,
+  Award,
+  Crown,
+  ShieldCheck,
 } from 'lucide-react';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 import { ThreeDMarquee } from '@/components/ui/3d-marquee';
 import { PodcastCarousel } from '@/components/ui/PodcastCarousel';
 import { StudioCatalogueViewer } from '@/components/ui/StudioCatalogueViewer';
 import { STUDIO_SHOWCASE_IMAGES } from '@/lib/studioImages';
-import { STUDIO_PACKAGES_DATA } from '@/lib/data';
+import { STUDIO_PACKAGES_DATA, SUBSCRIPTION_PACKAGES_DATA } from '@/lib/data';
 import { AdditionalServicesDropdown } from '@/components/ui/AdditionalServicesDropdown';
 
 const STUDIO_PHONE = '077 735 2700';
@@ -39,6 +43,13 @@ const PACKAGE_ICONS: Record<string, React.ElementType> = {
   'solo-video-podcast': Camera,
   'dual-host-video-podcast': Video,
   'custom-premium-experience': Sparkles,
+};
+
+const SUBSCRIPTION_ICONS: Record<string, React.ElementType> = {
+  'basic-subscription': Zap,
+  'bronze-subscription': Award,
+  'silver-subscription': Crown,
+  'gold-subscription': Sparkles,
 };
 
 export default function HomePage() {
@@ -487,6 +498,149 @@ export default function HomePage() {
               );
             })}
           </div>
+
+          {/* ========================================================================= */}
+          {/* SUBSCRIPTION PACKAGES (MONTHLY RECURRING) */}
+          {/* ========================================================================= */}
+          <div className="mt-20 sm:mt-24 pt-16 sm:pt-20 border-t border-slate-200/80">
+            <span className="text-xs font-black uppercase tracking-widest text-brand-red mb-2 block">
+              MEMBERSHIP TIERS
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-3">
+              Subscription Packages (Monthly Recurring)
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto mb-14">
+              Fixed monthly studio allocations, priority scheduling, and dedicated production support.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+              {SUBSCRIPTION_PACKAGES_DATA.map((sub) => {
+                const IconComponent = SUBSCRIPTION_ICONS[sub.slug] || Crown;
+                const isPopular = !!sub.popular;
+
+                return (
+                  <div
+                    key={sub.id}
+                    className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left transition-all duration-300 ${
+                      isPopular
+                        ? 'border-2 border-brand-red shadow-xl shadow-red-500/10 ring-4 ring-brand-red/5 hover:-translate-y-1'
+                        : 'border border-slate-200 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1'
+                    }`}
+                  >
+                    {/* Floating Popular Badge */}
+                    {isPopular && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-brand-red text-white text-[10px] font-black uppercase tracking-wider shadow-md shadow-brand-red/30 flex items-center gap-1.5 whitespace-nowrap">
+                        <Sparkles className="w-3 h-3 fill-current" />
+                        <span>Creator Choice</span>
+                      </div>
+                    )}
+
+                    <div>
+                      {/* Top Meta: Iconic Symbol + Priority Badge */}
+                      <div className="flex items-center justify-between gap-3 mb-6">
+                        <div
+                          className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-300 ${
+                            isPopular
+                              ? 'bg-brand-red text-white shadow-md shadow-brand-red/25'
+                              : 'bg-slate-100 text-slate-800 group-hover:bg-brand-red group-hover:text-white'
+                          }`}
+                        >
+                          <IconComponent className="w-5 h-5 stroke-[2.2]" />
+                        </div>
+
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 tracking-tight">
+                          <ShieldCheck className="w-3 h-3 text-slate-400" />
+                          <span>{sub.priority === 'Priority' ? 'Priority Access' : `${sub.priority} Priority`}</span>
+                        </span>
+                      </div>
+
+                      {/* Title & Subtitle */}
+                      <h3 className="text-lg font-black text-slate-900 tracking-tight mb-1">
+                        {sub.name}
+                      </h3>
+                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 min-h-[32px] mb-5">
+                        {sub.recommendedFor}
+                      </p>
+
+                      {/* Price Block */}
+                      <div className="pt-4 pb-5 border-t border-b border-slate-100 mb-6">
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                            {sub.monthlyFeeLKR}
+                          </span>
+                          <span className="text-xs font-semibold text-slate-400">/ month</span>
+                        </div>
+                        <span className="text-[11px] font-medium text-slate-400 block mt-0.5">
+                          Monthly recurring membership
+                        </span>
+                      </div>
+
+                      {/* Studio Time & Allocation on clean light card style */}
+                      <div className="space-y-3 mb-8">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
+                          Studio Time & Allocation
+                        </span>
+
+                        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                          <div className="flex items-center justify-between gap-3 mb-2.5">
+                            <div>
+                              <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-0.5">
+                                Monthly Allocation
+                              </span>
+                              <span className="text-xs sm:text-sm font-bold text-slate-900 block leading-tight">
+                                {sub.sessionCount}
+                              </span>
+                            </div>
+
+                            {/* 3D Embossed Hours Tag */}
+                            <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-gradient-to-br from-brand-red via-[#f02d33] to-[#b91c1c] text-white shadow-md shadow-brand-red/30 border border-red-400/30 flex items-baseline gap-1 text-center font-black">
+                              <span className="text-lg leading-none tracking-tight">{sub.hoursBadge}</span>
+                              <span className="text-[9px] uppercase tracking-wider opacity-90 font-black">HRS</span>
+                            </div>
+                          </div>
+
+                          {/* Camera Setup Category */}
+                          {sub.cameras && (
+                            <div className="pt-2.5 border-t border-slate-200/70 flex items-center justify-between text-[11px] sm:text-xs">
+                              <span className="flex items-center gap-1.5 text-slate-500 font-semibold">
+                                <Camera className="w-3.5 h-3.5 text-brand-red" />
+                                <span>Camera Setup</span>
+                              </span>
+                              <span className="font-bold text-slate-900 bg-white px-2 py-0.5 rounded-md border border-slate-200/80 shadow-xs">
+                                {sub.cameras}
+                              </span>
+                            </div>
+                          )}
+
+                          {sub.idealUseCase && (
+                            <div className="pt-2 border-t border-slate-200/70 flex items-center gap-2 text-[11px] sm:text-xs text-slate-600 font-medium">
+                              <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
+                                <Check className="w-2.5 h-2.5 stroke-[3]" />
+                              </div>
+                              <span className="truncate">{sub.idealUseCase}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Interactive Modern Action Button: Direct Phone Call */}
+                    <a
+                      href={STUDIO_TEL_HREF}
+                      className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
+                        isPopular
+                          ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
+                          : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
+                      }`}
+                    >
+                      <span>Book The Studio</span>
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
           {/* Simple Dropdown for Additional A La Carte Services & Equipment */}
           <AdditionalServicesDropdown />
 
@@ -495,7 +649,7 @@ export default function HomePage() {
               href="/pricing"
               className="inline-flex items-center gap-2 text-xs font-bold text-brand-red hover:underline uppercase tracking-wider"
             >
-              <span>View Monthly Subscription Packages & Membership Benefits</span>
+              <span>View Full Membership Benefits Comparison & Table</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

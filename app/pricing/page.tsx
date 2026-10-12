@@ -72,7 +72,7 @@ export default function StudioPackagesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-4 xl:gap-6 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {STUDIO_PACKAGES_DATA.map((pkg) => {
               const IconComponent = STUDIO_ICONS[pkg.slug] || Sparkles;
               const isPopular = !!pkg.popular;
@@ -80,7 +80,7 @@ export default function StudioPackagesPage() {
               return (
                 <div
                   key={pkg.id}
-                  className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:px-4 lg:py-6 xl:p-6 flex flex-col justify-between text-left transition-all duration-300 ${
+                  className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left transition-all duration-300 ${
                     isPopular
                       ? 'border-2 border-brand-red shadow-xl shadow-red-500/10 ring-4 ring-brand-red/5 hover:-translate-y-1'
                       : 'border border-slate-200 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1'
@@ -123,12 +123,12 @@ export default function StudioPackagesPage() {
 
                     {/* Price Block */}
                     <div className="pt-4 pb-5 border-t border-b border-slate-100 mb-6">
-                      <div className="flex items-baseline gap-1 sm:gap-1.5 whitespace-nowrap">
-                        <span className="text-xl sm:text-2xl lg:text-[20px] xl:text-[23px] 2xl:text-[26px] font-black text-slate-900 tracking-tight whitespace-nowrap">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                           {pkg.priceLKR}
                         </span>
                         {pkg.priceNum > 0 && (
-                          <span className="text-[11px] sm:text-xs font-semibold text-slate-400 whitespace-nowrap shrink-0">/ session</span>
+                          <span className="text-xs font-semibold text-slate-400">/ session</span>
                         )}
                       </div>
                       <span className="text-[11px] font-medium text-slate-400 block mt-0.5">
@@ -195,7 +195,7 @@ export default function StudioPackagesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-4 xl:gap-6 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {SUBSCRIPTION_PACKAGES_DATA.map((sub) => {
               const IconComponent = SUBSCRIPTION_ICONS[sub.slug] || Crown;
               const isPopular = !!sub.popular;
@@ -203,7 +203,7 @@ export default function StudioPackagesPage() {
               return (
                 <div
                   key={sub.id}
-                  className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:px-4 lg:py-6 xl:p-6 flex flex-col justify-between text-left transition-all duration-300 ${
+                  className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left transition-all duration-300 ${
                     isPopular
                       ? 'border-2 border-brand-red shadow-xl shadow-red-500/10 ring-4 ring-brand-red/5 hover:-translate-y-1'
                       : 'border border-slate-200 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1'
@@ -246,11 +246,11 @@ export default function StudioPackagesPage() {
 
                     {/* Price Block */}
                     <div className="pt-4 pb-5 border-t border-b border-slate-100 mb-6">
-                      <div className="flex items-baseline gap-1 sm:gap-1.5 whitespace-nowrap">
-                        <span className="text-xl sm:text-2xl lg:text-[20px] xl:text-[23px] 2xl:text-[26px] font-black text-slate-900 tracking-tight whitespace-nowrap">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                           {sub.monthlyFeeLKR}
                         </span>
-                        <span className="text-[11px] sm:text-xs font-semibold text-slate-400 whitespace-nowrap shrink-0">
+                        <span className="text-xs font-semibold text-slate-400">
                           / month
                         </span>
                       </div>
