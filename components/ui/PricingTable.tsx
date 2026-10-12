@@ -16,7 +16,12 @@ import {
   Award,
   Crown,
 } from 'lucide-react';
-import { STUDIO_PACKAGES_DATA, SUBSCRIPTION_PACKAGES_DATA, SubscriptionPackageItem } from '@/lib/data';
+import {
+  STUDIO_PACKAGES_DATA,
+  SUBSCRIPTION_PACKAGES_DATA,
+  SubscriptionPackageItem,
+  StudioPackageItem,
+} from '@/lib/data';
 import { AdditionalServicesDropdown } from '@/components/ui/AdditionalServicesDropdown';
 import { SubscriptionInquiryModal } from '@/components/ui/SubscriptionInquiryModal';
 
@@ -44,7 +49,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
   defaultMode = 'packages',
 }) => {
   const [activeTab, setActiveTab] = useState<'packages' | 'subscriptions'>(defaultMode);
-  const [inquiryPackage, setInquiryPackage] = useState<SubscriptionPackageItem | null>(null);
+  const [inquiryPackage, setInquiryPackage] = useState<SubscriptionPackageItem | StudioPackageItem | null>(null);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   return (
@@ -171,17 +176,34 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                       </div>
                     </div>
 
-                    {/* Interactive Modern Action Button: Book Studio Page */}
-                    <Link
-                      href="/book-studio"
-                      className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
-                        isPopular
-                          ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
-                          : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
-                      }`}
-                    >
-                      <span>Book The Studio</span>
-                    </Link>
+                    {/* Interactive Modern Action Button: Book Studio Page OR Custom Quotation Modal */}
+                    {pkg.slug === 'custom-premium-experience' || pkg.priceNum === 0 ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setInquiryPackage(pkg);
+                          setIsInquiryModalOpen(true);
+                        }}
+                        className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 cursor-pointer ${
+                          isPopular
+                            ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
+                            : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
+                        }`}
+                      >
+                        <span>Book The Studio</span>
+                      </button>
+                    ) : (
+                      <Link
+                        href="/book-studio"
+                        className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
+                          isPopular
+                            ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
+                            : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
+                        }`}
+                      >
+                        <span>Book The Studio</span>
+                      </Link>
+                    )}
                   </div>
                 );
               })}

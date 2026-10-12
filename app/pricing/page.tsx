@@ -20,6 +20,7 @@ import {
   STUDIO_PACKAGES_DATA,
   SUBSCRIPTION_PACKAGES_DATA,
   SubscriptionPackageItem,
+  StudioPackageItem,
   MEMBERSHIP_BENEFITS_DATA,
 } from '@/lib/data';
 import { AdditionalServicesDropdown } from '@/components/ui/AdditionalServicesDropdown';
@@ -42,7 +43,7 @@ const SUBSCRIPTION_ICONS: Record<string, React.ElementType> = {
 };
 
 export default function StudioPackagesPage() {
-  const [inquiryPackage, setInquiryPackage] = useState<SubscriptionPackageItem | null>(null);
+  const [inquiryPackage, setInquiryPackage] = useState<SubscriptionPackageItem | StudioPackageItem | null>(null);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   return (
@@ -164,17 +165,34 @@ export default function StudioPackagesPage() {
                     </div>
                   </div>
 
-                  {/* Interactive Modern Action Button: Book Studio Page */}
-                  <Link
-                    href="/book-studio"
-                    className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
-                      isPopular
-                        ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
-                        : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
-                    }`}
-                  >
-                    <span>Book The Studio</span>
-                  </Link>
+                  {/* Interactive Modern Action Button: Book Studio Page OR Custom Quotation Modal */}
+                  {pkg.slug === 'custom-premium-experience' || pkg.priceNum === 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setInquiryPackage(pkg);
+                        setIsInquiryModalOpen(true);
+                      }}
+                      className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 cursor-pointer ${
+                        isPopular
+                          ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
+                          : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
+                      }`}
+                    >
+                      <span>Book The Studio</span>
+                    </button>
+                  ) : (
+                    <Link
+                      href="/book-studio"
+                      className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
+                        isPopular
+                          ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
+                          : 'bg-slate-900 hover:bg-brand-red text-white hover:shadow-md hover:shadow-brand-red/20'
+                      }`}
+                    >
+                      <span>Book The Studio</span>
+                    </Link>
+                  )}
                 </div>
               );
             })}
@@ -408,12 +426,17 @@ export default function StudioPackagesPage() {
           <p className="text-sm text-slate-400 mb-8 max-w-lg mx-auto">
             Contact our studio manager for multi-episode series, enterprise retainers, and private studio takeovers.
           </p>
-          <Link
-            href="/contact?type=enterprise"
-            className="px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow"
+          <button
+            type="button"
+            onClick={() => {
+              const customPkg = STUDIO_PACKAGES_DATA.find((p) => p.slug === 'custom-premium-experience') || null;
+              setInquiryPackage(customPkg);
+              setIsInquiryModalOpen(true);
+            }}
+            className="px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow cursor-pointer"
           >
             Request Custom Quotation
-          </Link>
+          </button>
         </div>
       </section>
 

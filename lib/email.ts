@@ -375,23 +375,29 @@ export interface SubscriptionInquiryEmailData {
 
 export async function sendSubscriptionInquiryEmail(data: SubscriptionInquiryEmailData): Promise<EmailResult> {
   const recipient = 'bookings@wize.tv';
+  const isCustomQuote = Boolean(
+    data.packagePrice.toLowerCase().includes('custom') ||
+    data.packageName.toLowerCase().includes('custom')
+  );
+  const typeLabel = isCustomQuote ? 'Custom Production Quotation Request' : 'Subscription Package Inquiry';
+  const rateLabel = isCustomQuote ? 'Pricing Model' : 'Monthly Rate';
 
   const html = emailWrapper(`
-    <p class="greeting">New Subscription Package Inquiry</p>
-    <p class="text">A new client has submitted an inquiry for the <strong>${data.packageName}</strong> subscription package.</p>
+    <p class="greeting">New ${typeLabel}</p>
+    <p class="text">A new client has submitted a request for <strong>${data.packageName}</strong>.</p>
     
     <div class="card">
       <div class="card-row">
-        <span class="card-label">Package Tier</span>
+        <span class="card-label">Package / Scope</span>
         <span class="card-value"><span class="badge badge-red">${data.packageName}</span></span>
       </div>
       <div class="card-row">
-        <span class="card-label">Monthly Rate</span>
+        <span class="card-label">${rateLabel}</span>
         <span class="card-value"><strong>${data.packagePrice}</strong></span>
       </div>
       ${data.packageAllocation ? `
       <div class="card-row">
-        <span class="card-label">Allocation</span>
+        <span class="card-label">${isCustomQuote ? 'Scope Details' : 'Allocation'}</span>
         <span class="card-value">${data.packageAllocation}</span>
       </div>` : ''}
       ${data.idealUseCase ? `
@@ -418,7 +424,7 @@ export async function sendSubscriptionInquiryEmail(data: SubscriptionInquiryEmai
     </div>
 
     <div class="highlight" style="color:#F1F5F9;background:#0F172A;border:1px solid #334155;border-left:4px solid #EC2328;padding:16px;border-radius:8px;">
-      <strong style="color:#EC2328;display:block;margin-bottom:8px;font-size:13px;text-transform:uppercase;letter-spacing:0.5px;">Client Message / Requirements:</strong>
+      <strong style="color:#EC2328;display:block;margin-bottom:8px;font-size:13px;text-transform:uppercase;letter-spacing:0.5px;">Client Message & Requirements:</strong>
       <p style="white-space:pre-wrap;margin:0;line-height:1.6;color:#E2E8F0;font-size:14px;">${data.mailBody}</p>
     </div>
 
@@ -427,27 +433,36 @@ export async function sendSubscriptionInquiryEmail(data: SubscriptionInquiryEmai
     </p>
   `);
 
-  return sendEmail(recipient, `💎 New Subscription Inquiry: ${data.packageName} — ${data.userName}${data.companyName ? ` (${data.companyName})` : ''}`, html, data.email);
+  const subjectPrefix = isCustomQuote ? '🎬 New Custom Quotation Request' : '💎 New Subscription Inquiry';
+  return sendEmail(recipient, `${subjectPrefix}: ${data.packageName} — ${data.userName}${data.companyName ? ` (${data.companyName})` : ''}`, html, data.email);
 }
 
 export async function sendSubscriptionConfirmationToClient(data: SubscriptionInquiryEmailData): Promise<EmailResult> {
+  const isCustomQuote = Boolean(
+    data.packagePrice.toLowerCase().includes('custom') ||
+    data.packageName.toLowerCase().includes('custom')
+  );
+
   const html = emailWrapper(`
     <p class="greeting">Hi ${data.userName},</p>
-    <p class="text">Thank you for your interest in the <strong>${data.packageName}</strong> monthly recurring subscription at WIZEtv Studios!</p>
-    <p class="text">Our executive studio producer has received your inquiry details and will contact you via email or WhatsApp within 24 hours to confirm your membership onboarding.</p>
+    <p class="text">${isCustomQuote
+      ? `Thank you for requesting a custom quotation for <strong>${data.packageName}</strong> at WIZEtv Studios!`
+      : `Thank you for your interest in the <strong>${data.packageName}</strong> monthly recurring subscription at WIZEtv Studios!`
+    }</p>
+    <p class="text">Our executive studio producer has received your inquiry details and will contact you via email or WhatsApp within 24 hours${isCustomQuote ? ' with a tailored proposal and consultation.' : ' to confirm your membership onboarding.'}</p>
     
     <div class="card">
       <div class="card-row">
-        <span class="card-label">Requested Plan</span>
+        <span class="card-label">Requested Scope</span>
         <span class="card-value"><span class="badge badge-red">${data.packageName}</span></span>
       </div>
       <div class="card-row">
-        <span class="card-label">Monthly Rate</span>
+        <span class="card-label">Rate</span>
         <span class="card-value">${data.packagePrice}</span>
       </div>
       ${data.packageAllocation ? `
       <div class="card-row">
-        <span class="card-label">Studio Allocation</span>
+        <span class="card-label">Allocation / Scope</span>
         <span class="card-value">${data.packageAllocation}</span>
       </div>` : ''}
       <div class="card-row">
@@ -460,5 +475,9 @@ export async function sendSubscriptionConfirmationToClient(data: SubscriptionInq
     <p class="text">Warm regards,<br/><strong>WIZEtv Studios Team</strong></p>
   `);
 
-  return sendEmail(data.email, `Subscription Request Received: ${data.packageName} — WIZEtv Studios`, html);
+  const clientSubject = isCustomQuote
+    ? `Custom Quotation Request Received: ${data.packageName} — WIZEtv Studios`
+    : `Subscription Request Received: ${data.packageName} — WIZEtv Studios`;
+
+  return sendEmail(data.email, clientSubject, html);
 }
