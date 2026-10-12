@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import {
   Loader2, ArrowLeft, CheckCircle, XCircle, Ban, RotateCcw,
   MessageSquare, Calendar, Clock, User, Mail, Phone, Building2,
-  Mic, AlertCircle, ChevronDown
+  Mic, AlertCircle, ChevronDown, Trash2
 } from 'lucide-react';
 import { Booking } from '@/lib/booking-types';
 import { getStatusBadge, formatDateColombo, formatTimeSlot, formatLKR } from '@/lib/booking-utils';
@@ -56,6 +56,25 @@ export default function AdminBookingDetailClient({ id }: Props) {
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Action failed');
     } finally {
+      setActionLoading('');
+    }
+  };
+
+  const handleDeleteBooking = async () => {
+    if (!booking) return;
+    const confirmed = window.confirm(
+      `Are you sure you want to permanently delete booking "${booking.booking_reference}"?\n\nThis action cannot be undone and will remove it completely from the database.`
+    );
+    if (!confirmed) return;
+
+    setActionLoading('delete');
+    try {
+      const res = await fetch(`/api/admin/bookings/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to delete booking');
+      router.push('/admin/bookings');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to delete booking');
       setActionLoading('');
     }
   };
@@ -237,8 +256,20 @@ export default function AdminBookingDetailClient({ id }: Props) {
                 </button>
               )}
               {!['pending', 'confirmed'].includes(booking.status) && (
-                <p className="text-slate-500 text-xs text-center py-2">No actions available for {booking.status} bookings.</p>
+                <p className="text-slate-500 text-xs text-center py-2">No status actions available for {booking.status} bookings.</p>
               )}
+
+              <div className="pt-3 border-t border-brand-dark">
+                <button
+                  type="button"
+                  onClick={handleDeleteBooking}
+                  disabled={!!actionLoading}
+                  className="w-full flex items-center justify-center gap-2 border border-red-500/30 hover:bg-red-500/10 text-red-400 hover:text-red-300 px-4 py-2.5 rounded-xl text-xs font-bold transition-all disabled:opacity-60"
+                >
+                  {actionLoading === 'delete' ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
+                  Delete Booking Permanently
+                </button>
+              </div>
             </div>
           </div>
 

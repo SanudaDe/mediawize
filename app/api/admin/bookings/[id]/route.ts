@@ -224,3 +224,44 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const supabase = createServerClient();
+
+    // 1. Verify booking exists
+    const { data: booking, error: fetchError } = await supabase
+      .from('bookings')
+      .select('id, booking_reference')
+      .eq('id', params.id)
+      .single();
+
+    if (fetchError || !booking) {
+      return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
+    }
+
+    // 2. Delete related notifications & activity logs first (safeguard if foreign keys lack ON DELETE CASCADE)
+    await supabase.from('booking_notifications').delete().eq('booking_id', params.id);
+    await supabase.from('booking_activity').delete().eq('booking_id', params.id);
+
+    // 3. Delete booking record permanently from database
+    const { error: deleteError } = await supabase
+      .from('bookings')
+      .delete()
+      .eq('id', params.id);
+
+    if (deleteError) {
+      console.error('[Admin Booking Delete Error]:', deleteError);
+      return NextResponse.json({ error: deleteError.message }, { status: 500 });
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: `Booking ${booking.booking_reference} deleted successfully.`,
+    });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Internal error';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+

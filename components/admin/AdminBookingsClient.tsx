@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Booking } from '@/lib/booking-types';
 import { getStatusBadge, formatDateColombo, formatTimeSlot, formatLKR } from '@/lib/booking-utils';
-import { Loader2, Search, Filter, RefreshCw, AlertCircle } from 'lucide-react';
+import { Loader2, Search, Filter, RefreshCw, AlertCircle, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
 const STATUS_TABS = ['all', 'pending', 'confirmed', 'rejected', 'cancelled', 'completed'];
@@ -11,6 +11,7 @@ const STATUS_TABS = ['all', 'pending', 'confirmed', 'rejected', 'cancelled', 'co
 export default function AdminBookingsClient() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [activeStatus, setActiveStatus] = useState('all');
   const [search, setSearch] = useState('');
   const [total, setTotal] = useState(0);
@@ -30,6 +31,27 @@ export default function AdminBookingsClient() {
       setLoading(false);
     }
   }, []);
+
+  const handleDelete = async (id: string, ref: string) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to permanently delete booking "${ref}"?\n\nThis will completely remove it from the database.`
+    );
+    if (!confirmed) return;
+
+    setDeletingId(id);
+    try {
+      const res = await fetch(`/api/admin/bookings/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to delete booking');
+
+      setBookings(prev => prev.filter(b => b.id !== id));
+      setTotal(prev => Math.max(0, prev - 1));
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : 'Failed to delete booking');
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   useEffect(() => { load(activeStatus); }, [activeStatus, load]);
 
@@ -142,12 +164,27 @@ export default function AdminBookingsClient() {
                         </span>
                       </td>
                       <td className="px-5 py-4">
-                        <Link
-                          href={`/admin/bookings/${b.id}`}
-                          className="text-brand-red hover:underline text-xs font-semibold whitespace-nowrap"
-                        >
-                          View →
-                        </Link>
+                        <div className="flex items-center gap-3">
+                          <Link
+                            href={`/admin/bookings/${b.id}`}
+                            className="text-brand-red hover:underline text-xs font-semibold whitespace-nowrap"
+                          >
+                            View →
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(b.id, b.booking_reference)}
+                            disabled={deletingId === b.id}
+                            title="Delete booking permanently"
+                            className="text-slate-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-red-500/10 transition-colors disabled:opacity-50"
+                          >
+                            {deletingId === b.id ? (
+                              <Loader2 size={14} className="animate-spin text-red-500" />
+                            ) : (
+                              <Trash2 size={14} />
+                            )}
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
