@@ -123,9 +123,9 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="tel:+94777352700" className="hover:text-brand-red transition-colors text-white font-semibold inline-block">
+                <Link href="/book-studio" className="hover:text-brand-red transition-colors text-white font-semibold inline-block">
                   Book The Studio
-                </a>
+                </Link>
               </li>
               <li>
                 <Link href="/contact?type=inquiry" className="hover:text-brand-red transition-colors">

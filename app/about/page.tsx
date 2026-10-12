@@ -130,12 +130,12 @@ export default function AboutPage() {
                 <span>Let&apos;s Talk</span>
                 <ArrowUpRight className="w-4 h-4 text-slate-500" />
               </Link>
-              <a
-                href={STUDIO_TEL_HREF}
+              <Link
+                href="/book-studio"
                 className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-brand-red hover:bg-brand-red-hover text-white text-sm font-black tracking-wide transition-all shadow-red-glow active:scale-[0.98] w-full sm:w-auto text-center"
               >
                 <span>Book The Studio</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

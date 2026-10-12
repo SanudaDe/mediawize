@@ -168,9 +168,9 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                       </div>
                     </div>
 
-                    {/* Interactive Modern Action Button: Direct Phone Call */}
-                    <a
-                      href={STUDIO_TEL_HREF}
+                    {/* Interactive Modern Action Button: Book Studio Page */}
+                    <Link
+                      href="/book-studio"
                       className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
                         isPopular
                           ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
@@ -178,7 +178,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                       }`}
                     >
                       <span>Book The Studio</span>
-                    </a>
+                    </Link>
                   </div>
                 );
               })}
@@ -303,9 +303,9 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                       </div>
                     </div>
 
-                    {/* Interactive Modern Action Button: Direct Phone Call */}
-                    <a
-                      href={STUDIO_TEL_HREF}
+                    {/* Interactive Modern Action Button: Book Studio Page */}
+                    <Link
+                      href="/book-studio"
                       className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
                         isPopular
                           ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
@@ -313,7 +313,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                       }`}
                     >
                       <span>Book The Studio</span>
-                    </a>
+                    </Link>
                   </div>
                 );
               })}

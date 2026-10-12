@@ -157,12 +157,12 @@ export default function HomePage() {
                 <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
               </Link>
 
-              <a
-                href={STUDIO_TEL_HREF}
+              <Link
+                href="/book-studio"
                 className="group relative inline-flex items-center justify-center px-8 sm:px-12 py-3.5 sm:py-5 rounded-2xl bg-gradient-to-r from-brand-red via-[#f02d33] to-brand-red hover:from-[#f02d33] hover:to-brand-red text-white text-sm sm:text-base font-black tracking-wide transition-all duration-300 border border-red-400/30 shadow-[0_14px_34px_-6px_rgba(236,35,40,0.55),inset_0_1.5px_2px_rgba(255,255,255,0.4)] hover:shadow-[0_18px_42px_-4px_rgba(236,35,40,0.7)] active:scale-[0.98] w-full sm:w-auto text-center"
               >
                 <span>Book The Studio</span>
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -483,9 +483,9 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Interactive Modern Action Button: Direct Phone Call */}
-                  <a
-                    href={STUDIO_TEL_HREF}
+                  {/* Interactive Modern Action Button: Book Studio Page */}
+                  <Link
+                    href="/book-studio"
                     className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
                       isPopular
                         ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
@@ -493,7 +493,7 @@ export default function HomePage() {
                     }`}
                   >
                     <span>Book The Studio</span>
-                  </a>
+                  </Link>
                 </div>
               );
             })}
@@ -626,9 +626,9 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    {/* Interactive Modern Action Button: Direct Phone Call */}
-                    <a
-                      href={STUDIO_TEL_HREF}
+                    {/* Interactive Modern Action Button: Book Studio Page */}
+                    <Link
+                      href="/book-studio"
                       className={`group/btn w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center text-center transition-all duration-200 ${
                         isPopular
                           ? 'bg-brand-red hover:bg-brand-red-hover text-white shadow-md shadow-brand-red/25 hover:shadow-lg hover:shadow-brand-red/35 hover:-translate-y-0.5'
@@ -636,7 +636,7 @@ export default function HomePage() {
                       }`}
                     >
                       <span>Book The Studio</span>
-                    </a>
+                    </Link>
                   </div>
                 );
               })}
@@ -672,12 +672,12 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
-            <a
-              href={STUDIO_TEL_HREF}
+            <Link
+              href="/book-studio"
               className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow flex items-center justify-center"
             >
               <span>Book The Studio</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

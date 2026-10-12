@@ -82,13 +82,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
 
       {/* Card Footer CTA */}
       <div className="relative z-10 pt-6 border-t border-white/10 flex items-center justify-between">
-        <a
-          href="tel:+94777352700"
+        <Link
+          href="/book-studio"
           className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white group-hover:text-brand-red transition-colors"
         >
           <span>Book The Studio</span>
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-        </a>
+        </Link>
         <span className="text-[11px] text-slate-300 font-medium flex items-center gap-1">
           <Sparkles className="w-3 h-3 text-brand-red" />
           Pro Gear Included

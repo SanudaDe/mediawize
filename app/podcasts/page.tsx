@@ -170,12 +170,12 @@ export default function PodcastsPage() {
                   </div>
                 </div>
 
-                <a
-                  href={STUDIO_TEL_HREF}
+                <Link
+                  href="/book-studio"
                   className="w-full py-2.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider text-center transition-all shadow-sm hover:shadow-red-glow flex items-center justify-center"
                 >
                   <span>Book The Studio</span>
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -223,12 +223,12 @@ export default function PodcastsPage() {
           <p className="text-sm text-slate-400 mb-8">
             Book your session in our Colombo studio today or talk with our executive producer.
           </p>
-          <a
-            href={STUDIO_TEL_HREF}
+          <Link
+            href="/book-studio"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow text-center"
           >
             <span>Book The Studio</span>
-          </a>
+          </Link>
         </div>
       </section>
     </div>

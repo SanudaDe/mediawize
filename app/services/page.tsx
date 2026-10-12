@@ -480,12 +480,12 @@ export default function ServicesPage() {
             Every great brand has a story worth sharing. We help you turn it into professional podcasts, videos and content that people trust, remember and engage with.
           </p>
           <div className="flex items-center justify-center gap-4 flex-wrap">
-            <a
-              href={STUDIO_TEL_HREF}
+            <Link
+              href="/book-studio"
               className="px-8 py-3.5 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-black uppercase tracking-wider transition-all shadow-red-glow flex items-center justify-center text-center"
             >
               <span>Book The Studio</span>
-            </a>
+            </Link>
             <Link
               href="/contact?type=inquiry"
               className="px-8 py-3.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-black uppercase tracking-wider transition-all"
