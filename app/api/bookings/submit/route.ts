@@ -161,6 +161,9 @@ export async function POST(req: NextRequest) {
         bookingReference,
         clientName: client_name,
         clientEmail: client_email,
+        clientPhone: client_phone || undefined,
+        companyName: company_name || undefined,
+        durationHours: pkg.duration_hours,
         packageName: pkg.name,
         requestedDate: requested_date,
         requestedTime: requested_time_slot,
@@ -179,9 +182,13 @@ export async function POST(req: NextRequest) {
         bookingReference,
         clientName: client_name,
         clientEmail: client_email,
+        clientPhone: client_phone || undefined,
+        companyName: company_name || undefined,
+        durationHours: pkg.duration_hours,
         packageName: pkg.name,
         requestedDate: requested_date,
         requestedTime: requested_time_slot,
+        estimatedTotal: pkg.price_lkr,
       }).then(async (result) => {
         await supabase.from('booking_notifications').insert([{
           booking_id: booking.id,
