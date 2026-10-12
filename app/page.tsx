@@ -404,7 +404,7 @@ export default function HomePage() {
               return (
                 <div
                   key={pkg.id}
-                  className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left transition-all duration-300 ${
+                  className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:px-5 lg:py-6 xl:p-7 flex flex-col justify-between text-left transition-all duration-300 ${
                     isPopular
                       ? 'border-2 border-brand-red shadow-xl shadow-red-500/10 ring-4 ring-brand-red/5 hover:-translate-y-1'
                       : 'border border-slate-200 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1'
@@ -420,9 +420,9 @@ export default function HomePage() {
 
                   <div>
                     {/* Top Meta: Iconic Symbol + Duration Badge */}
-                    <div className="flex items-center justify-between gap-3 mb-6">
+                    <div className="flex items-center justify-between gap-3 mb-6 h-12">
                       <div
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-300 ${
+                        className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-colors duration-300 ${
                           isPopular
                             ? 'bg-brand-red text-white shadow-md shadow-brand-red/25'
                             : 'bg-slate-100 text-slate-800 group-hover:bg-brand-red group-hover:text-white'
@@ -431,7 +431,7 @@ export default function HomePage() {
                         <IconComponent className="w-5 h-5 stroke-[2.2]" />
                       </div>
 
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 tracking-tight">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 tracking-tight shrink-0 whitespace-nowrap">
                         <Clock className="w-3 h-3 text-slate-400" />
                         <span>{pkg.duration}</span>
                       </span>
@@ -441,21 +441,21 @@ export default function HomePage() {
                     <h3 className="text-lg font-black text-slate-900 tracking-tight mb-1">
                       {pkg.name}
                     </h3>
-                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 min-h-[32px] mb-5">
+                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 h-[38px] mb-5">
                       {pkg.bestFor}
                     </p>
 
                     {/* Price Block */}
-                    <div className="pt-4 pb-5 border-t border-b border-slate-100 mb-6">
-                      <div className="flex items-baseline gap-1.5">
-                        <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                    <div className="pt-4 pb-5 border-t border-b border-slate-100 mb-6 min-h-[88px] flex flex-col justify-center">
+                      <div className="flex items-baseline gap-1 sm:gap-1.5 whitespace-nowrap">
+                        <span className="text-xl sm:text-2xl lg:text-[20px] xl:text-[23px] 2xl:text-[26px] font-black text-slate-900 tracking-tight whitespace-nowrap">
                           {pkg.priceLKR}
                         </span>
                         {pkg.priceNum > 0 && (
-                          <span className="text-xs font-semibold text-slate-400">/ session</span>
+                          <span className="text-[11px] sm:text-xs font-semibold text-slate-400 whitespace-nowrap shrink-0">/ session</span>
                         )}
                       </div>
-                      <span className="text-[11px] font-medium text-slate-400 block mt-0.5">
+                      <span className="text-[11px] font-medium text-slate-400 block mt-1 whitespace-nowrap">
                         {pkg.priceNum > 0
                           ? 'Includes studio setup & technician'
                           : 'Tailored to your creative scope'}
@@ -521,7 +521,7 @@ export default function HomePage() {
                 return (
                   <div
                     key={sub.id}
-                    className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left transition-all duration-300 ${
+                    className={`group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 lg:px-5 lg:py-6 xl:p-7 flex flex-col justify-between text-left transition-all duration-300 ${
                       isPopular
                         ? 'border-2 border-brand-red shadow-xl shadow-red-500/10 ring-4 ring-brand-red/5 hover:-translate-y-1'
                         : 'border border-slate-200 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1'
@@ -537,9 +537,9 @@ export default function HomePage() {
 
                     <div>
                       {/* Top Meta: Iconic Symbol + Priority Badge */}
-                      <div className="flex items-center justify-between gap-3 mb-6">
+                      <div className="flex items-center justify-between gap-3 mb-6 h-12">
                         <div
-                          className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-300 ${
+                          className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-colors duration-300 ${
                             isPopular
                               ? 'bg-brand-red text-white shadow-md shadow-brand-red/25'
                               : 'bg-slate-100 text-slate-800 group-hover:bg-brand-red group-hover:text-white'
@@ -548,7 +548,7 @@ export default function HomePage() {
                           <IconComponent className="w-5 h-5 stroke-[2.2]" />
                         </div>
 
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 tracking-tight">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 tracking-tight shrink-0 whitespace-nowrap">
                           <ShieldCheck className="w-3 h-3 text-slate-400" />
                           <span>{sub.priority === 'Priority' ? 'Priority Access' : `${sub.priority} Priority`}</span>
                         </span>
@@ -558,19 +558,21 @@ export default function HomePage() {
                       <h3 className="text-lg font-black text-slate-900 tracking-tight mb-1">
                         {sub.name}
                       </h3>
-                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 min-h-[32px] mb-5">
+                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 h-[38px] mb-5">
                         {sub.recommendedFor}
                       </p>
 
                       {/* Price Block */}
-                      <div className="pt-4 pb-5 border-t border-b border-slate-100 mb-6">
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                      <div className="pt-4 pb-5 border-t border-b border-slate-100 mb-6 min-h-[88px] flex flex-col justify-center">
+                        <div className="flex items-baseline gap-1 sm:gap-1.5 whitespace-nowrap">
+                          <span className="text-xl sm:text-2xl lg:text-[19px] xl:text-[23px] 2xl:text-[26px] font-black text-slate-900 tracking-tight whitespace-nowrap">
                             {sub.monthlyFeeLKR}
                           </span>
-                          <span className="text-xs font-semibold text-slate-400">/ month</span>
+                          <span className="text-[11px] sm:text-xs font-semibold text-slate-400 whitespace-nowrap shrink-0">
+                            / month
+                          </span>
                         </div>
-                        <span className="text-[11px] font-medium text-slate-400 block mt-0.5">
+                        <span className="text-[11px] font-medium text-slate-400 block mt-1 whitespace-nowrap">
                           Monthly recurring membership
                         </span>
                       </div>
@@ -583,7 +585,7 @@ export default function HomePage() {
 
                         <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
                           <div className="flex items-center justify-between gap-3 mb-2.5">
-                            <div>
+                            <div className="min-h-[38px] flex flex-col justify-center">
                               <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-0.5">
                                 Monthly Allocation
                               </span>
