@@ -12,6 +12,7 @@ import {
   Youtube,
   Instagram,
   Linkedin,
+  Lock,
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -132,6 +133,12 @@ export const Footer: React.FC = () => {
                   Let&apos;s Talk
                 </Link>
               </li>
+              <li>
+                <Link href="/admin/login" className="hover:text-brand-red transition-colors inline-flex items-center gap-1.5 text-slate-400">
+                  <Lock size={12} className="text-brand-red" />
+                  <span>Admin Portal</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -169,6 +176,13 @@ export const Footer: React.FC = () => {
             </Link>
             <Link href="/terms#studio-rental" className="hover:text-slate-400 transition-colors">
               Terms of Studio Rental
+            </Link>
+            <Link
+              href="/admin/login"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:text-white bg-slate-800/80 hover:bg-slate-800 border border-slate-700/80 hover:border-brand-red/50 transition-all font-semibold"
+            >
+              <Lock size={12} className="text-brand-red" />
+              <span>Admin Login</span>
             </Link>
           </div>
         </div>
