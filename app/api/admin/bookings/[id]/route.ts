@@ -9,6 +9,8 @@ import {
   sendBookingRejectionEmail,
 } from '@/lib/email';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const supabase = createServerClient();
@@ -22,7 +24,16 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ booking: data });
+    return NextResponse.json(
+      { booking: data },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0, proxy-revalidate',
+          Pragma: 'no-cache',
+          Expires: '0',
+        },
+      }
+    );
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal error';
     return NextResponse.json({ error: message }, { status: 500 });

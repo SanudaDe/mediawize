@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   LayoutDashboard,
   CalendarDays,
@@ -25,6 +25,27 @@ export default function AdminSidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
+  const [pendingCount, setPendingCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchPending = () => {
+      fetch(`/api/admin/bookings?status=pending&limit=1&_t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+      })
+        .then(r => r.json())
+        .then(d => {
+          if (typeof d.total === 'number') {
+            setPendingCount(d.total);
+          }
+        })
+        .catch(() => {});
+    };
+
+    fetchPending();
+    const interval = setInterval(fetchPending, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   if (pathname === '/admin/login') {
     return null;
@@ -91,7 +112,12 @@ export default function AdminSidebar() {
               }`}
             >
               <Icon size={18} />
-              {label}
+              <span className="flex-1">{label}</span>
+              {label === 'Bookings' && pendingCount !== null && pendingCount > 0 && (
+                <span className="bg-amber-400 text-black text-[11px] font-black px-2 py-0.5 rounded-full leading-none">
+                  {pendingCount}
+                </span>
+              )}
             </Link>
           ))}
         </nav>

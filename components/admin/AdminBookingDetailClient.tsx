@@ -27,7 +27,10 @@ export default function AdminBookingDetailClient({ id }: Props) {
   const [newTime, setNewTime] = useState('');
 
   useEffect(() => {
-    fetch(`/api/admin/bookings/${id}`)
+    fetch(`/api/admin/bookings/${id}?_t=${Date.now()}`, {
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+    })
       .then(r => r.json())
       .then(data => {
         setBooking(data.booking);

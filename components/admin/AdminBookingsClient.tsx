@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { Booking } from '@/lib/booking-types';
 import { getStatusBadge, formatDateColombo, formatTimeSlot, formatLKR } from '@/lib/booking-utils';
-import { Loader2, Search, Filter, RefreshCw, AlertCircle, Trash2, CheckCircle, X } from 'lucide-react';
+import { getSupabaseClient } from '@/lib/supabaseClient';
+import { Loader2, Search, Filter, RefreshCw, AlertCircle, Trash2, CheckCircle, X, Bell, Radio } from 'lucide-react';
 import Link from 'next/link';
 
 const STATUS_TABS = ['all', 'pending', 'confirmed', 'rejected', 'cancelled', 'completed'];
@@ -11,26 +12,64 @@ const STATUS_TABS = ['all', 'pending', 'confirmed', 'rejected', 'cancelled', 'co
 export default function AdminBookingsClient() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [approvingId, setApprovingId] = useState<string | null>(null);
   const [feedbackMsg, setFeedbackMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [newBookingAlert, setNewBookingAlert] = useState<{ name: string; ref: string; id: string } | null>(null);
   const [activeStatus, setActiveStatus] = useState('all');
   const [search, setSearch] = useState('');
   const [total, setTotal] = useState(0);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
-  const load = useCallback(async (status: string) => {
-    setLoading(true);
+  const seenIdsRef = useRef<Set<string>>(new Set());
+  const isFirstLoadRef = useRef(true);
+  const activeStatusRef = useRef(activeStatus);
+  activeStatusRef.current = activeStatus;
+
+  const load = useCallback(async (status: string, silent = false) => {
+    if (!silent) {
+      setLoading(true);
+    } else {
+      setIsRefreshing(true);
+    }
+
     try {
-      const params = new URLSearchParams({ limit: '100' });
+      const params = new URLSearchParams({ limit: '100', _t: String(Date.now()) });
       if (status !== 'all') params.set('status', status);
-      const res = await fetch(`/api/admin/bookings?${params}`);
+
+      const res = await fetch(`/api/admin/bookings?${params}`, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+      });
       const data = await res.json();
-      setBookings(data.bookings ?? []);
-      setTotal(data.total ?? 0);
+      const incoming: Booking[] = data.bookings ?? [];
+
+      // Check for newly arrived bookings if this was a silent background refresh
+      if (!isFirstLoadRef.current && seenIdsRef.current.size > 0) {
+        const brandNew = incoming.filter(b => !seenIdsRef.current.has(b.id));
+        if (brandNew.length > 0) {
+          const newest = brandNew[0];
+          setNewBookingAlert({
+            name: newest.client_name,
+            ref: newest.booking_reference,
+            id: newest.id,
+          });
+        }
+      }
+
+      // Update seen IDs
+      seenIdsRef.current = new Set(incoming.map(b => b.id));
+      isFirstLoadRef.current = false;
+
+      setBookings(incoming);
+      setTotal(data.total ?? incoming.length);
+      setLastUpdated(new Date());
     } catch (err) {
-      console.error(err);
+      console.error('[AdminBookings] load error:', err);
     } finally {
       setLoading(false);
+      setIsRefreshing(false);
     }
   }, []);
 
@@ -56,6 +95,9 @@ export default function AdminBookingsClient() {
         type: 'success',
         text: `Booking ${ref} confirmed successfully! The user has been notified via email.`,
       });
+      if (newBookingAlert?.id === id) {
+        setNewBookingAlert(null);
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Failed to approve booking';
       setFeedbackMsg({ type: 'error', text: msg });
@@ -77,7 +119,11 @@ export default function AdminBookingsClient() {
       if (!res.ok) throw new Error(data.error || 'Failed to delete booking');
 
       setBookings(prev => prev.filter(b => b.id !== id));
+      seenIdsRef.current.delete(id);
       setTotal(prev => Math.max(0, prev - 1));
+      if (newBookingAlert?.id === id) {
+        setNewBookingAlert(null);
+      }
     } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Failed to delete booking');
     } finally {
@@ -85,7 +131,56 @@ export default function AdminBookingsClient() {
     }
   };
 
-  useEffect(() => { load(activeStatus); }, [activeStatus, load]);
+  // Initial load when tab status changes
+  useEffect(() => {
+    load(activeStatus, false);
+  }, [activeStatus, load]);
+
+  // Real-time synchronization: Auto-polling interval + window focus + document visibility
+  useEffect(() => {
+    const interval = setInterval(() => {
+      load(activeStatusRef.current, true);
+    }, 8000); // Poll every 8s silently
+
+    const handleFocusOrVisible = () => {
+      if (document.visibilityState === 'visible') {
+        load(activeStatusRef.current, true);
+      }
+    };
+
+    window.addEventListener('focus', handleFocusOrVisible);
+    document.addEventListener('visibilitychange', handleFocusOrVisible);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('focus', handleFocusOrVisible);
+      document.removeEventListener('visibilitychange', handleFocusOrVisible);
+    };
+  }, [load]);
+
+  // Supabase Realtime channel subscription for instant pushes
+  useEffect(() => {
+    try {
+      const supabase = getSupabaseClient();
+      const channel = supabase
+        .channel('admin_bookings_realtime')
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'bookings' },
+          payload => {
+            console.log('[AdminBookings] Realtime change detected:', payload.eventType);
+            load(activeStatusRef.current, true);
+          }
+        )
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    } catch (err) {
+      console.warn('[AdminBookings] Supabase Realtime subscription not enabled:', err);
+    }
+  }, [load]);
 
   const filtered = bookings.filter(b =>
     !search ||
@@ -96,18 +191,78 @@ export default function AdminBookingsClient() {
 
   return (
     <div className="p-6 lg:p-8 max-w-7xl">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-black text-white">Bookings</h1>
-          <p className="text-slate-400 text-sm mt-1">{total} total booking{total !== 1 ? 's' : ''}</p>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-black text-white">Bookings</h1>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Live Sync
+            </span>
+          </div>
+          <p className="text-slate-400 text-sm mt-1">
+            {total} total booking{total !== 1 ? 's' : ''}
+            {lastUpdated && (
+              <span className="text-slate-500 ml-2">
+                • Synced {lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+              </span>
+            )}
+          </p>
         </div>
         <button
-          onClick={() => load(activeStatus)}
-          className="flex items-center gap-2 text-slate-400 hover:text-white text-sm border border-brand-charcoal px-3 py-2 rounded-lg transition-colors"
+          onClick={() => load(activeStatus, false)}
+          disabled={loading || isRefreshing}
+          className="flex items-center justify-center gap-2 text-slate-300 hover:text-white text-sm bg-brand-charcoal hover:bg-brand-charcoal/80 border border-brand-charcoal px-4 py-2 rounded-xl transition-all disabled:opacity-60"
         >
-          <RefreshCw size={14} /> Refresh
+          <RefreshCw size={14} className={loading || isRefreshing ? 'animate-spin text-brand-red' : ''} />
+          <span>{loading || isRefreshing ? 'Refreshing…' : 'Refresh'}</span>
         </button>
       </div>
+
+      {/* Realtime Alert for New Incoming Booking */}
+      {newBookingAlert && (
+        <div className="mb-6 p-4 rounded-xl bg-gradient-to-r from-brand-red/20 via-amber-500/10 to-transparent border border-brand-red/40 flex items-center justify-between text-sm animate-bounce-short">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-brand-red flex items-center justify-center text-white flex-shrink-0 animate-pulse">
+              <Bell size={16} />
+            </div>
+            <div>
+              <div className="font-bold text-white flex items-center gap-2">
+                <span>New booking received!</span>
+                <span className="font-mono text-xs text-brand-red bg-brand-red/10 px-2 py-0.5 rounded border border-brand-red/30">
+                  {newBookingAlert.ref}
+                </span>
+              </div>
+              <p className="text-xs text-slate-300 mt-0.5">
+                From <span className="font-semibold text-white">{newBookingAlert.name}</span> awaiting admin review.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 ml-4">
+            <button
+              onClick={() => handleQuickApprove(newBookingAlert.id, newBookingAlert.ref)}
+              disabled={approvingId === newBookingAlert.id}
+              className="inline-flex items-center gap-1.5 bg-green-600 hover:bg-green-500 text-white font-bold text-xs px-3 py-1.5 rounded-lg transition-colors shadow-sm"
+            >
+              <CheckCircle size={13} />
+              <span>Approve Now</span>
+            </button>
+            <Link
+              href={`/admin/bookings/${newBookingAlert.id}`}
+              className="text-xs text-slate-300 hover:text-white bg-brand-charcoal px-3 py-1.5 rounded-lg border border-brand-charcoal transition-colors font-medium"
+            >
+              View
+            </Link>
+            <button
+              onClick={() => setNewBookingAlert(null)}
+              className="text-slate-400 hover:text-white p-1 ml-1"
+              title="Dismiss"
+            >
+              <X size={16} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Tabs */}
       <div className="flex gap-2 mb-5 overflow-x-auto pb-1">
