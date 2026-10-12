@@ -4,6 +4,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@/lib/supabaseClient';
 import { colomboToUTC } from '@/lib/booking-utils';
+import { ADMIN_COOKIE_NAME, verifyAdminToken } from '@/lib/admin-auth';
 import {
   sendBookingConfirmationEmail,
   sendBookingRejectionEmail,
@@ -11,8 +12,14 @@ import {
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   try {
+    const token = req.cookies.get(ADMIN_COOKIE_NAME)?.value;
+    const isAuthenticated = await verifyAdminToken(token);
+    if (!isAuthenticated) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const supabase = createServerClient();
     const { data, error } = await supabase
       .from('bookings')
@@ -42,6 +49,12 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   try {
+    const token = req.cookies.get(ADMIN_COOKIE_NAME)?.value;
+    const isAuthenticated = await verifyAdminToken(token);
+    if (!isAuthenticated) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const body = await req.json();
     const { action, admin_notes, rejection_reason, new_date, new_time } = body;
 
@@ -268,8 +281,14 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   }
 }
 
-export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   try {
+    const token = req.cookies.get(ADMIN_COOKIE_NAME)?.value;
+    const isAuthenticated = await verifyAdminToken(token);
+    if (!isAuthenticated) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const supabase = createServerClient();
 
     // 1. Verify booking exists

@@ -30,8 +30,8 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Protect all /admin/* pages
-  if (pathname.startsWith('/admin')) {
+  // Protect all /admin and /admin/* pages
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
     if (!isAuthenticated) {
       const loginUrl = new URL('/admin/login', req.url);
       return NextResponse.redirect(loginUrl);
@@ -43,5 +43,10 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/api/admin/:path*'],
+  matcher: [
+    '/admin',
+    '/admin/:path*',
+    '/api/admin',
+    '/api/admin/:path*',
+  ],
 };

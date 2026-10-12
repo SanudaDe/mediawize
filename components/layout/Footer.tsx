@@ -12,6 +12,7 @@ import {
   Youtube,
   Instagram,
   Linkedin,
+  Lock,
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -169,6 +170,15 @@ export const Footer: React.FC = () => {
             </Link>
             <Link href="/terms#studio-rental" className="hover:text-slate-400 transition-colors">
               Terms of Studio Rental
+            </Link>
+            <Link
+              href="/admin/login"
+              title="Admin Access"
+              aria-label="Admin Access"
+              className="text-slate-600 hover:text-slate-400 transition-colors opacity-40 hover:opacity-100 flex items-center gap-1 text-[11px]"
+            >
+              <Lock size={10} className="w-2.5 h-2.5" />
+              <span>Admin</span>
             </Link>
           </div>
         </div>
