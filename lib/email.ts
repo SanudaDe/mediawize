@@ -1159,7 +1159,7 @@ function renderBookingEmailTemplate(opt: BookingEmailTemplateOptions): string {
                         font-weight:500;
                         color:#777A81;
                       ">
-                    Notice / Reason
+                    Rejection Reason
                   </td>
 
                   <td class="mobile-value"
@@ -1582,11 +1582,11 @@ export async function sendBookingRejectionEmail(data: BookingRejectionEmailData)
   const submittedAt = `${dateStr} · ${timeStr}`;
 
   const html = renderBookingEmailTemplate({
-    statusBadgeText: 'NOT CONFIRMED',
+    statusBadgeText: 'REJECTED',
     statusBadgeBg: '#FDEBEC',
     statusBadgeColor: '#C9181D',
-    emailHeadline: 'Studio Booking Update',
-    introHtml: `Hi <strong style="color:#111216;">${escapeHtml(data.clientName)}</strong>, thank you for your interest in WIZEtv Studios. Unfortunately, our studio is unavailable for your requested time slot.`,
+    emailHeadline: 'Booking Request Rejected',
+    introHtml: `Hi <strong style="color:#111216;">${escapeHtml(data.clientName)}</strong>, thank you for your interest in WIZEtv Studios. Unfortunately, your booking request has been <strong style="color:#C9181D;">rejected</strong> and our studio is unavailable for your requested time slot.`,
     packageName: data.packageName,
     estimatedTotal: 0,
     bookingReference: data.bookingReference,
@@ -1602,17 +1602,17 @@ export async function sendBookingRejectionEmail(data: BookingRejectionEmailData)
     guidanceAccentColor: '#C9181D',
     guidanceHtml: `
       <p style="margin:0 0 10px 0;">We encourage you to submit a request for an alternate date or time slot that fits your schedule.</p>
-      <p style="margin:0;">Our studio team is also available over the phone or email to help identify the best open recording slots for your project.</p>
+      <p style="margin:0;">Our studio team is also available over the phone at <strong>077 779 4600</strong> or email at <strong>bookings@wize.tv</strong> to identify the best open recording slots for your project.</p>
     `,
     actionTitle: 'CONTACT STUDIO MANAGEMENT',
     submittedAt,
     currentYear: now.getFullYear().toString(),
     logoUrl,
-    preheaderText: `Update regarding your WIZEtv Studios booking request (${data.bookingReference}).`,
+    preheaderText: `Your WIZEtv Studios booking request (${data.bookingReference}) has been rejected.`,
     footerNotice: 'Automated notification from the WIZEtv Studios booking engine.',
   });
 
-  return sendEmail(data.clientEmail, `Studio Booking Update — ${data.bookingReference}`, html);
+  return sendEmail(data.clientEmail, `Booking Request Rejected ❌ — ${data.bookingReference}`, html);
 }
 
 export async function sendAdminNotificationEmail(data: AdminNotificationData): Promise<EmailResult> {

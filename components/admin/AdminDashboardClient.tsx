@@ -124,6 +124,47 @@ export default function AdminDashboardClient() {
     }
   };
 
+  const [rejectingId, setRejectingId] = useState<string | null>(null);
+
+  const handleQuickReject = async (id: string, ref: string) => {
+    const reason = window.prompt(
+      `Reject booking "${ref}"?\n\nEnter an optional reason to send in the client's rejection email:`,
+      'Studio unavailable for requested date/time.'
+    );
+    if (reason === null) return;
+
+    setRejectingId(id);
+    setFeedbackMsg(null);
+    try {
+      const res = await fetch(`/api/admin/bookings/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'reject', rejection_reason: reason || undefined }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to reject booking');
+
+      setBookings(prev => prev.map(b => (b.id === id ? { ...b, status: 'rejected', rejection_reason: reason } : b)));
+      setStats(prev => ({
+        ...prev,
+        pending: Math.max(0, prev.pending - 1),
+        rejected: prev.rejected + 1,
+      }));
+      setFeedbackMsg({
+        type: 'success',
+        text: `Booking ${ref} rejected. Rejection email sent to client.`,
+      });
+      if (newBookingAlert?.id === id) {
+        setNewBookingAlert(null);
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to reject booking';
+      setFeedbackMsg({ type: 'error', text: msg });
+    } finally {
+      setRejectingId(null);
+    }
+  };
+
   // Initial load
   useEffect(() => {
     load(false);
@@ -335,20 +376,36 @@ export default function AdminDashboardClient() {
                   </div>
                   <div className="flex items-center gap-2.5">
                     {b.status === 'pending' && (
-                      <button
-                        type="button"
-                        onClick={() => handleQuickApprove(b.id, b.booking_reference)}
-                        disabled={approvingId === b.id}
-                        title="Approve booking and notify client"
-                        className="inline-flex items-center gap-1.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white border border-green-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition-all disabled:opacity-50"
-                      >
-                        {approvingId === b.id ? (
-                          <Loader2 size={12} className="animate-spin text-green-400" />
-                        ) : (
-                          <CheckCircle size={12} />
-                        )}
-                        <span>Approve</span>
-                      </button>
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => handleQuickApprove(b.id, b.booking_reference)}
+                          disabled={approvingId === b.id || rejectingId === b.id}
+                          title="Approve booking and notify client"
+                          className="inline-flex items-center gap-1.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white border border-green-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition-all disabled:opacity-50"
+                        >
+                          {approvingId === b.id ? (
+                            <Loader2 size={12} className="animate-spin text-green-400" />
+                          ) : (
+                            <CheckCircle size={12} />
+                          )}
+                          <span>Approve</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleQuickReject(b.id, b.booking_reference)}
+                          disabled={approvingId === b.id || rejectingId === b.id}
+                          title="Reject booking and notify client"
+                          className="inline-flex items-center gap-1.5 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition-all disabled:opacity-50"
+                        >
+                          {rejectingId === b.id ? (
+                            <Loader2 size={12} className="animate-spin text-red-400" />
+                          ) : (
+                            <XCircle size={12} />
+                          )}
+                          <span>Reject</span>
+                        </button>
+                      </>
                     )}
                     <Link
                       href={`/admin/bookings/${b.id}`}

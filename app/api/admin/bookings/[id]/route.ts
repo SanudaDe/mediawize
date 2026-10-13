@@ -260,7 +260,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       .from('bookings')
       .update(updateData)
       .eq('id', params.id)
-      .select()
+      .select(`*, studio_packages(*)`)
       .single();
 
     if (updateError) {

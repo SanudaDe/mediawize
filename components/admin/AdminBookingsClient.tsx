@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { Booking } from '@/lib/booking-types';
 import { getStatusBadge, formatDateColombo, formatTimeSlot, formatLKR } from '@/lib/booking-utils';
 import { getSupabaseClient } from '@/lib/supabaseClient';
-import { Loader2, Search, Filter, RefreshCw, AlertCircle, Trash2, CheckCircle, X, Bell, Radio } from 'lucide-react';
+import { Loader2, Search, Filter, RefreshCw, AlertCircle, Trash2, CheckCircle, XCircle, X, Bell, Radio } from 'lucide-react';
 import Link from 'next/link';
 
 const STATUS_TABS = ['all', 'pending', 'confirmed', 'rejected', 'cancelled', 'completed'];
@@ -103,6 +103,42 @@ export default function AdminBookingsClient() {
       setFeedbackMsg({ type: 'error', text: msg });
     } finally {
       setApprovingId(null);
+    }
+  };
+
+  const [rejectingId, setRejectingId] = useState<string | null>(null);
+
+  const handleQuickReject = async (id: string, ref: string) => {
+    const reason = window.prompt(
+      `Reject booking "${ref}"?\n\nEnter an optional reason to send in the client's rejection email:`,
+      'Studio unavailable for requested date/time.'
+    );
+    if (reason === null) return;
+
+    setRejectingId(id);
+    setFeedbackMsg(null);
+    try {
+      const res = await fetch(`/api/admin/bookings/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'reject', rejection_reason: reason || undefined }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to reject booking');
+
+      setBookings(prev => prev.map(b => (b.id === id ? { ...b, status: 'rejected', rejection_reason: reason } : b)));
+      setFeedbackMsg({
+        type: 'success',
+        text: `Booking ${ref} rejected. Rejection email sent to client.`,
+      });
+      if (newBookingAlert?.id === id) {
+        setNewBookingAlert(null);
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to reject booking';
+      setFeedbackMsg({ type: 'error', text: msg });
+    } finally {
+      setRejectingId(null);
     }
   };
 
@@ -379,20 +415,36 @@ export default function AdminBookingsClient() {
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-2.5">
                           {b.status === 'pending' && (
-                            <button
-                              type="button"
-                              onClick={() => handleQuickApprove(b.id, b.booking_reference)}
-                              disabled={approvingId === b.id}
-                              title="Approve booking and send confirmation email to client"
-                              className="inline-flex items-center gap-1.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white border border-green-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition-all disabled:opacity-50"
-                            >
-                              {approvingId === b.id ? (
-                                <Loader2 size={13} className="animate-spin text-green-400" />
-                              ) : (
-                                <CheckCircle size={13} />
-                              )}
-                              <span>Approve</span>
-                            </button>
+                            <>
+                              <button
+                                type="button"
+                                onClick={() => handleQuickApprove(b.id, b.booking_reference)}
+                                disabled={approvingId === b.id || rejectingId === b.id}
+                                title="Approve booking and send confirmation email to client"
+                                className="inline-flex items-center gap-1.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white border border-green-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition-all disabled:opacity-50"
+                              >
+                                {approvingId === b.id ? (
+                                  <Loader2 size={13} className="animate-spin text-green-400" />
+                                ) : (
+                                  <CheckCircle size={13} />
+                                )}
+                                <span>Approve</span>
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleQuickReject(b.id, b.booking_reference)}
+                                disabled={approvingId === b.id || rejectingId === b.id}
+                                title="Reject booking and send rejection email to client"
+                                className="inline-flex items-center gap-1.5 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition-all disabled:opacity-50"
+                              >
+                                {rejectingId === b.id ? (
+                                  <Loader2 size={13} className="animate-spin text-red-400" />
+                                ) : (
+                                  <XCircle size={13} />
+                                )}
+                                <span>Reject</span>
+                              </button>
+                            </>
                           )}
                           <Link
                             href={`/admin/bookings/${b.id}`}

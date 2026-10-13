@@ -141,6 +141,33 @@ export default function AdminBookingDetailClient({ id }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left — booking info */}
         <div className="lg:col-span-2 space-y-5">
+          {/* Rejection Alert Banner */}
+          {booking.status === 'rejected' && (
+            <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-5">
+              <div className="flex items-start gap-3">
+                <XCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <h4 className="text-red-300 font-bold text-sm">Booking Request Rejected</h4>
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-500/20 text-red-400 uppercase tracking-wider">
+                      Rejected
+                    </span>
+                  </div>
+                  <p className="text-slate-300 text-xs leading-relaxed">
+                    This booking request has been rejected. An official rejection notification email was sent to{' '}
+                    <strong className="text-white">{booking.client_email}</strong>.
+                  </p>
+                  {booking.rejection_reason && (
+                    <div className="mt-3 bg-red-950/40 border border-red-500/20 rounded-xl p-3 text-xs text-red-200">
+                      <span className="font-bold text-red-400 block mb-1">Rejection Reason:</span>
+                      <p className="text-slate-200 italic">&ldquo;{booking.rejection_reason}&rdquo;</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Client details */}
           <div className="bg-brand-charcoal rounded-2xl border border-brand-charcoal p-6">
             <h3 className="text-white font-bold mb-4 flex items-center gap-2"><User size={16} className="text-brand-red" /> Client Information</h3>
@@ -264,7 +291,17 @@ export default function AdminBookingDetailClient({ id }: Props) {
                   Cancel Booking
                 </button>
               )}
-              {!['pending', 'confirmed'].includes(booking.status) && (
+              {booking.status === 'rejected' && (
+                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-red-400 uppercase tracking-wider mb-1">
+                    <XCircle size={14} /> Request Rejected
+                  </span>
+                  <p className="text-slate-400 text-xs">
+                    This booking has been rejected and marked inactive.
+                  </p>
+                </div>
+              )}
+              {!['pending', 'confirmed', 'rejected'].includes(booking.status) && (
                 <p className="text-slate-500 text-xs text-center py-2">No status actions available for {booking.status} bookings.</p>
               )}
 
@@ -308,6 +345,9 @@ export default function AdminBookingDetailClient({ id }: Props) {
                   <div>
                     <div className="font-semibold text-red-300">Rejected</div>
                     <div>{new Date(booking.rejected_at).toLocaleString('en-LK', { timeZone: 'Asia/Colombo', dateStyle: 'short', timeStyle: 'short' })}</div>
+                    {booking.rejection_reason && (
+                      <div className="text-red-400/90 mt-1 italic">&ldquo;{booking.rejection_reason}&rdquo;</div>
+                    )}
                   </div>
                 </div>
               )}
