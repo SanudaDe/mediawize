@@ -116,7 +116,7 @@ export default function PrivacyPolicyPage() {
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
             <p className="font-bold text-slate-900">WIZEtv Studios</p>
             <p className="text-slate-600">17, Kirimandala Mawatha, Nawala, Sri Lanka</p>
-            <p className="text-slate-600">Email: <a href="mailto:info@wize.tv" className="text-brand-red font-semibold hover:underline">info@wize.tv</a> | Phone: <a href="tel:+94777794600" className="text-brand-red font-semibold hover:underline">077 779 4600</a></p>
+            <p className="text-slate-600">Email: <a href="mailto:bookings@wize.tv" className="text-brand-red font-semibold hover:underline">bookings@wize.tv</a> | Phone: <a href="tel:+94777794600" className="text-brand-red font-semibold hover:underline">077 779 4600</a></p>
           </div>
         </section>
       </main>

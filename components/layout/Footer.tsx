@@ -150,9 +150,9 @@ export const Footer: React.FC = () => {
                 <Phone className="w-4 h-4 text-brand-red shrink-0" />
                 <span>077 779 4600</span>
               </a>
-              <a href="mailto:info@wize.tv" className="flex items-center gap-2 hover:text-brand-red transition-colors">
+              <a href="mailto:bookings@wize.tv" className="flex items-center gap-2 hover:text-brand-red transition-colors">
                 <Mail className="w-4 h-4 text-brand-red shrink-0" />
-                <span>info@wize.tv</span>
+                <span>bookings@wize.tv</span>
               </a>
             </div>
           </div>

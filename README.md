@@ -111,5 +111,5 @@ npm run start
 ## 📍 Studio Location
 - **Address**: 17, Kirimandala Mawatha, Nawala / Colombo, Sri Lanka
 - **Hotline**: 077 779 4600
-- **Email**: `info@wize.tv`
+- **Email**: `bookings@wize.tv`
 - **Hours**: Monday – Sunday: 8:00 AM – 10:00 PM (By Appointment)

@@ -52,7 +52,7 @@ interface EmailResult {
 }
 
 const FROM_EMAIL = process.env.BOOKING_FROM_EMAIL ?? 'bookings@wize.tv';
-const ADMIN_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL ?? 'info@wize.tv';
+const ADMIN_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL ?? 'bookings@wize.tv';
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
 async function sendEmail(to: string, subject: string, html: string, replyTo?: string): Promise<EmailResult> {
@@ -188,7 +188,7 @@ function emailWrapper(content: string): string {
   </div>
   <div class="footer">
     <p>WIZEtv Studios · 17, Kirimandala Mawatha, Nawala, Sri Lanka</p>
-    <p><a href="https://wize.tv">wize.tv</a> · <a href="mailto:info@wize.tv">info@wize.tv</a></p>
+    <p><a href="https://wize.tv">wize.tv</a> · <a href="mailto:bookings@wize.tv">bookings@wize.tv</a></p>
     <p style="margin-top:12px;color:#334155;font-size:11px;">This is an automated message from WIZEtv booking system.</p>
   </div>
 </div>

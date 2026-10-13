@@ -204,10 +204,10 @@ export default function ContactPage() {
                   Email Inquiries:
                 </span>
                 <a
-                  href="mailto:info@wize.tv"
+                  href="mailto:bookings@wize.tv"
                   className="font-bold text-brand-red hover:underline text-sm block"
                 >
-                  info@wize.tv
+                  bookings@wize.tv
                 </a>
               </div>
             </div>

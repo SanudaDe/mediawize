@@ -1496,7 +1496,7 @@ export default function TermsPage() {
                   </p>
                   <p className="text-xs text-slate-500 mt-2">
                     17, Kirimandala Mawatha, Nawala, Sri Lanka <br />
-                    Tel: 077 779 4600 | Email: info@wize.tv
+                    Tel: 077 779 4600 | Email: bookings@wize.tv
                   </p>
                 </div>
               </div>

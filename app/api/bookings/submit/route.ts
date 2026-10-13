@@ -193,7 +193,7 @@ export async function POST(req: NextRequest) {
         await supabase.from('booking_notifications').insert([{
           booking_id: booking.id,
           type: 'admin_alert',
-          recipient_email: process.env.ADMIN_NOTIFICATION_EMAIL || 'info@wize.tv',
+          recipient_email: process.env.ADMIN_NOTIFICATION_EMAIL || 'bookings@wize.tv',
           status: result.success ? 'sent' : 'failed',
           error_message: result.error || null,
           sent_at: result.success ? new Date().toISOString() : null,
