@@ -1496,7 +1496,7 @@ export default function TermsPage() {
                   </p>
                   <p className="text-xs text-slate-500 mt-2">
                     17, Kirimandala Mawatha, Nawala, Sri Lanka <br />
-                    Tel: +94 77 735 2700 | Email: info@wize.tv
+                    Tel: 077 779 4600 | Email: info@wize.tv
                   </p>
                 </div>
               </div>
@@ -1516,11 +1516,11 @@ export default function TermsPage() {
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <a
-              href="tel:+94777352700"
+              href="tel:+94777794600"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-all border border-slate-700"
             >
               <Phone className="w-4 h-4 text-brand-red" />
-              <span>+94 77 735 2700</span>
+              <span>077 779 4600</span>
             </a>
             <Link
               href="/contact?type=inquiry"

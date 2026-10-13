@@ -95,11 +95,11 @@ export default function StepTime({ selectedDate, packageId, selectedTime, onSele
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a
-                  href="tel:+94777352700"
+                  href="tel:+94777794600"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-hover text-white px-6 py-3.5 rounded-xl font-bold transition-all shadow-md hover:shadow-brand-red/30 text-sm"
                 >
                   <Phone size={16} />
-                  <span>Call Us: +94 77 735 2700</span>
+                  <span>Call Us: 077 779 4600</span>
                 </a>
                 <button
                   onClick={onBack}

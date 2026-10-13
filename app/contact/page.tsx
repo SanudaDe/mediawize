@@ -19,8 +19,8 @@ import {
 } from 'lucide-react';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 
-const STUDIO_PHONE = '077 735 2700';
-const STUDIO_TEL_HREF = 'tel:+94777352700';
+const STUDIO_PHONE = '077 779 4600';
+const STUDIO_TEL_HREF = 'tel:+94777794600';
 
 export default function ContactPage() {
   return (
@@ -92,7 +92,7 @@ export default function ContactPage() {
                   {[
                     {
                       number: '01',
-                      title: 'Call 077 735 2700',
+                      title: 'Call 077 779 4600',
                       desc: 'Direct hotline to our studio coordinator to check open dates and time slots.',
                       icon: PhoneCall,
                     },

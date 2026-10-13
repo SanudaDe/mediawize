@@ -35,8 +35,8 @@ import { STUDIO_PACKAGES_DATA, SUBSCRIPTION_PACKAGES_DATA, SubscriptionPackageIt
 import { AdditionalServicesDropdown } from '@/components/ui/AdditionalServicesDropdown';
 import { SubscriptionInquiryModal } from '@/components/ui/SubscriptionInquiryModal';
 
-const STUDIO_PHONE = '077 735 2700';
-const STUDIO_TEL_HREF = 'tel:+94777352700';
+const STUDIO_PHONE = '077 779 4600';
+const STUDIO_TEL_HREF = 'tel:+94777794600';
 
 const DISCIPLINES = ['Podcasting', 'Production', 'Storytelling', 'Editing'];
 

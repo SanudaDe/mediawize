@@ -27,7 +27,7 @@ import {
 import { AdditionalServicesDropdown } from '@/components/ui/AdditionalServicesDropdown';
 import { SubscriptionInquiryModal } from '@/components/ui/SubscriptionInquiryModal';
 
-const STUDIO_TEL_HREF = 'tel:+94777352700';
+const STUDIO_TEL_HREF = 'tel:+94777794600';
 
 const STUDIO_ICONS: Record<string, React.ElementType> = {
   'audio-only-podcast': Mic,

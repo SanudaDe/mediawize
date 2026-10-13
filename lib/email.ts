@@ -264,7 +264,7 @@ function renderBookingEmailTemplate(opt: BookingEmailTemplateOptions): string {
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td align="center" bgcolor="#EC2328" style="background-color:#EC2328; border-radius:9px;">
-            <a href="tel:+94777352700" class="mobile-button" style="display:block; padding:15px 16px; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:13px; line-height:18px; font-weight:700; color:#FFFFFF; text-decoration:none;">
+            <a href="tel:+94777794600" class="mobile-button" style="display:block; padding:15px 16px; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:13px; line-height:18px; font-weight:700; color:#FFFFFF; text-decoration:none;">
               Call Studio Hotline
             </a>
           </td>
@@ -1717,7 +1717,7 @@ function renderInquiryEmailTemplate(opt: InquiryEmailTemplateOptions): string {
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td align="center" bgcolor="#EC2328" style="background-color:#EC2328; border-radius:9px;">
-              <a href="tel:+94777352700" class="mobile-button" style="display:block; padding:15px 16px; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:13px; line-height:18px; font-weight:700; color:#FFFFFF; text-decoration:none;">
+              <a href="tel:+94777794600" class="mobile-button" style="display:block; padding:15px 16px; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:13px; line-height:18px; font-weight:700; color:#FFFFFF; text-decoration:none;">
                 Call Studio Hotline
               </a>
             </td>

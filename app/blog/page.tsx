@@ -24,8 +24,8 @@ const VIDEO_CATEGORIES = [
   'Studio Showcase',
 ];
 
-const STUDIO_PHONE = '077 735 2700';
-const STUDIO_TEL_HREF = 'tel:+94777352700';
+const STUDIO_PHONE = '077 779 4600';
+const STUDIO_TEL_HREF = 'tel:+94777794600';
 
 export default function BlogPage() {
   const [activeVideoCategory, setActiveVideoCategory] = useState('All Videos');

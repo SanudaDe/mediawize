@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { Target, Compass, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 
-const STUDIO_TEL_HREF = 'tel:+94777352700';
-const STUDIO_PHONE = '077 735 2700';
+const STUDIO_TEL_HREF = 'tel:+94777794600';
+const STUDIO_PHONE = '077 779 4600';
 
 export default function AboutPage() {
   return (

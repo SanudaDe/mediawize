@@ -146,9 +146,9 @@ export const Footer: React.FC = () => {
                 <MapPin className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
                 <span>17, Kirimandala Mawatha, Nawala, Sri Lanka</span>
               </div>
-              <a href="tel:+94777352700" className="flex items-center gap-2 hover:text-brand-red transition-colors">
+              <a href="tel:+94777794600" className="flex items-center gap-2 hover:text-brand-red transition-colors">
                 <Phone className="w-4 h-4 text-brand-red shrink-0" />
-                <span>+94 77 735 2700</span>
+                <span>077 779 4600</span>
               </a>
               <a href="mailto:info@wize.tv" className="flex items-center gap-2 hover:text-brand-red transition-colors">
                 <Mail className="w-4 h-4 text-brand-red shrink-0" />

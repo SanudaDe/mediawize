@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { STUDIO_PACKAGES_DATA } from '@/lib/data';
 
-const STUDIO_TEL_HREF = 'tel:+94777352700';
+const STUDIO_TEL_HREF = 'tel:+94777794600';
 
 export default function PodcastsPage() {
   return (
