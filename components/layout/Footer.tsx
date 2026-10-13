@@ -144,7 +144,7 @@ export const Footer: React.FC = () => {
             <div className="space-y-2.5 text-xs text-slate-400">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
-                <span>17, Kirimandala Mawatha,  Nawala ,Sri Lanka</span>
+                <span>17, Kirimandala Mawatha, Nawala, Sri Lanka</span>
               </div>
               <a href="tel:+94777352700" className="flex items-center gap-2 hover:text-brand-red transition-colors">
                 <Phone className="w-4 h-4 text-brand-red shrink-0" />

@@ -12,9 +12,9 @@ interface Props {
 }
 
 export default function StepDetails({ formData, onChange, onNext, onBack }: Props) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    onChange({ [name]: name === 'guest_count' ? parseInt(value) : value });
+    onChange({ [name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -71,19 +71,6 @@ export default function StepDetails({ formData, onChange, onNext, onBack }: Prop
             />
           </div>
 
-          <div>
-            <label className={labelClass}>Number of Guests</label>
-            <select
-              name="guest_count"
-              value={formData.guest_count ?? 1}
-              onChange={handleChange}
-              className={inputClass}
-            >
-              {[1, 2, 3, 4, 5, 6].map(n => (
-                <option key={n} value={n}>{n} {n === 1 ? 'person' : 'people'}</option>
-              ))}
-            </select>
-          </div>
 
           <div>
             <label className={labelClass}>Company / Organization</label>

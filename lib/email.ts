@@ -187,7 +187,7 @@ function emailWrapper(content: string): string {
     ${content}
   </div>
   <div class="footer">
-    <p>WIZEtv Studios · Colombo, Sri Lanka</p>
+    <p>WIZEtv Studios · 17, Kirimandala Mawatha, Nawala, Sri Lanka</p>
     <p><a href="https://wize.tv">wize.tv</a> · <a href="mailto:info@wize.tv">info@wize.tv</a></p>
     <p style="margin-top:12px;color:#334155;font-size:11px;">This is an automated message from WIZEtv booking system.</p>
   </div>
@@ -1108,7 +1108,7 @@ function renderBookingEmailTemplate(opt: BookingEmailTemplateOptions): string {
                         font-weight:700;
                         color:#111216;
                       ">
-                    WIZEtv Studios · Colombo 07
+                    WIZEtv Studios · 17, Kirimandala Mawatha, Nawala, Sri Lanka
                   </td>
                 </tr>
 
@@ -1376,7 +1376,7 @@ function renderBookingEmailTemplate(opt: BookingEmailTemplateOptions): string {
                     font-weight:400;
                     color:#A6A8AF;
                   ">
-                    Colombo, Sri Lanka
+                    17, Kirimandala Mawatha, Nawala, Sri Lanka
                   </td>
                 </tr>
 
@@ -2481,6 +2481,38 @@ function renderInquiryEmailTemplate(opt: InquiryEmailTemplateOptions): string {
                   </td>
                 </tr>
 
+                <!-- STUDIO LOCATION -->
+                <tr>
+                  <td class="mobile-label"
+                      valign="top"
+                      style="
+                        padding:15px 20px;
+                        border-top:1px solid #EEEEF0;
+                        font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+                        font-size:13px;
+                        line-height:20px;
+                        font-weight:500;
+                        color:#777A81;
+                      ">
+                    Studio Location
+                  </td>
+
+                  <td class="mobile-value"
+                      valign="top"
+                      align="right"
+                      style="
+                        padding:15px 20px;
+                        border-top:1px solid #EEEEF0;
+                        font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+                        font-size:13px;
+                        line-height:20px;
+                        font-weight:700;
+                        color:#111216;
+                      ">
+                    WIZEtv Studios · 17, Kirimandala Mawatha, Nawala, Sri Lanka
+                  </td>
+                </tr>
+
               </table>
 
             </td>
@@ -2680,7 +2712,7 @@ function renderInquiryEmailTemplate(opt: InquiryEmailTemplateOptions): string {
                     font-weight:400;
                     color:#A6A8AF;
                   ">
-                    Colombo, Sri Lanka
+                    17, Kirimandala Mawatha, Nawala, Sri Lanka
                   </td>
                 </tr>
 

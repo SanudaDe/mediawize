@@ -676,7 +676,7 @@ export default function HomePage() {
               href="/pricing"
               className="inline-flex items-center gap-2 text-xs font-bold text-brand-red hover:underline uppercase tracking-wider"
             >
-              <span>View Full Membership Benefits Comparison & Table</span>
+              <span>View More Details About Packages</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
