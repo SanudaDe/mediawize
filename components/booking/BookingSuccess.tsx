@@ -1,14 +1,28 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
-import { CheckCircle, Mail, ArrowRight } from 'lucide-react';
+import { CheckCircle, Mail, ArrowRight, Copy, Check } from 'lucide-react';
 
 interface Props {
   bookingReference?: string;
   clientName: string;
 }
 
-export default function BookingSuccess({ clientName }: Props) {
+export default function BookingSuccess({ bookingReference, clientName }: Props) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    if (!bookingReference) return;
+    try {
+      await navigator.clipboard.writeText(bookingReference);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy booking reference:', err);
+    }
+  };
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-16 text-center">
       {/* Success icon */}
@@ -25,6 +39,49 @@ export default function BookingSuccess({ clientName }: Props) {
         Your booking is <strong className="text-amber-600 font-bold">not confirmed</strong> until approved by our production team.
         You will receive an email once your booking has been confirmed.
       </p>
+
+      {/* Booking Reference Card */}
+      {bookingReference && (
+        <div className="bg-slate-50 rounded-2xl p-6 mb-8 border border-slate-200 shadow-sm text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+                Booking Reference Number
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl sm:text-3xl font-mono font-black text-brand-red tracking-wide">
+                  #{bookingReference}
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1.5 font-medium">
+                Save this reference number or quote it when contacting our team.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleCopy}
+              className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm transition-all active:scale-95 border ${
+                copied
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  : 'bg-white hover:bg-slate-100 text-slate-800 border-slate-300 shadow-sm'
+              }`}
+              title="Copy booking reference"
+            >
+              {copied ? (
+                <>
+                  <Check size={18} className="text-emerald-600" />
+                  <span>Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy size={18} className="text-slate-600" />
+                  <span>Copy Reference</span>
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* What happens next */}
       <div className="bg-slate-50 rounded-2xl p-6 mb-8 text-left border border-slate-200 shadow-sm">
