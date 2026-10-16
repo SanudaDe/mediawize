@@ -54,6 +54,9 @@ const SUBSCRIPTION_ICONS: Record<string, React.ElementType> = {
   'gold-subscription': Star,
 };
 
+// Temporary toggle: set to true to restore the 3D showcase carousel (DO NOT DELETE CAROUSEL CODE)
+const SHOW_HERO_CAROUSEL = false;
+
 export default function HomePage() {
   const [activeWordIndex, setActiveWordIndex] = useState(0);
   const [inquiryPackage, setInquiryPackage] = useState<SubscriptionPackageItem | StudioPackageItem | null>(null);
@@ -69,33 +72,52 @@ export default function HomePage() {
   return (
     <div className="bg-white text-slate-900 overflow-hidden">
       {/* ========================================================================= */}
-      {/* 1. IMMERSIVE FULL-WIDTH 3D SHOWCASE HERO SECTION */}
+      {/* 1. IMMERSIVE FULL-WIDTH SHOWCASE HERO SECTION */}
       {/* ========================================================================= */}
       <section className="relative min-h-[680px] sm:min-h-[780px] lg:min-h-[840px] flex items-center justify-center overflow-hidden border-b border-slate-100 bg-white">
-        {/* --- Background 3D Showcase & Background Edge Shaders (Strictly z-0) --- */}
-        <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none opacity-40 sm:opacity-70 lg:opacity-100">
-          {/* 3D Marquee Layer with Radial Mask */}
-          <div
-            style={{
-              maskImage:
-                'radial-gradient(ellipse 90% 85% at 50% 50%, rgba(0,0,0,0.65) 30%, rgba(0,0,0,0.52) 65%, rgba(0,0,0,0.45) 100%)',
-              WebkitMaskImage:
-                'radial-gradient(ellipse 90% 85% at 50% 50%, rgba(0,0,0,0.65) 30%, rgba(0,0,0,0.52) 65%, rgba(0,0,0,0.45) 100%)',
-            }}
-            className="w-full h-full flex items-center justify-center"
-          >
-            <ThreeDMarquee
-              images={STUDIO_SHOWCASE_IMAGES}
-              className="h-full w-full max-sm:h-full opacity-100"
-              innerScaleClass="scale-[0.85] sm:scale-[1.0] lg:scale-[1.18] xl:scale-[1.25]"
-            />
-          </div>
+        {SHOW_HERO_CAROUSEL ? (
+          /* --- Background 3D Showcase & Background Edge Shaders (Preserved - Strictly z-0) --- */
+          <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none opacity-40 sm:opacity-70 lg:opacity-100">
+            {/* 3D Marquee Layer with Radial Mask */}
+            <div
+              style={{
+                maskImage:
+                  'radial-gradient(ellipse 90% 85% at 50% 50%, rgba(0,0,0,0.65) 30%, rgba(0,0,0,0.52) 65%, rgba(0,0,0,0.45) 100%)',
+                WebkitMaskImage:
+                  'radial-gradient(ellipse 90% 85% at 50% 50%, rgba(0,0,0,0.65) 30%, rgba(0,0,0,0.52) 65%, rgba(0,0,0,0.45) 100%)',
+              }}
+              className="w-full h-full flex items-center justify-center"
+            >
+              <ThreeDMarquee
+                images={STUDIO_SHOWCASE_IMAGES}
+                className="h-full w-full max-sm:h-full opacity-100"
+                innerScaleClass="scale-[0.85] sm:scale-[1.0] lg:scale-[1.18] xl:scale-[1.25]"
+              />
+            </div>
 
-          {/* Background-only Soft Edge Fades */}
-          <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent" />
-          <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent" />
-          <div className="absolute inset-y-0 right-0 w-28 sm:w-48 bg-gradient-to-l from-white via-white/45 to-transparent" />
-        </div>
+            {/* Background-only Soft Edge Fades */}
+            <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent" />
+            <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-28 sm:w-48 bg-gradient-to-l from-white via-white/45 to-transparent" />
+          </div>
+        ) : (
+          /* --- Temporary Hero Studio Image (DO NOT DELETE CAROUSEL: switch SHOW_HERO_CAROUSEL to true to restore) --- */
+          <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none">
+            <Image
+              src="/images/hero-studio-main.jpg"
+              alt="WIZEtv Studio Stage Setup"
+              fill
+              priority
+              quality={95}
+              className="object-cover object-[72%_center] sm:object-right lg:object-center"
+              sizes="100vw"
+            />
+            {/* Smooth gradient overlay ensuring high text readability while showcasing studio setup on the right */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent sm:via-white/80 lg:via-white/60 lg:to-white/10" />
+            <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-white via-white/60 to-transparent" />
+            <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent" />
+          </div>
+        )}
 
         {/* --- Left Corner Hero Content --- */}
         <div className="relative z-10 isolate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 lg:pt-20 pb-14 sm:pb-24 w-full flex justify-start items-start">

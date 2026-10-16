@@ -8,6 +8,7 @@
 const SUPABASE_STORAGE_BASE = 'https://bdsdxtydmhydiqwaodie.supabase.co/storage/v1/object/public/photos';
 
 export const STUDIO_SHOWCASE_IMAGES: string[] = [
+  '/images/studio-images/hero-studio-main.jpg',
   `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(1).jpeg`,
   `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(2).jpeg`,
   `${SUPABASE_STORAGE_BASE}/images/studio-images/WhatsApp%20Image%202026-09-07%20at%2015.33.19%20(3).jpeg`,
